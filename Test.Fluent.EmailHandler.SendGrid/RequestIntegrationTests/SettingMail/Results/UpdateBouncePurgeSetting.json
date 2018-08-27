@@ -1,0 +1,5 @@
+{
+  "enabled": true,
+  "hard_bounces": 5,
+  "soft_bounces": 5
+}

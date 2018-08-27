@@ -1,0 +1,10 @@
+{
+  "id": "1",
+  "title": "May Newsletter",
+  "subject": "New Products for Summer!",
+  "categories": [
+    "summer line"
+  ],
+  "html_content": "<html><head><title></title></head><body><p>Check out our summer line!</p></body></html>",
+  "plain_content": "Check out our summer line!"
+}

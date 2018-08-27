@@ -1,0 +1,5 @@
+{
+  "type": "stats_notification",
+  "email_to": "example@example.com",
+  "frequency": "daily"
+}

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fluentley.SendGrid", "Fluentley.SendGrid\Fluentley.SendGrid.csproj", "{2EC57D7E-1AA7-4430-829C-D9CA75850208}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.Fluentley.SendGrid", "Test.Fluent.EmailHandler.SendGrid\Test.Fluentley.SendGrid.csproj", "{1528A8E3-0E90-47C1-921F-30139CDA09C5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2EC57D7E-1AA7-4430-829C-D9CA75850208}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EC57D7E-1AA7-4430-829C-D9CA75850208}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EC57D7E-1AA7-4430-829C-D9CA75850208}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EC57D7E-1AA7-4430-829C-D9CA75850208}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1528A8E3-0E90-47C1-921F-30139CDA09C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1528A8E3-0E90-47C1-921F-30139CDA09C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1528A8E3-0E90-47C1-921F-30139CDA09C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1528A8E3-0E90-47C1-921F-30139CDA09C5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F8E42A38-3704-4C1A-A2CA-1EEB1E74CEDE}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Common\Options\QueryOptions\**" />
+    <EmbeddedResource Remove="Common\Options\QueryOptions\**" />
+    <None Remove="Common\Options\QueryOptions\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Fluentley.QueryBuilder" Version="1.0.0-alpha.1.8" />
+    <PackageReference Include="FluentValidation" Version="8.0.0" />
+    <PackageReference Include="RestEase" Version="1.4.7" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.8.16" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Operations\ReverseDnses\Validators\" />
+  </ItemGroup>
+
+</Project>

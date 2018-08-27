@@ -1,0 +1,17 @@
+{
+  "nickname": "My Sender ID",
+  "from": {
+    "email": "from@example.com",
+    "name": "Example INC"
+  },
+  "reply_to": {
+    "email": "replyto@example.com",
+    "name": "Example INC"
+  },
+  "address": "123 Elm St.",
+  "address_2": "Apt. 456",
+  "city": "Denver",
+  "state": "Colorado",
+  "zip": "80202",
+  "country": "United States"
+}

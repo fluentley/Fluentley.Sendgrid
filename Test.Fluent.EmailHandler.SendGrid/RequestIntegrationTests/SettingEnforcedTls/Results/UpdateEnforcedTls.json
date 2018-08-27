@@ -1,0 +1,4 @@
+{
+  "require_tls": true,
+  "require_valid_cert": false
+}

@@ -1,0 +1,12 @@
+{
+  "domain": "example.com",
+  "subdomain": "news",
+  "username": "john@example.com",
+  "ips": [
+    "192.168.1.1",
+    "192.168.1.2"
+  ],
+  "custom_spf": true,
+  "default": true,
+  "automatic_security": false
+}

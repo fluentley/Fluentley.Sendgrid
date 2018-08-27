@@ -1,0 +1,6 @@
+{
+  "hostname": "myhostname",
+  "url": "http://email.myhosthame.com",
+  "spam_check": true,
+  "send_raw": false
+}

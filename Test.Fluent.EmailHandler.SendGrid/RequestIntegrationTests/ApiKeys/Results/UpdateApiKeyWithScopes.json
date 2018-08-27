@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "name": "A New Hope",
+  "scopes": [
+    "user.profile.read",
+    "user.profile.update"
+  ]
+}

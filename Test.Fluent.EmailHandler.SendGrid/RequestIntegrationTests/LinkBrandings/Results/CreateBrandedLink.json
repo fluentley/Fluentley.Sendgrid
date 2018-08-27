@@ -1,0 +1,5 @@
+{
+  "domain": "example.com",
+  "subdomain": "mail",
+  "default": true
+}

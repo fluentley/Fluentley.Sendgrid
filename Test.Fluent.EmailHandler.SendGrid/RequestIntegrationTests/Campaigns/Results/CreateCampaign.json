@@ -1,0 +1,20 @@
+{
+  "title": "March Newsletter",
+  "subject": "New Products for Spring!",
+  "sender_id": 124451,
+  "list_ids": [
+    110,
+    124
+  ],
+  "segment_ids": [
+    110
+  ],
+  "categories": [
+    "spring line"
+  ],
+  "suppression_group_id": 42,
+  "custom_unsubscribe_url": "",
+  "ip_pool": "marketing",
+  "html_content": "<html><head><title></title></head><body><p>Check out our spring line!</p></body></html>",
+  "plain_content": "Check out our spring line!"
+}

@@ -1,0 +1,115 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+
+    <AssemblyName>Test.Fluentley.SendGrid</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="RequestIntegrationTests\Alerts\CreateAlert.json" />
+    <None Remove="RequestIntegrationTests\Alerts\UpdateAlert.json" />
+    <None Remove="RequestIntegrationTests\ApiKeys\CreateApiKey.json" />
+    <None Remove="RequestIntegrationTests\ApiKeys\Results\UpdateApiKeyWithScopes.json" />
+    <None Remove="RequestIntegrationTests\ApiKeys\UpdateApiKey.json" />
+    <None Remove="RequestIntegrationTests\BouncedEmailAddresses\DeleteEmailAddress.json" />
+    <None Remove="RequestIntegrationTests\BlockedEmailAddresses\DeleteEmailAddress.json" />
+    <None Remove="RequestIntegrationTests\CampaignSchedules\CreateCampaignSchedule.json" />
+    <None Remove="RequestIntegrationTests\CampaignSchedules\UpdateCampaignSchedule.json" />
+    <None Remove="RequestIntegrationTests\Campaigns\CreateCampaign.json" />
+    <None Remove="RequestIntegrationTests\Campaigns\UpdateCampaign.json" />
+    <None Remove="RequestIntegrationTests\Categories\CreateCategorySchedule.json" />
+    <None Remove="RequestIntegrationTests\Categories\UpdateCategorySchedule.json" />
+    <None Remove="RequestIntegrationTests\DomainAuthentications\AddIpAddressToAuthenticatedDomain.json" />
+    <None Remove="RequestIntegrationTests\DomainAuthentications\AssociateSubuserToAuthenticated.json" />
+    <None Remove="RequestIntegrationTests\EmailCNameRecords\Results\SendGenerateDnsInformation.json" />
+    <None Remove="RequestIntegrationTests\InvalidEmailAddresses\Results\DeleteEmailAddress.json" />
+    <None Remove="RequestIntegrationTests\IpAccessManagements\Results\AddWhiteListedIpAddress.json" />
+    <None Remove="RequestIntegrationTests\IpAccessManagements\Results\RemoveWhiteListedIpAddress.json" />
+    <None Remove="RequestIntegrationTests\IpAddresses\Results\AddIpAddress.json" />
+    <None Remove="RequestIntegrationTests\IpPools\Results\AddIpAddressToIpPool.json" />
+    <None Remove="RequestIntegrationTests\IpPools\Results\AddIpPoolName.json" />
+    <None Remove="RequestIntegrationTests\IpPools\Results\UpdateIpPoolName.json" />
+    <None Remove="RequestIntegrationTests\IpWarmups\Results\AddIpWarmups.json" />
+    <None Remove="RequestIntegrationTests\LinkBrandings\Results\AssociateBrandedLink.json" />
+    <None Remove="RequestIntegrationTests\LinkBrandings\Results\CreateBrandedLink.json" />
+    <None Remove="RequestIntegrationTests\LinkBrandings\Results\UpdateBrandedLink.json" />
+    <None Remove="RequestIntegrationTests\MonitorSettings\Results\UpdateMonitorSettings.json" />
+    <None Remove="RequestIntegrationTests\ReverseDnses\Results\SetupReverseDns.json" />
+    <None Remove="RequestIntegrationTests\SenderIdentities\Results\CreateSenderIdentity.json" />
+    <None Remove="RequestIntegrationTests\SenderIdentities\Results\UpdateSenderIdentity.json" />
+    <None Remove="RequestIntegrationTests\SettingEnforcedTls\Results\UpdateEnforcedTls.json" />
+    <None Remove="RequestIntegrationTests\SettingInboundParses\Results\CreateParseSetting.json" />
+    <None Remove="RequestIntegrationTests\SettingInboundParses\Results\UpdateParseSetting.json" />
+    <None Remove="RequestIntegrationTests\SettingMail\Results\UpdateBccSetting.json" />
+    <None Remove="RequestIntegrationTests\SettingMail\Results\UpdateBounceForwardSetting.json" />
+    <None Remove="RequestIntegrationTests\SettingMail\Results\UpdateBouncePurgeSetting.json" />
+    <None Remove="RequestIntegrationTests\SettingMail\Results\UpdateEmailAddressWhiteListSetting.json" />
+    <None Remove="RequestIntegrationTests\SettingMail\Results\UpdateMailFooterSetting.json" />
+    <None Remove="RequestIntegrationTests\SettingMail\Results\UpdatePlainContentSetting.json" />
+    <None Remove="RequestIntegrationTests\SettingMail\Results\UpdateSpamCheckSetting.json" />
+    <None Remove="RequestIntegrationTests\SettingMail\Results\UpdateSpamForwardingSetting.json" />
+    <None Remove="RequestIntegrationTests\SettingMail\Results\UpdateTemplateSetting.json" />
+    <None Remove="RequestIntegrationTests\SpamReportedEmailAddresses\Results\DeleteEmailAddress.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="RequestIntegrationTests\Alerts\Results\CreateAlert.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\Alerts\Results\UpdateAlert.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\ApiKeys\Results\CreateApiKey.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\ApiKeys\Results\UpdateApiKeyWithScopes.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\ApiKeys\Results\UpdateApiKey.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\BouncedEmailAddresses\Results\DeleteEmailAddress.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\BlockedEmailAddresses\Results\DeleteEmailAddress.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\CampaignSchedules\Results\CreateCampaignSchedule.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\CampaignSchedules\Results\UpdateCampaignSchedule.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\Campaigns\Results\CreateCampaign.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\Campaigns\Results\UpdateCampaign.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\DomainAuthentications\Results\AssociateSubuserToAuthenticated.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\DomainAuthentications\Results\AddIpAddressToAuthenticatedDomain.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\DomainAuthentications\Results\AuthenticateToDomain.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\DomainAuthentications\Results\UpdateAuthenticatedDomain.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\EmailCNameRecords\Results\SendGenerateDnsInformation.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\InvalidEmailAddresses\Results\DeleteEmailAddress.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\IpAccessManagements\Results\RemoveWhiteListedIpAddress.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\IpAccessManagements\Results\AddWhiteListedIpAddress.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\IpAddresses\Results\AddIpAddress.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\IpPools\Results\AddIpAddressToIpPool.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\IpPools\Results\UpdateIpPoolName.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\IpPools\Results\AddIpPoolName.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\IpWarmups\Results\AddIpWarmups.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\LinkBrandings\Results\CreateBrandedLink.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\LinkBrandings\Results\AssociateBrandedLink.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\LinkBrandings\Results\UpdateBrandedLink.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\MonitorSettings\Results\UpdateMonitorSettings.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\ReverseDnses\Results\SetupReverseDns.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\SenderIdentities\Results\CreateSenderIdentity.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\SenderIdentities\Results\UpdateSenderIdentity.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\SettingEnforcedTls\Results\UpdateEnforcedTls.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\SettingInboundParses\Results\CreateParseSetting.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\SettingInboundParses\Results\UpdateParseSetting.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\SettingMail\Results\UpdateTemplateSetting.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\SettingMail\Results\UpdateSpamForwardingSetting.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\SettingMail\Results\UpdateSpamCheckSetting.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\SettingMail\Results\UpdatePlainContentSetting.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\SettingMail\Results\UpdateMailFooterSetting.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\SettingMail\Results\UpdateBounceForwardSetting.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\SettingMail\Results\UpdateBouncePurgeSetting.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\SettingMail\Results\UpdateEmailAddressWhiteListSetting.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\SettingMail\Results\UpdateBccSetting.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\SpamReportedEmailAddresses\Results\DeleteEmailAddress.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="1.3.2" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.3.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Fluentley.SendGrid\Fluentley.SendGrid.csproj" />
+  </ItemGroup>
+
+</Project>
