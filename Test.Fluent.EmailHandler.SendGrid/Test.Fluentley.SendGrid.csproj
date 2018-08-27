@@ -38,6 +38,7 @@
     <None Remove="RequestIntegrationTests\LinkBrandings\Results\UpdateBrandedLink.json" />
     <None Remove="RequestIntegrationTests\MonitorSettings\Results\UpdateMonitorSettings.json" />
     <None Remove="RequestIntegrationTests\ReverseDnses\Results\SetupReverseDns.json" />
+    <None Remove="RequestIntegrationTests\SendEmail\Results\SendEmailBasic.json" />
     <None Remove="RequestIntegrationTests\SenderIdentities\Results\CreateSenderIdentity.json" />
     <None Remove="RequestIntegrationTests\SenderIdentities\Results\UpdateSenderIdentity.json" />
     <None Remove="RequestIntegrationTests\SettingEnforcedTls\Results\UpdateEnforcedTls.json" />
@@ -85,6 +86,7 @@
     <EmbeddedResource Include="RequestIntegrationTests\LinkBrandings\Results\UpdateBrandedLink.json" />
     <EmbeddedResource Include="RequestIntegrationTests\MonitorSettings\Results\UpdateMonitorSettings.json" />
     <EmbeddedResource Include="RequestIntegrationTests\ReverseDnses\Results\SetupReverseDns.json" />
+    <EmbeddedResource Include="RequestIntegrationTests\SendEmail\Results\SendEmailBasic.json" />
     <EmbeddedResource Include="RequestIntegrationTests\SenderIdentities\Results\CreateSenderIdentity.json" />
     <EmbeddedResource Include="RequestIntegrationTests\SenderIdentities\Results\UpdateSenderIdentity.json" />
     <EmbeddedResource Include="RequestIntegrationTests\SettingEnforcedTls\Results\UpdateEnforcedTls.json" />

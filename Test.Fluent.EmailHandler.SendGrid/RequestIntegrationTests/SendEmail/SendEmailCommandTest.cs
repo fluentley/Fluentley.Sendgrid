@@ -2,9 +2,8 @@
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Test.Fluentley.SendGrid.RequestIntegrationTests;
 
-namespace Test.Fluentley.SendGrid
+namespace Test.Fluentley.SendGrid.RequestIntegrationTests.SendEmail
 {
     [TestClass]
     public class SendEmailCommandTest : BaseTest
@@ -53,6 +52,24 @@ namespace Test.Fluentley.SendGrid
             Assert.AreEqual(true, result.IsSuccess);
             Assert.AreEqual("POST", result.Data.Method.Method);
             Assert.AreEqual("https://api.sendgrid.com/v3/mail/send", result.Data.RequestUri.AbsoluteUri);
+        }
+        [TestMethod]
+        public async Task SendEmailBasicTest()
+        {
+            var result = await Service.SendEmail(sendEmailOption => sendEmailOption
+                .From("sam.smith@example.com", "Sam Smith")
+                .ReplyTo("sam.smith@example.com", "Sam Smith")
+                .AddRecipient(recipientOption => recipientOption
+                    .AddTo("john.doe@example.com", "John Doe")
+                    .Subject("Hello, World!")
+                )
+            ).GenerateRequest();
+
+            Assert.AreEqual(true, result.IsSuccess);
+            Assert.AreEqual("POST", result.Data.Method.Method);
+            Assert.AreEqual("https://api.sendgrid.com/v3/mail/send", result.Data.RequestUri.AbsoluteUri);
+
+            Assert.AreEqual(true, CompareJsons("RequestIntegrationTests.SendEmail.Results.SendEmailBasic", result.Data));
         }
     }
 }
