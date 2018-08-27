@@ -5,17 +5,11 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.Campaigns.Core;
 using Fluentley.SendGrid.Operations.Campaigns.Models;
 
 namespace Fluentley.SendGrid.Operations.Campaigns.Commands
 {
-    public interface IDeleteCampaignCommand : IContextQuery<IDeleteCampaignCommand>
-
-    {
-        IDeleteCampaignCommand ById(string id);
-        IDeleteCampaignCommand ByModel(Campaign model);
-    }
-
     internal class DeleteCampaignCommand : AbstractCommand<string, DeleteCampaignCommand>, IDeleteCampaignCommand,
         ICommand<string>
     {

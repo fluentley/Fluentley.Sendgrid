@@ -1,13 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using Fluentley.SendGrid.Operations.EmailOperations.Core;
+using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.EmailOperations.Options.TrackingSettings
 {
-    public interface IClickTrackingOption
-    {
-        IClickTrackingOption Enable(bool value);
-        IClickTrackingOption InlcudeInPlainText(bool value);
-    }
-
     internal class ClickTrackingOption : IClickTrackingOption
     {
         [JsonProperty("enable_text")]

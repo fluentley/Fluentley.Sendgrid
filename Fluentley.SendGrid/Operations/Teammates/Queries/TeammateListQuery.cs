@@ -6,16 +6,11 @@ using Fluentley.QueryBuilder.Options;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.Teammates.Core;
 using Fluentley.SendGrid.Operations.Teammates.Models;
 
 namespace Fluentley.SendGrid.Operations.Teammates.Queries
 {
-    public interface ITeammateListQuery : IListMemoryFilterQuery<ITeammateListQuery, Teammate>,
-        IContextQuery<ITeammateListQuery>
-    {
-        ITeammateListQuery UsePaging(int pageIndex, int pageSize);
-    }
-
     internal class TeammateListQuery : AbstractListQuery<Teammate>, ITeammateListQuery, IQuery<List<Teammate>>
     {
         public TeammateListQuery(string defaultApiKey) : base(defaultApiKey)

@@ -4,14 +4,6 @@ using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Common.Models
 {
-    public enum ErrorType
-    {
-        Unknown,
-        Exception,
-        SendGrid,
-        Validation
-    }
-
     public class Error
     {
         [JsonProperty("errors")]

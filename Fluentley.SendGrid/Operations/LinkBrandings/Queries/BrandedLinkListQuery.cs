@@ -6,16 +6,11 @@ using Fluentley.QueryBuilder.Options;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.LinkBrandings.Core;
 using Fluentley.SendGrid.Operations.LinkBrandings.Models;
 
 namespace Fluentley.SendGrid.Operations.LinkBrandings.Queries
 {
-    public interface IBrandedLinkListQuery : IListMemoryFilterQuery<IBrandedLinkListQuery, BrandedLink>,
-        IContextQuery<IBrandedLinkListQuery>
-    {
-        IBrandedLinkListQuery LimitResults(int value);
-    }
-
     internal class BrandedLinkListQuery : AbstractListQuery<BrandedLink>, IBrandedLinkListQuery,
         IQuery<List<BrandedLink>>
     {

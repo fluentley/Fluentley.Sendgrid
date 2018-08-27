@@ -6,16 +6,11 @@ using Fluentley.QueryBuilder.Options;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.Campaigns.Core;
 using Fluentley.SendGrid.Operations.Campaigns.Models;
 
 namespace Fluentley.SendGrid.Operations.Campaigns.Queries
 {
-    public interface ICampaignListQuery : IListMemoryFilterQuery<ICampaignListQuery, Campaign>,
-        IContextQuery<ICampaignListQuery>
-    {
-        ICampaignListQuery UsePaging(int pageIndex, int pageSize);
-    }
-
     internal class CampaignListQuery : AbstractListQuery<Campaign>, ICampaignListQuery, IQuery<List<Campaign>>
     {
         public CampaignListQuery(string defaultApiKey) : base(defaultApiKey)

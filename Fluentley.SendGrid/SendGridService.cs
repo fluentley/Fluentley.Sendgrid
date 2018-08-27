@@ -4,81 +4,110 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Models;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Operations.Alerts.Commands;
+using Fluentley.SendGrid.Operations.Alerts.Core;
 using Fluentley.SendGrid.Operations.Alerts.Models;
 using Fluentley.SendGrid.Operations.Alerts.Queries;
 using Fluentley.SendGrid.Operations.ApiKeys.Commands;
+using Fluentley.SendGrid.Operations.ApiKeys.Core;
 using Fluentley.SendGrid.Operations.ApiKeys.Models;
 using Fluentley.SendGrid.Operations.ApiKeys.Queries;
 using Fluentley.SendGrid.Operations.BlockedEmailAddresses.Commands;
+using Fluentley.SendGrid.Operations.BlockedEmailAddresses.Core;
 using Fluentley.SendGrid.Operations.BlockedEmailAddresses.Queries;
 using Fluentley.SendGrid.Operations.BouncedEmailAddresses.Commands;
+using Fluentley.SendGrid.Operations.BouncedEmailAddresses.Core;
 using Fluentley.SendGrid.Operations.BouncedEmailAddresses.Queries;
 using Fluentley.SendGrid.Operations.Campaigns.Commands;
+using Fluentley.SendGrid.Operations.Campaigns.Core;
 using Fluentley.SendGrid.Operations.Campaigns.Models;
 using Fluentley.SendGrid.Operations.Campaigns.Queries;
 using Fluentley.SendGrid.Operations.CampaignSchedules.Commands;
+using Fluentley.SendGrid.Operations.CampaignSchedules.Core;
 using Fluentley.SendGrid.Operations.CampaignSchedules.Models;
 using Fluentley.SendGrid.Operations.CampaignSchedules.Queries;
+using Fluentley.SendGrid.Operations.Categories.Core;
 using Fluentley.SendGrid.Operations.Categories.Models;
 using Fluentley.SendGrid.Operations.Categories.Queries;
 using Fluentley.SendGrid.Operations.DomainAuthentications.Commands;
+using Fluentley.SendGrid.Operations.DomainAuthentications.Core;
 using Fluentley.SendGrid.Operations.DomainAuthentications.Models;
 using Fluentley.SendGrid.Operations.DomainAuthentications.Queries;
 using Fluentley.SendGrid.Operations.EmailCNameRecords.Commands;
+using Fluentley.SendGrid.Operations.EmailCNameRecords.Core;
 using Fluentley.SendGrid.Operations.EmailCNameRecords.Models;
 using Fluentley.SendGrid.Operations.EmailOperations;
+using Fluentley.SendGrid.Operations.EmailOperations.Core;
 using Fluentley.SendGrid.Operations.InvalidEmailAddresses.Commands;
+using Fluentley.SendGrid.Operations.InvalidEmailAddresses.Core;
 using Fluentley.SendGrid.Operations.InvalidEmailAddresses.Queries;
 using Fluentley.SendGrid.Operations.IpAccessManagements.Commands;
+using Fluentley.SendGrid.Operations.IpAccessManagements.Core;
 using Fluentley.SendGrid.Operations.IpAccessManagements.Models;
 using Fluentley.SendGrid.Operations.IpAccessManagements.Queries;
 using Fluentley.SendGrid.Operations.IpAddresses.Commands;
+using Fluentley.SendGrid.Operations.IpAddresses.Core;
 using Fluentley.SendGrid.Operations.IpAddresses.Models;
 using Fluentley.SendGrid.Operations.IpAddresses.Queries;
 using Fluentley.SendGrid.Operations.IpPools.Commands;
+using Fluentley.SendGrid.Operations.IpPools.Core;
 using Fluentley.SendGrid.Operations.IpPools.Models;
 using Fluentley.SendGrid.Operations.IpPools.Queries;
 using Fluentley.SendGrid.Operations.IpWarmups.Commands;
+using Fluentley.SendGrid.Operations.IpWarmups.Core;
 using Fluentley.SendGrid.Operations.IpWarmups.Models;
 using Fluentley.SendGrid.Operations.IpWarmups.Queries;
 using Fluentley.SendGrid.Operations.LinkBrandings.Commands;
+using Fluentley.SendGrid.Operations.LinkBrandings.Core;
 using Fluentley.SendGrid.Operations.LinkBrandings.Models;
 using Fluentley.SendGrid.Operations.LinkBrandings.Queries;
 using Fluentley.SendGrid.Operations.MonitorSettings.Commands;
+using Fluentley.SendGrid.Operations.MonitorSettings.Core;
 using Fluentley.SendGrid.Operations.MonitorSettings.Models;
 using Fluentley.SendGrid.Operations.MonitorSettings.Queries;
+using Fluentley.SendGrid.Operations.Reputations.Core;
 using Fluentley.SendGrid.Operations.Reputations.Models;
 using Fluentley.SendGrid.Operations.Reputations.Queries;
 using Fluentley.SendGrid.Operations.ReverseDnses.Commands;
+using Fluentley.SendGrid.Operations.ReverseDnses.Core;
 using Fluentley.SendGrid.Operations.ReverseDnses.Models;
 using Fluentley.SendGrid.Operations.ReverseDnses.Queries;
 using Fluentley.SendGrid.Operations.SenderIdentities.Commands;
+using Fluentley.SendGrid.Operations.SenderIdentities.Core;
 using Fluentley.SendGrid.Operations.SenderIdentities.Models;
 using Fluentley.SendGrid.Operations.SenderIdentities.Queries;
 using Fluentley.SendGrid.Operations.SettingEnforcedTls.Commands;
+using Fluentley.SendGrid.Operations.SettingEnforcedTls.Core;
 using Fluentley.SendGrid.Operations.SettingEnforcedTls.Models;
 using Fluentley.SendGrid.Operations.SettingEnforcedTls.Queries;
 using Fluentley.SendGrid.Operations.SettingInboundParse.Commands;
+using Fluentley.SendGrid.Operations.SettingInboundParse.Core;
 using Fluentley.SendGrid.Operations.SettingInboundParse.Models;
 using Fluentley.SendGrid.Operations.SettingInboundParse.Queries;
 using Fluentley.SendGrid.Operations.SettingMail.Commands;
+using Fluentley.SendGrid.Operations.SettingMail.Core;
 using Fluentley.SendGrid.Operations.SettingMail.Models;
 using Fluentley.SendGrid.Operations.SettingMail.Queries;
 using Fluentley.SendGrid.Operations.SpamReportedEmailAddresses.Commands;
+using Fluentley.SendGrid.Operations.SpamReportedEmailAddresses.Core;
 using Fluentley.SendGrid.Operations.SpamReportedEmailAddresses.Models;
 using Fluentley.SendGrid.Operations.SpamReportedEmailAddresses.Queries;
+using Fluentley.SendGrid.Operations.Statistics.Core;
 using Fluentley.SendGrid.Operations.Statistics.Models;
 using Fluentley.SendGrid.Operations.Statistics.Queries;
 using Fluentley.SendGrid.Operations.SubUsers.Commands;
+using Fluentley.SendGrid.Operations.SubUsers.Core;
 using Fluentley.SendGrid.Operations.SubUsers.Models;
 using Fluentley.SendGrid.Operations.SubUsers.Queries;
 using Fluentley.SendGrid.Operations.Teammates.Commands;
+using Fluentley.SendGrid.Operations.Teammates.Core;
 using Fluentley.SendGrid.Operations.Teammates.Models;
 using Fluentley.SendGrid.Operations.Teammates.Queries;
 using Fluentley.SendGrid.Operations.Users.Commands;
+using Fluentley.SendGrid.Operations.Users.Core;
 using Fluentley.SendGrid.Operations.Users.Models;
 using Fluentley.SendGrid.Operations.Users.Queries;
 using Fluentley.SendGrid.Operations.Webhooks.Commands;
+using Fluentley.SendGrid.Operations.Webhooks.Core;
 using Fluentley.SendGrid.Operations.Webhooks.Models;
 using Fluentley.SendGrid.Operations.Webhooks.Queries;
 using Fluentley.SendGrid.Processors;
@@ -128,7 +157,7 @@ namespace Fluentley.SendGrid
             Action<ISendGeneratedDnsInformationCommand> commandAction)
         {
             return _optionProcessor
-                    .Process<ISendGeneratedDnsInformationCommand, SendGeneratedDnsInformationCommand>(commandAction);
+                .Process<ISendGeneratedDnsInformationCommand, SendGeneratedDnsInformationCommand>(commandAction);
         }
 
         #endregion
@@ -254,15 +283,15 @@ namespace Fluentley.SendGrid
             Action<ISpamReportedEmailAddressSingleQuery> queryAction)
         {
             return _optionProcessor
-                    .Process<ISpamReportedEmailAddressSingleQuery, SpamReportedEmailAddressSingleQuery>(queryAction);
+                .Process<ISpamReportedEmailAddressSingleQuery, SpamReportedEmailAddressSingleQuery>(queryAction);
         }
 
         public ICommand<string> DeleteSpamReportedEmailAddress(
             Action<IDeleteSpamReportedEmailAddressCommand> commandAction)
         {
             return _optionProcessor
-                    .Process<IDeleteSpamReportedEmailAddressCommand, DeleteSpamReportedEmailAddressCommand>(
-                        commandAction);
+                .Process<IDeleteSpamReportedEmailAddressCommand, DeleteSpamReportedEmailAddressCommand>(
+                    commandAction);
         }
 
         #endregion
@@ -621,7 +650,7 @@ namespace Fluentley.SendGrid
         public ICommand<string> RemoveWhiteListedIpAddress(Action<IRemoveWhiteListedIpAddressCommand> commandAction)
         {
             return _optionProcessor
-                    .Process<IRemoveWhiteListedIpAddressCommand, RemoveWhiteListedIpAddressCommand>(commandAction);
+                .Process<IRemoveWhiteListedIpAddressCommand, RemoveWhiteListedIpAddressCommand>(commandAction);
         }
 
         public IQuery<List<IpAccessManagementSettingActivity>> IpAccessManagementSettingActivity(
@@ -701,14 +730,14 @@ namespace Fluentley.SendGrid
             Action<IAssociateBrandedForSubUserCommand> commandAction)
         {
             return _optionProcessor
-                    .Process<IAssociateBrandedForSubUserCommand, AssociateBrandedForSubUserCommand>(commandAction);
+                .Process<IAssociateBrandedForSubUserCommand, AssociateBrandedForSubUserCommand>(commandAction);
         }
 
         public ICommand<string> DisassociateBrandedForSubUser(
             Action<IDisassociateBrandedForSubUserCommand> commandAction)
         {
             return _optionProcessor
-                    .Process<IDisassociateBrandedForSubUserCommand, DisassociateBrandedForSubUserCommand>(commandAction);
+                .Process<IDisassociateBrandedForSubUserCommand, DisassociateBrandedForSubUserCommand>(commandAction);
         }
 
         #endregion
@@ -719,19 +748,19 @@ namespace Fluentley.SendGrid
             Action<IValidateReverseDnsCommand> commandAction)
         {
             return _optionProcessor
-                    .Process<IValidateReverseDnsCommand, ValidateReverseDnsCommand>(commandAction);
+                .Process<IValidateReverseDnsCommand, ValidateReverseDnsCommand>(commandAction);
         }
 
         public ICommand<ReverseDns> SetupReverseDns(Action<ISetupReverseDnsCommand> commandAction)
         {
             return _optionProcessor
-                    .Process<ISetupReverseDnsCommand, SetupReverseDnsCommand>(commandAction);
+                .Process<ISetupReverseDnsCommand, SetupReverseDnsCommand>(commandAction);
         }
 
         public ICommand<string> DeleteReverseDns(Action<IDeleteReverseDnsCommand> commandAction)
         {
             return _optionProcessor
-                    .Process<IDeleteReverseDnsCommand, DeleteReverseDnsCommand>(commandAction);
+                .Process<IDeleteReverseDnsCommand, DeleteReverseDnsCommand>(commandAction);
         }
 
         public IQuery<ReverseDns> ReverseDns(Action<IReverseDnsSingleQuery> queryAction)
@@ -787,63 +816,63 @@ namespace Fluentley.SendGrid
             Action<IAddIpAddressToAuthenticatedDomainCommand> commandAction)
         {
             return _optionProcessor
-                    .Process<IAddIpAddressToAuthenticatedDomainCommand, AddIpAddressToAuthenticatedDomainCommand>(
-                        commandAction);
+                .Process<IAddIpAddressToAuthenticatedDomainCommand, AddIpAddressToAuthenticatedDomainCommand>(
+                    commandAction);
         }
 
         public ICommand<AuthenticatedDomain> AuthenticateToDomain(
             Action<IAuthenticateToDomainCommand> commandAction)
         {
             return _optionProcessor
-                    .Process<IAuthenticateToDomainCommand, AuthenticateToDomainCommand>(
-                        commandAction);
+                .Process<IAuthenticateToDomainCommand, AuthenticateToDomainCommand>(
+                    commandAction);
         }
 
         public ICommand<AuthenticatedDomain> AssociateSubuserToAuthenticatedDomain(
             Action<IAssociateSubuserToAuthenticatedDomainCommand> commandAction)
         {
             return _optionProcessor
-                    .Process<IAssociateSubuserToAuthenticatedDomainCommand, AssociateSubuserToAuthenticatedDomainCommand
-                    >(commandAction);
+                .Process<IAssociateSubuserToAuthenticatedDomainCommand, AssociateSubuserToAuthenticatedDomainCommand
+                >(commandAction);
         }
 
         public ICommand<string> DisAssociateSubuserToAuthenticatedDomain(
             Action<IDisassociateSubUserFromAuthenticatedDomainCommand> commandAction = null)
         {
             return _optionProcessor
-                    .Process<IDisassociateSubUserFromAuthenticatedDomainCommand,
-                        DisassociateSubUserFromAuthenticatedDomainCommand>(commandAction);
+                .Process<IDisassociateSubUserFromAuthenticatedDomainCommand,
+                    DisassociateSubUserFromAuthenticatedDomainCommand>(commandAction);
         }
 
         public ICommand<AuthenticatedDomain> RemoveIpAddressToAuthenticatedDomain(
             Action<IRemoveIpAddressFromAuthenticatedDomainCommand> commandAction)
         {
             return _optionProcessor
-                    .Process<IRemoveIpAddressFromAuthenticatedDomainCommand,
-                        RemoveIpAddressFromAuthenticatedDomainCommand>(commandAction);
+                .Process<IRemoveIpAddressFromAuthenticatedDomainCommand,
+                    RemoveIpAddressFromAuthenticatedDomainCommand>(commandAction);
         }
 
         public ICommand<AuthenticatedDomainSetting> UpdateAuthenticatedDomainSetting(
             Action<IUpdateAuthenticatedDomainSettingCommand> commandAction)
         {
             return _optionProcessor
-                    .Process<IUpdateAuthenticatedDomainSettingCommand,
-                        UpdateAuthenticatedDomainSettingCommand>(commandAction);
+                .Process<IUpdateAuthenticatedDomainSettingCommand,
+                    UpdateAuthenticatedDomainSettingCommand>(commandAction);
         }
 
         public ICommand<string> DeleteAuthenticatedDomain(
             Action<IDeleteAuthenticatedDomainCommand> commandAction)
         {
             return _optionProcessor
-                    .Process<IDeleteAuthenticatedDomainCommand,
-                        DeleteAuthenticatedDomainCommand>(commandAction);
+                .Process<IDeleteAuthenticatedDomainCommand,
+                    DeleteAuthenticatedDomainCommand>(commandAction);
         }
 
         public ICommand<AuthenticatedDomainValidation> ValidateAuthenticatedDomain(
             Action<IValidateAuthenticatedDomainCommand> commandAction)
         {
             return _optionProcessor
-                    .Process<IValidateAuthenticatedDomainCommand, ValidateAuthenticatedDomainCommand>(commandAction);
+                .Process<IValidateAuthenticatedDomainCommand, ValidateAuthenticatedDomainCommand>(commandAction);
         }
 
         #endregion
@@ -876,7 +905,7 @@ namespace Fluentley.SendGrid
             Action<IDeletePendingTeammateInviteCommand> commandAction)
         {
             return _optionProcessor
-                    .Process<IDeletePendingTeammateInviteCommand, DeletePendingTeammateInviteCommand>(commandAction);
+                .Process<IDeletePendingTeammateInviteCommand, DeletePendingTeammateInviteCommand>(commandAction);
         }
 
         public ICommand<TeammateInviteResult> InviteTeammate(Action<IInviteTeammateCommand> commandAction)

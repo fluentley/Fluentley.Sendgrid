@@ -4,16 +4,11 @@ using System.Threading.Tasks;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.IpAddresses.Core;
 using Fluentley.SendGrid.Operations.IpAddresses.Models;
 
 namespace Fluentley.SendGrid.Operations.IpAddresses.Queries
 {
-    public interface IIpAddressSingleQuery : IContextQuery<IIpAddressSingleQuery>
-
-    {
-        IIpAddressSingleQuery ByIpAddress(string ipAddress);
-    }
-
     internal class IpAddressSingleQuery : AbstractSingleQuery<IpAddress>, IIpAddressSingleQuery, IQuery<IpAddress>
     {
         public IpAddressSingleQuery(string defaultApiKey) : base(defaultApiKey)

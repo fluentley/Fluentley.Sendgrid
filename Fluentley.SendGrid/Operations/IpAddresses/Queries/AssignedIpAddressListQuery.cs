@@ -6,16 +6,11 @@ using Fluentley.QueryBuilder.Options;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.IpAddresses.Core;
 using Fluentley.SendGrid.Operations.IpAddresses.Models;
 
 namespace Fluentley.SendGrid.Operations.IpAddresses.Queries
 {
-    public interface IAssignedIpAddressListQuery :
-        IListMemoryFilterQuery<IAssignedIpAddressListQuery, AssignedIpAddress>,
-        IContextQuery<IAssignedIpAddressListQuery>
-    {
-    }
-
     internal class AssignedIpAddressListQuery : AbstractListQuery<AssignedIpAddress>, IAssignedIpAddressListQuery,
         IQuery<List<AssignedIpAddress>>
     {

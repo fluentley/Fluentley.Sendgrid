@@ -1,12 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using Fluentley.SendGrid.Operations.EmailOperations.Core;
+using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.EmailOperations.Options
 {
-    public interface ISandboxOption
-    {
-        ISandboxOption Enable(bool value);
-    }
-
     internal class SandboxOption : ISandboxOption
     {
         [JsonProperty("enable")]

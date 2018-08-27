@@ -5,20 +5,12 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.SettingMail.Core;
 using Fluentley.SendGrid.Operations.SettingMail.Models;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.SettingMail.Commands
 {
-    public interface IUpdateSpamCheckSettingCommand : IContextQuery<IUpdateSpamCheckSettingCommand>
-
-    {
-        IUpdateSpamCheckSettingCommand ByModel(SpamCheckSetting value);
-        IUpdateSpamCheckSettingCommand Url(string value);
-        IUpdateSpamCheckSettingCommand MaxScore(int value);
-        IUpdateSpamCheckSettingCommand IsEnabled(bool value);
-    }
-
     internal class UpdateSpamCheckSettingCommand : AbstractCommand<SpamCheckSetting, UpdateSpamCheckSettingCommand>,
         IUpdateSpamCheckSettingCommand, ICommand<SpamCheckSetting>
     {

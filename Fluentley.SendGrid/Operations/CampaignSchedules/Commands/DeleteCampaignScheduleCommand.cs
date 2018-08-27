@@ -5,15 +5,10 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.CampaignSchedules.Core;
 
 namespace Fluentley.SendGrid.Operations.CampaignSchedules.Commands
 {
-    public interface IDeleteCampaignScheduleCommand : IContextQuery<IDeleteCampaignScheduleCommand>
-
-    {
-        IDeleteCampaignScheduleCommand ById(string id);
-    }
-
     internal class DeleteCampaignScheduleCommand : AbstractCommand<string, DeleteCampaignScheduleCommand>,
         IDeleteCampaignScheduleCommand,
         ICommand<string>

@@ -5,17 +5,12 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.IpPools.Core;
 using Fluentley.SendGrid.Operations.IpPools.Models;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.IpPools.Commands
 {
-    public interface IUpdateIpPoolCommand : IContextQuery<IUpdateIpPoolCommand>
-
-    {
-        IUpdateIpPoolCommand ChangeName(string oldName, string newName);
-    }
-
     internal class UpdateIpPoolCommand : AbstractCommand<IpPool, UpdateIpPoolCommand>, IUpdateIpPoolCommand,
         ICommand<IpPool>
     {

@@ -5,15 +5,10 @@ using Fluentley.SendGrid.Common.Models;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.BlockedEmailAddresses.Core;
 
 namespace Fluentley.SendGrid.Operations.BlockedEmailAddresses.Queries
 {
-    public interface IBlockedEmailAddressSingleQuery : IContextQuery<IBlockedEmailAddressSingleQuery>
-
-    {
-        IBlockedEmailAddressSingleQuery ByEmailAddress(string id);
-    }
-
     internal class BlockedEmailAddressSingleQuery : AbstractSingleQuery<EmailReport>,
         IBlockedEmailAddressSingleQuery,
         IQuery<EmailReport>

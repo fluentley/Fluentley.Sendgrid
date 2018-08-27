@@ -1,15 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using Fluentley.SendGrid.Operations.EmailOperations.Core;
+using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.EmailOperations.Options.TrackingSettings
 {
-    public interface ISubscriptionTrackingOption
-    {
-        ISubscriptionTrackingOption Enable(bool value);
-        ISubscriptionTrackingOption AppendTextWithSubscriptionTracking(string value);
-        ISubscriptionTrackingOption AppendHtmlWithSubscriptionTracking(string value);
-        ISubscriptionTrackingOption ReplacementSubstituionTag(string value);
-    }
-
     internal class SubscriptionTrackingOption : ISubscriptionTrackingOption
     {
         [JsonProperty("enable")]

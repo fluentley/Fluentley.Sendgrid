@@ -6,15 +6,11 @@ using Fluentley.QueryBuilder.Options;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.SenderIdentities.Core;
 using Fluentley.SendGrid.Operations.SenderIdentities.Models;
 
 namespace Fluentley.SendGrid.Operations.SenderIdentities.Queries
 {
-    public interface ISenderIdentityListQuery : IListMemoryFilterQuery<ISenderIdentityListQuery, SenderIdentity>,
-        IContextQuery<ISenderIdentityListQuery>
-    {
-    }
-
     internal class SenderIdentityListQuery : AbstractListQuery<SenderIdentity>, ISenderIdentityListQuery,
         IQuery<List<SenderIdentity>>
     {

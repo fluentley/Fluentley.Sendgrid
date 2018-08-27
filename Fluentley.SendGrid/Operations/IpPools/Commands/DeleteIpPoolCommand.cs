@@ -5,17 +5,11 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.IpPools.Core;
 using Fluentley.SendGrid.Operations.IpPools.Models;
 
 namespace Fluentley.SendGrid.Operations.IpPools.Commands
 {
-    public interface IDeleteIpPoolCommand : IContextQuery<IDeleteIpPoolCommand>
-
-    {
-        IDeleteIpPoolCommand ByName(string name);
-        IDeleteIpPoolCommand ByModel(IpPool model);
-    }
-
     internal class DeleteIpPoolCommand : AbstractCommand<string, DeleteIpPoolCommand>, IDeleteIpPoolCommand,
         ICommand<string>
     {

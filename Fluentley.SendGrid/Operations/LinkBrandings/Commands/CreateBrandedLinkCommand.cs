@@ -5,19 +5,12 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.LinkBrandings.Core;
 using Fluentley.SendGrid.Operations.LinkBrandings.Models;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.LinkBrandings.Commands
 {
-    public interface ICreateBrandedLinkCommand : IContextQuery<ICreateBrandedLinkCommand>
-
-    {
-        ICreateBrandedLinkCommand DomainUrl(string value);
-        ICreateBrandedLinkCommand SubDomain(string value);
-        ICreateBrandedLinkCommand IsDefault(bool value);
-    }
-
     internal class CreateBrandedLinkCommand : AbstractCommand<BrandedLink, CreateBrandedLinkCommand>,
         ICreateBrandedLinkCommand,
         ICommand<BrandedLink>

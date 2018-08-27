@@ -7,16 +7,11 @@ using Fluentley.QueryBuilder.Options;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.Reputations.Core;
 using Fluentley.SendGrid.Operations.Reputations.Models;
 
 namespace Fluentley.SendGrid.Operations.Reputations.Queries
 {
-    public interface IReputationListQuery : IListMemoryFilterQuery<IReputationListQuery, Reputation>,
-        IContextQuery<IReputationListQuery>
-    {
-        IReputationListQuery AddSubUser(params string[] values);
-    }
-
     internal class ReputationListQuery : AbstractListQuery<Reputation>, IReputationListQuery,
         IQuery<List<Reputation>>
     {

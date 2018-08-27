@@ -4,16 +4,11 @@ using System.Threading.Tasks;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.LinkBrandings.Core;
 using Fluentley.SendGrid.Operations.LinkBrandings.Models;
 
 namespace Fluentley.SendGrid.Operations.LinkBrandings.Queries
 {
-    public interface IBrandedLinkSingleQuery : IContextQuery<IBrandedLinkSingleQuery>
-
-    {
-        IBrandedLinkSingleQuery ById(string id);
-    }
-
     internal class BrandedLinkSingleQuery : AbstractSingleQuery<BrandedLink>, IBrandedLinkSingleQuery,
         IQuery<BrandedLink>
     {

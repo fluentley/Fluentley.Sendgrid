@@ -6,17 +6,11 @@ using Fluentley.QueryBuilder.Options;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.Teammates.Core;
 using Fluentley.SendGrid.Operations.Teammates.Models;
 
 namespace Fluentley.SendGrid.Operations.Teammates.Queries
 {
-    public interface IPendingTeammateInvitationListQuery :
-        IListMemoryFilterQuery<IPendingTeammateInvitationListQuery, PendingTeammateInvitation>,
-        IContextQuery<IPendingTeammateInvitationListQuery>
-    {
-        IPendingTeammateInvitationListQuery UsePaging(int pageIndex, int pageSize);
-    }
-
     internal class PendingTeammateInvitationListQuery : AbstractListQuery<PendingTeammateInvitation>,
         IPendingTeammateInvitationListQuery, IQuery<List<PendingTeammateInvitation>>
     {

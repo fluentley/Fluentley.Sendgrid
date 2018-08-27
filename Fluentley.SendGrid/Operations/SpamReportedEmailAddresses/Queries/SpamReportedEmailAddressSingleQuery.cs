@@ -4,16 +4,11 @@ using System.Threading.Tasks;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.SpamReportedEmailAddresses.Core;
 using Fluentley.SendGrid.Operations.SpamReportedEmailAddresses.Models;
 
 namespace Fluentley.SendGrid.Operations.SpamReportedEmailAddresses.Queries
 {
-    public interface ISpamReportedEmailAddressSingleQuery : IContextQuery<ISpamReportedEmailAddressSingleQuery>
-
-    {
-        ISpamReportedEmailAddressSingleQuery ByEmailAddress(string id);
-    }
-
     internal class SpamReportedEmailAddressSingleQuery : AbstractSingleQuery<SpamReportedEmailAddress>,
         ISpamReportedEmailAddressSingleQuery,
         IQuery<SpamReportedEmailAddress>

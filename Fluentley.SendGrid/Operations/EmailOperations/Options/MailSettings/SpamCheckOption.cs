@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Fluentley.SendGrid.Operations.EmailOperations.Core;
+using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.EmailOperations.Options.MailSettings
 {
@@ -30,12 +31,5 @@ namespace Fluentley.SendGrid.Operations.EmailOperations.Options.MailSettings
             PostToUrl = value;
             return this;
         }
-    }
-
-    public interface ISpamCheckOption
-    {
-        ISpamCheckOption Enable(bool value);
-        ISpamCheckOption Treshold(int value);
-        ISpamCheckOption PostReportToUrl(string value);
     }
 }

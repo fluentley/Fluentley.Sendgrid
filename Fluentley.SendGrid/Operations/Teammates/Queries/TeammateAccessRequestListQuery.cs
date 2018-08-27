@@ -7,16 +7,10 @@ using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.ReverseDnses.Models;
+using Fluentley.SendGrid.Operations.Teammates.Core;
 
 namespace Fluentley.SendGrid.Operations.Teammates.Queries
 {
-    public interface ITeammateAccessRequestListQuery :
-        IListMemoryFilterQuery<ITeammateAccessRequestListQuery, TeammateAccessRequest>,
-        IContextQuery<ITeammateAccessRequestListQuery>
-    {
-        ITeammateAccessRequestListQuery UsePaging(int pageIndex, int pageSize);
-    }
-
     internal class TeammateAccessRequestListQuery : AbstractListQuery<TeammateAccessRequest>,
         ITeammateAccessRequestListQuery, IQuery<List<TeammateAccessRequest>>
     {

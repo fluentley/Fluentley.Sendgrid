@@ -5,19 +5,12 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.SettingMail.Core;
 using Fluentley.SendGrid.Operations.SettingMail.Models;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.SettingMail.Commands
 {
-    public interface IUpdateBounceForwardSettingCommand : IContextQuery<IUpdateBounceForwardSettingCommand>
-
-    {
-        IUpdateBounceForwardSettingCommand ByModel(BounceForwardSetting value);
-        IUpdateBounceForwardSettingCommand EmailAddress(string value);
-        IUpdateBounceForwardSettingCommand IsEnabled(bool value);
-    }
-
     internal class UpdateBounceForwardSettingCommand :
         AbstractCommand<BounceForwardSetting, UpdateBounceForwardSettingCommand>,
         IUpdateBounceForwardSettingCommand, ICommand<BounceForwardSetting>

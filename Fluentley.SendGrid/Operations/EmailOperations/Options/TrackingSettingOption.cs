@@ -1,18 +1,11 @@
 ﻿using System;
+using Fluentley.SendGrid.Operations.EmailOperations.Core;
 using Fluentley.SendGrid.Operations.EmailOperations.Options.TrackingSettings;
 using Fluentley.SendGrid.Processors;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.EmailOperations.Options
 {
-    public interface ITrackingSettingOption
-    {
-        ITrackingSettingOption ClickTracking(Action<IClickTrackingOption> option);
-        ITrackingSettingOption OpenTracking(Action<IOpenTrackingOption> option);
-        ITrackingSettingOption SubscriptionTracking(Action<ISubscriptionTrackingOption> option);
-        ITrackingSettingOption GoogleAnalytics(Action<IGoogleAnalyticsOption> option);
-    }
-
     internal class TrackingSettingOption : ITrackingSettingOption
     {
         private readonly OptionProcessor _optionProcessor;

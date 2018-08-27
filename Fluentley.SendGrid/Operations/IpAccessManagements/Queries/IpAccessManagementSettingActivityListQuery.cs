@@ -6,17 +6,11 @@ using Fluentley.QueryBuilder.Options;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.IpAccessManagements.Core;
 using Fluentley.SendGrid.Operations.IpAccessManagements.Models;
 
 namespace Fluentley.SendGrid.Operations.IpAccessManagements.Queries
 {
-    public interface IIpAccessManagementSettingActivityListQuery : IListMemoryFilterQuery<
-            IIpAccessManagementSettingActivityListQuery, IpAccessManagementSettingActivity>,
-        IContextQuery<IIpAccessManagementSettingActivityListQuery>
-    {
-        IIpAccessManagementSettingActivityListQuery LimitResults(int value);
-    }
-
     internal class IpAccessManagementSettingActivityListQuery : AbstractListQuery<IpAccessManagementSettingActivity>,
         IIpAccessManagementSettingActivityListQuery, IQuery<List<IpAccessManagementSettingActivity>>
     {

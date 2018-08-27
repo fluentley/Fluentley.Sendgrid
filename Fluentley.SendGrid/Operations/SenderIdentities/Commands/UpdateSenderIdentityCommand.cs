@@ -6,17 +6,12 @@ using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.EmailOperations.Models;
+using Fluentley.SendGrid.Operations.SenderIdentities.Core;
 using Fluentley.SendGrid.Operations.SenderIdentities.Models;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.SenderIdentities.Commands
 {
-    public interface IUpdateSenderIdentityCommand : IContextQuery<IUpdateSenderIdentityCommand>
-
-    {
-        IUpdateSenderIdentityCommand ByModel(SenderIdentity senderIdentity);
-    }
-
     internal class UpdateSenderIdentityCommand : AbstractCommand<SenderIdentity, UpdateSenderIdentityCommand>,
         IUpdateSenderIdentityCommand,
         ICommand<SenderIdentity>

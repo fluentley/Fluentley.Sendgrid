@@ -5,17 +5,12 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.SettingEnforcedTls.Core;
 using Fluentley.SendGrid.Operations.SettingEnforcedTls.Models;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.SettingEnforcedTls.Commands
 {
-    public interface IUpdateEnforcedTlsCommand : IContextQuery<IUpdateEnforcedTlsCommand>
-
-    {
-        IUpdateEnforcedTlsCommand ByModel(EnforcedTls value);
-    }
-
     internal class UpdateEnforcedTlsCommand : AbstractCommand<EnforcedTls, UpdateEnforcedTlsCommand>,
         IUpdateEnforcedTlsCommand, ICommand<EnforcedTls>
     {

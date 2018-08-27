@@ -5,18 +5,13 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.Webhooks.Core;
 using Fluentley.SendGrid.Operations.Webhooks.Models;
 using Fluentley.SendGrid.Operations.Webhooks.Validators;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.Webhooks.Commands
 {
-    public interface IUpdateWebHookSettingsCommand : IContextQuery<IUpdateWebHookSettingsCommand>
-
-    {
-        IUpdateWebHookSettingsCommand ByModel(WebhookSettings webhookSettings);
-    }
-
     internal class UpdateWebHookSettingsCommand : AbstractCommand<WebhookSettings, UpdateWebHookSettingsCommand>,
         IUpdateWebHookSettingsCommand,
         ICommand<WebhookSettings>

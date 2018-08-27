@@ -4,16 +4,11 @@ using System.Threading.Tasks;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.Users.Core;
 using Fluentley.SendGrid.Operations.Users.Models;
 
 namespace Fluentley.SendGrid.Operations.Users.Queries
 {
-    public interface IUserProfileSingleQuery : IContextQuery<IUserProfileSingleQuery>
-
-    {
-        IUserProfileSingleQuery ById(string id);
-    }
-
     internal class UserProfileSingleQuery : AbstractSingleQuery<UserProfile>, IUserProfileSingleQuery,
         IQuery<UserProfile>
     {

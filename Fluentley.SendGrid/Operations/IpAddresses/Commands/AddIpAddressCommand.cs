@@ -7,20 +7,12 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.IpAddresses.Core;
 using Fluentley.SendGrid.Operations.IpAddresses.Models;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.IpAddresses.Commands
 {
-    public interface IAddIpAddressCommand : IContextQuery<IAddIpAddressCommand>
-
-    {
-        IAddIpAddressCommand CountOfIpAddresses(int value);
-        IAddIpAddressCommand AddSubUser(params string[] values);
-        IAddIpAddressCommand IsWarmUp(bool value);
-        IAddIpAddressCommand UserCanSend(bool value);
-    }
-
     internal class AddIpAddressCommand : AbstractCommand<AddIpResult, AddIpAddressCommand>, IAddIpAddressCommand,
         ICommand<AddIpResult>
     {

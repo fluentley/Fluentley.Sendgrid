@@ -7,20 +7,12 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.SubUsers.Core;
 using Fluentley.SendGrid.Operations.SubUsers.Models;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.SubUsers.Commands
 {
-    public interface ICreateSubUserCommand : IContextQuery<ICreateSubUserCommand>
-
-    {
-        ICreateSubUserCommand UserName(string value);
-        ICreateSubUserCommand Password(string value);
-        ICreateSubUserCommand EmailAddress(string value);
-        ICreateSubUserCommand AssignIp(params string[] ips);
-    }
-
     internal class CreateSubUserCommand : AbstractCommand<SubUser, CreateSubUserCommand>, ICreateSubUserCommand,
         ICommand<SubUser>
     {

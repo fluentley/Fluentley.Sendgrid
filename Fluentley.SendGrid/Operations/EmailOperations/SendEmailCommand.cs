@@ -7,6 +7,7 @@ using Fluentley.SendGrid.Common.Extensions;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.EmailOperations.Core;
 using Fluentley.SendGrid.Operations.EmailOperations.Models;
 using Fluentley.SendGrid.Operations.EmailOperations.Options;
 using Fluentley.SendGrid.Operations.EmailOperations.Options.EmailOptions;
@@ -14,29 +15,6 @@ using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.EmailOperations
 {
-    public interface ISendEmailCommand : IContextQuery<ISendEmailCommand>
-    {
-        ISendEmailCommand From(string emailAddress, string name = null);
-        ISendEmailCommand ReplyTo(string emailAddress, string name = null);
-        ISendEmailCommand AddRecipient(Action<IRecipientOption> option);
-        ISendEmailCommand Subject(string subject);
-        ISendEmailCommand AddSection(string key, string value);
-        ISendEmailCommand AddCategory(string name);
-        ISendEmailCommand AddCustomArguments(string key, string value);
-
-        ISendEmailCommand MailingSettings(Action<IMailSettingsOption> option);
-        ISendEmailCommand TrackingSettings(Action<ITrackingSettingOption> option);
-        ISendEmailCommand TemplateId(string value);
-        ISendEmailCommand AddHeader(string key, string value);
-        ISendEmailCommand AddContentOption(Action<IContentOption> option);
-        ISendEmailCommand AddAttachments(Action<IAttachmentOption> option);
-
-        ISendEmailCommand FromIpPoolName(string name);
-        ISendEmailCommand Sandbox(Action<ISandboxOption> option);
-        ISendEmailCommand UnsubscribeManagement(Action<IUnsubscribeManagementOption> option);
-        ISendEmailCommand SendAtUtc(DateTime sendAtDateTime);
-    }
-
     internal class SendEmailCommand : AbstractCommand<string, SendEmailCommand>, ISendEmailCommand, ICommand<string>
     {
         public SendEmailCommand(string defaultApiKey) : base(defaultApiKey)

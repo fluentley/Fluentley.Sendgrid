@@ -5,17 +5,12 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.IpWarmups.Core;
 using Fluentley.SendGrid.Operations.IpWarmups.Models;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.IpWarmups.Commands
 {
-    public interface ICreateIpWarmupCommand : IContextQuery<ICreateIpWarmupCommand>
-
-    {
-        ICreateIpWarmupCommand IpAddress(string value);
-    }
-
     internal class CreateIpWarmupCommand : AbstractCommand<IpWarmup, CreateIpWarmupCommand>, ICreateIpWarmupCommand,
         ICommand<IpWarmup>
     {

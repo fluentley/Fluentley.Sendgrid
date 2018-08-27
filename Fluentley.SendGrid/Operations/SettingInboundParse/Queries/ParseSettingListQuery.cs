@@ -6,15 +6,11 @@ using Fluentley.QueryBuilder.Options;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.SettingInboundParse.Core;
 using Fluentley.SendGrid.Operations.SettingInboundParse.Models;
 
 namespace Fluentley.SendGrid.Operations.SettingInboundParse.Queries
 {
-    public interface IParseSettingListQuery : IListMemoryFilterQuery<IParseSettingListQuery, ParseSetting>,
-        IContextQuery<IParseSettingListQuery>
-    {
-    }
-
     internal class ParseSettingListQuery : AbstractListQuery<ParseSetting>, IParseSettingListQuery,
         IQuery<List<ParseSetting>>
     {

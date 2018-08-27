@@ -4,15 +4,11 @@ using System.Threading.Tasks;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.SettingEnforcedTls.Core;
 using Fluentley.SendGrid.Operations.SettingEnforcedTls.Models;
 
 namespace Fluentley.SendGrid.Operations.SettingEnforcedTls.Queries
 {
-    public interface IEnforcedTlsSingleQuery : IContextQuery<IEnforcedTlsSingleQuery>
-
-    {
-    }
-
     internal class EnforcedTlsSingleQuery : AbstractSingleQuery<EnforcedTls>, IEnforcedTlsSingleQuery,
         IQuery<EnforcedTls>
     {

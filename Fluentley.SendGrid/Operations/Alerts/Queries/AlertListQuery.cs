@@ -6,14 +6,11 @@ using Fluentley.QueryBuilder.Options;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.Alerts.Core;
 using Fluentley.SendGrid.Operations.Alerts.Models;
 
 namespace Fluentley.SendGrid.Operations.Alerts.Queries
 {
-    public interface IAlertListQuery : IListMemoryFilterQuery<IAlertListQuery, Alert>, IContextQuery<IAlertListQuery>
-    {
-    }
-
     internal class AlertListQuery : AbstractListQuery<Alert>, IAlertListQuery,
         IQuery<List<Alert>>
     {

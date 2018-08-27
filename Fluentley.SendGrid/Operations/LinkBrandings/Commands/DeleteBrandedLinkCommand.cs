@@ -5,17 +5,11 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.LinkBrandings.Core;
 using Fluentley.SendGrid.Operations.LinkBrandings.Models;
 
 namespace Fluentley.SendGrid.Operations.LinkBrandings.Commands
 {
-    public interface IDeleteBrandedLinkCommand : IContextQuery<IDeleteBrandedLinkCommand>
-
-    {
-        IDeleteBrandedLinkCommand ById(string id);
-        IDeleteBrandedLinkCommand ByModel(BrandedLink model);
-    }
-
     internal class DeleteBrandedLinkCommand : AbstractCommand<string, DeleteBrandedLinkCommand>,
         IDeleteBrandedLinkCommand, ICommand<string>
     {

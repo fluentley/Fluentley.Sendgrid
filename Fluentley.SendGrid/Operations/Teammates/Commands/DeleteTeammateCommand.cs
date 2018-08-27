@@ -5,17 +5,11 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.Teammates.Core;
 using Fluentley.SendGrid.Operations.Teammates.Models;
 
 namespace Fluentley.SendGrid.Operations.Teammates.Commands
 {
-    public interface IDeleteTeammateCommand : IContextQuery<IDeleteTeammateCommand>
-
-    {
-        IDeleteTeammateCommand ByUserName(string userName);
-        IDeleteTeammateCommand ByModel(Teammate model);
-    }
-
     internal class DeleteTeammateCommand : AbstractCommand<string, DeleteTeammateCommand>, IDeleteTeammateCommand,
         ICommand<string>
     {

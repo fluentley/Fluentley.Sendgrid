@@ -6,18 +6,11 @@ using Fluentley.QueryBuilder.Options;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.ReverseDnses.Core;
 using Fluentley.SendGrid.Operations.ReverseDnses.Models;
 
 namespace Fluentley.SendGrid.Operations.ReverseDnses.Queries
 {
-    public interface IReverseDnsListQuery : IListMemoryFilterQuery<IReverseDnsListQuery, ReverseDns>,
-        IContextQuery<IReverseDnsListQuery>
-    {
-        IReverseDnsListQuery UsePaging(int pageIndex, int pageSize);
-
-        IReverseDnsListQuery FilterByIpAddress(string ipAddress);
-    }
-
     internal class ReverseDnsListQuery : AbstractListQuery<ReverseDns>, IReverseDnsListQuery, IQuery<List<ReverseDns>>
     {
         public ReverseDnsListQuery(string defaultApiKey) : base(defaultApiKey)

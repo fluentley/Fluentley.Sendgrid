@@ -5,17 +5,12 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.Users.Core;
 using Fluentley.SendGrid.Operations.Users.Models;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.Users.Commands
 {
-    public interface IUpdateUserProfileCommand : IContextQuery<IUpdateUserProfileCommand>
-
-    {
-        IUpdateUserProfileCommand ByModel(UserProfile userProfile);
-    }
-
     internal class UpdateUserProfileCommand : AbstractCommand<UserProfile, UpdateUserProfileCommand>,
         IUpdateUserProfileCommand,
         ICommand<UserProfile>

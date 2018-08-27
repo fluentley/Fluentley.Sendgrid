@@ -1,8 +1,7 @@
-using Fluentley.SendGrid.Operations.Campaigns.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Fluentley.SendGrid.Operations.Campaigns.Models;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Test.Fluentley.SendGrid.RequestIntegrationTests.Campaigns
 {

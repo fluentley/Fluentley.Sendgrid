@@ -7,22 +7,13 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.ApiKeys.Core;
 using Fluentley.SendGrid.Operations.ApiKeys.Extensions;
 using Fluentley.SendGrid.Operations.ApiKeys.Models;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.ApiKeys.Commands
 {
-    public interface IUpdateApiKeyCommand : IContextQuery<IUpdateApiKeyCommand>
-
-    {
-        IUpdateApiKeyCommand ByModel(ApiKey apiKey);
-        IUpdateApiKeyCommand Id(string value);
-        IUpdateApiKeyCommand Name(string value);
-        IUpdateApiKeyCommand AddToExistingScopes(params Scope[] scopes);
-        IUpdateApiKeyCommand ResetScopes();
-    }
-
     internal class UpdateApiKeyCommand : AbstractCommand<ApiKey, UpdateApiKeyCommand>, IUpdateApiKeyCommand,
         ICommand<ApiKey>
     {

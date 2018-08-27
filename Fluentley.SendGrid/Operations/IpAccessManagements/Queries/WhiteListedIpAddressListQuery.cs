@@ -6,16 +6,11 @@ using Fluentley.QueryBuilder.Options;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.IpAccessManagements.Core;
 using Fluentley.SendGrid.Operations.IpAccessManagements.Models;
 
 namespace Fluentley.SendGrid.Operations.IpAccessManagements.Queries
 {
-    public interface IWhiteListedIpAddressListQuery :
-        IListMemoryFilterQuery<IWhiteListedIpAddressListQuery, WhiteListedIpAddress>,
-        IContextQuery<IWhiteListedIpAddressListQuery>
-    {
-    }
-
     internal class WhiteListedIpAddressListQuery : AbstractListQuery<WhiteListedIpAddress>,
         IWhiteListedIpAddressListQuery, IQuery<List<WhiteListedIpAddress>>
     {

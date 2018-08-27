@@ -5,21 +5,12 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.SettingInboundParse.Core;
 using Fluentley.SendGrid.Operations.SettingInboundParse.Models;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.SettingInboundParse.Commands
 {
-    public interface ICreateParseSettingCommand : IContextQuery<ICreateParseSettingCommand>
-
-    {
-        ICreateParseSettingCommand HostName(string value);
-        ICreateParseSettingCommand Url(string value);
-        ICreateParseSettingCommand SpamCheck(bool value);
-        ICreateParseSettingCommand SendRaw(bool value);
-        ICreateParseSettingCommand ByModel(ParseSetting value);
-    }
-
     internal class CreateParseSettingCommand : AbstractCommand<ParseSetting, CreateParseSettingCommand>,
         ICreateParseSettingCommand, ICommand<ParseSetting>
     {

@@ -6,19 +6,11 @@ using Fluentley.QueryBuilder.Options;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.SpamReportedEmailAddresses.Core;
 using Fluentley.SendGrid.Operations.SpamReportedEmailAddresses.Models;
 
 namespace Fluentley.SendGrid.Operations.SpamReportedEmailAddresses.Queries
 {
-    public interface ISpamReportedEmailAddressListQuery :
-        IListMemoryFilterQuery<ISpamReportedEmailAddressListQuery, SpamReportedEmailAddress>,
-        IContextQuery<ISpamReportedEmailAddressListQuery>
-    {
-        ISpamReportedEmailAddressListQuery FilterByStartTime(TimeSpan value);
-        ISpamReportedEmailAddressListQuery FilterByEndTime(TimeSpan value);
-        ISpamReportedEmailAddressListQuery UsePaging(int pageIndex, int pageSize);
-    }
-
     internal class SpamReportedEmailAddressListQuery : AbstractListQuery<SpamReportedEmailAddress>,
         ISpamReportedEmailAddressListQuery,
         IQuery<List<SpamReportedEmailAddress>>

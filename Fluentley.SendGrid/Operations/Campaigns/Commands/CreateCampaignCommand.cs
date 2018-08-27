@@ -6,17 +6,12 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.Campaigns.Core;
 using Fluentley.SendGrid.Operations.Campaigns.Models;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.Campaigns.Commands
 {
-    public interface ICreateCampaignCommand : IContextQuery<ICreateCampaignCommand>
-
-    {
-        ICreateCampaignCommand ByModel(Campaign campaign);
-    }
-
     internal class CreateCampaignCommand : AbstractCommand<Campaign, CreateCampaignCommand>, ICreateCampaignCommand,
         ICommand<Campaign>
     {

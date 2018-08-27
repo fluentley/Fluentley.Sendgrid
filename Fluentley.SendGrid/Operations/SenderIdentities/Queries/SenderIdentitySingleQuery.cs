@@ -4,16 +4,11 @@ using System.Threading.Tasks;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.SenderIdentities.Core;
 using Fluentley.SendGrid.Operations.SenderIdentities.Models;
 
 namespace Fluentley.SendGrid.Operations.SenderIdentities.Queries
 {
-    public interface ISenderIdentitySingleQuery : IContextQuery<ISenderIdentitySingleQuery>
-
-    {
-        ISenderIdentitySingleQuery ById(string id);
-    }
-
     internal class SenderIdentitySingleQuery : AbstractSingleQuery<SenderIdentity>, ISenderIdentitySingleQuery,
         IQuery<SenderIdentity>
     {

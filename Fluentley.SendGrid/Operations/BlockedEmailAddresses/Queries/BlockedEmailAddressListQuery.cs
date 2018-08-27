@@ -7,18 +7,10 @@ using Fluentley.SendGrid.Common.Models;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.BlockedEmailAddresses.Core;
 
 namespace Fluentley.SendGrid.Operations.BlockedEmailAddresses.Queries
 {
-    public interface IBlockedEmailAddressListQuery :
-        IListMemoryFilterQuery<IBlockedEmailAddressListQuery, EmailReport>,
-        IContextQuery<IBlockedEmailAddressListQuery>
-    {
-        IBlockedEmailAddressListQuery FilterByStartTime(TimeSpan value);
-        IBlockedEmailAddressListQuery FilterByEndTime(TimeSpan value);
-        IBlockedEmailAddressListQuery UsePaging(int pageIndex, int pageSize);
-    }
-
     internal class BlockedEmailAddressListQuery : AbstractListQuery<EmailReport>, IBlockedEmailAddressListQuery,
         IQuery<List<EmailReport>>
 

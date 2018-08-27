@@ -1,13 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using Fluentley.SendGrid.Operations.EmailOperations.Core;
+using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.EmailOperations.Options.MailSettings
 {
-    public interface IFooterOption
-    {
-        IFooterOption ContentText(string value);
-        IFooterOption ContentHtml(string value);
-    }
-
     internal class FooterOption : IFooterOption
     {
         [JsonProperty("text")]

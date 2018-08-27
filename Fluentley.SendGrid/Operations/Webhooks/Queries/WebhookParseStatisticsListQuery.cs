@@ -7,20 +7,11 @@ using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.Statistics.Models;
+using Fluentley.SendGrid.Operations.Webhooks.Core;
 using Fluentley.SendGrid.Operations.Webhooks.Models;
 
 namespace Fluentley.SendGrid.Operations.Webhooks.Queries
 {
-    public interface IWebhookParseStatisticsListQuery :
-        IListMemoryFilterQuery<IWebhookParseStatisticsListQuery, WebhookParseStatistics>,
-        IContextQuery<IWebhookParseStatisticsListQuery>
-    {
-        IWebhookParseStatisticsListQuery FilterByStartTime(TimeSpan value);
-        IWebhookParseStatisticsListQuery FilterByEndTime(TimeSpan value);
-        IWebhookParseStatisticsListQuery AggregateBy(StatisticsAggregate value);
-        IWebhookParseStatisticsListQuery UsePaging(int pageIndex, int pageSize);
-    }
-
     internal class WebhookParseStatisticsListQuery : AbstractListQuery<WebhookParseStatistics>,
         IWebhookParseStatisticsListQuery,
         IQuery<List<WebhookParseStatistics>>

@@ -5,21 +5,13 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.Alerts.Core;
 using Fluentley.SendGrid.Operations.Alerts.Extensions;
 using Fluentley.SendGrid.Operations.Alerts.Models;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.Alerts.Commands
 {
-    public interface ICreateAlertCommand : IContextQuery<ICreateAlertCommand>
-
-    {
-        ICreateAlertCommand ByModel(Alert alert);
-
-        ICreateAlertCommand Using(AlertType alertType, string emailTo, Frequency frequency = Frequency.Undefined,
-            int? percentage = null);
-    }
-
     internal class CreateAlertCommand : AbstractCommand<Alert, CreateAlertCommand>, ICreateAlertCommand, ICommand<Alert>
     {
         public CreateAlertCommand(string defaultApiKey) : base(defaultApiKey)

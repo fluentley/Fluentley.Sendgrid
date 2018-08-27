@@ -5,17 +5,11 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.ApiKeys.Core;
 using Fluentley.SendGrid.Operations.ApiKeys.Models;
 
 namespace Fluentley.SendGrid.Operations.ApiKeys.Commands
 {
-    public interface IDeleteApiKeyCommand : IContextQuery<IDeleteApiKeyCommand>
-
-    {
-        IDeleteApiKeyCommand ById(string id);
-        IDeleteApiKeyCommand ByModel(ApiKey value);
-    }
-
     internal class DeleteApiKeyCommand : AbstractCommand<string, DeleteApiKeyCommand>, IDeleteApiKeyCommand,
         ICommand<string>
     {

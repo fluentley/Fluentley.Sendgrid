@@ -7,18 +7,10 @@ using Fluentley.SendGrid.Common.Models;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.InvalidEmailAddresses.Core;
 
 namespace Fluentley.SendGrid.Operations.InvalidEmailAddresses.Queries
 {
-    public interface IInvalidEmailAddressListQuery :
-        IListMemoryFilterQuery<IInvalidEmailAddressListQuery, EmailReport>,
-        IContextQuery<IInvalidEmailAddressListQuery>
-    {
-        IInvalidEmailAddressListQuery FilterByStartTime(TimeSpan value);
-        IInvalidEmailAddressListQuery FilterByEndTime(TimeSpan value);
-        IInvalidEmailAddressListQuery UsePaging(int pageIndex, int pageSize);
-    }
-
     internal class InvalidEmailAddressListQuery : AbstractListQuery<EmailReport>, IInvalidEmailAddressListQuery,
         IQuery<List<EmailReport>>
     {

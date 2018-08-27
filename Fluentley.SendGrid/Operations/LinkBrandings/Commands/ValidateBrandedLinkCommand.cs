@@ -5,17 +5,11 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.LinkBrandings.Core;
 using Fluentley.SendGrid.Operations.LinkBrandings.Models;
 
 namespace Fluentley.SendGrid.Operations.LinkBrandings.Commands
 {
-    public interface IValidateBrandedLinkCommand : IContextQuery<IValidateBrandedLinkCommand>
-
-    {
-        IValidateBrandedLinkCommand ById(string id);
-        IValidateBrandedLinkCommand ByModel(BrandedLink model);
-    }
-
     internal class ValidateBrandedLinkCommand :
         AbstractCommand<BrandedLinkValidationResult, ValidateBrandedLinkCommand>,
         IValidateBrandedLinkCommand,

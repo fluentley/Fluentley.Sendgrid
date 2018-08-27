@@ -5,16 +5,11 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.Teammates.Core;
 using Fluentley.SendGrid.Operations.Teammates.Models;
 
 namespace Fluentley.SendGrid.Operations.Teammates.Commands
 {
-    public interface IResendTeammateInviteCommand : IContextQuery<IResendTeammateInviteCommand>
-
-    {
-        IResendTeammateInviteCommand ByToken(string value);
-    }
-
     internal class ResendTeammateInviteCommand : AbstractCommand<TeammateInviteResult, ResendTeammateInviteCommand>,
         IResendTeammateInviteCommand,
         ICommand<TeammateInviteResult>

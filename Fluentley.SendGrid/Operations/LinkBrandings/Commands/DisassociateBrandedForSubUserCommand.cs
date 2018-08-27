@@ -5,15 +5,10 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.LinkBrandings.Core;
 
 namespace Fluentley.SendGrid.Operations.LinkBrandings.Commands
 {
-    public interface IDisassociateBrandedForSubUserCommand : IContextQuery<IDisassociateBrandedForSubUserCommand>
-
-    {
-        IDisassociateBrandedForSubUserCommand SubUserName(string value);
-    }
-
     internal class DisassociateBrandedForSubUserCommand : AbstractCommand<string, DisassociateBrandedForSubUserCommand>,
         IDisassociateBrandedForSubUserCommand,
         ICommand<string>

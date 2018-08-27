@@ -7,18 +7,13 @@ using Fluentley.QueryBuilder.Options;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.Categories.Core;
 using Fluentley.SendGrid.Operations.Categories.Models;
+using Fluentley.SendGrid.Operations.Statistics.Core;
 using Fluentley.SendGrid.Operations.Statistics.Queries;
 
 namespace Fluentley.SendGrid.Operations.Categories.Queries
 {
-    public interface ICategoryListQuery : IListMemoryFilterQuery<ICategoryListQuery, Category>,
-        IContextQuery<ICategoryListQuery>
-    {
-        ICategoryListQuery UsePaging(int pageIndex, int pageSize);
-        ICategoryListQuery FilterByName(string value);
-    }
-
     internal class CategoryListQuery : AbstractListQuery<Category>, ICategoryListQuery, IQuery<List<Category>>
     {
         public CategoryListQuery(string defaultApiKey) : base(defaultApiKey)

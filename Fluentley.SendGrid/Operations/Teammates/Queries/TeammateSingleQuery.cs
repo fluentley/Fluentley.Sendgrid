@@ -4,16 +4,11 @@ using System.Threading.Tasks;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.Teammates.Core;
 using Fluentley.SendGrid.Operations.Teammates.Models;
 
 namespace Fluentley.SendGrid.Operations.Teammates.Queries
 {
-    public interface ITeammateSingleQuery : IContextQuery<ITeammateSingleQuery>
-
-    {
-        ITeammateSingleQuery ByUserName(string value);
-    }
-
     internal class TeammateSingleQuery : AbstractSingleQuery<Teammate>, ITeammateSingleQuery, IQuery<Teammate>
     {
         public TeammateSingleQuery(string defaultApiKey) : base(defaultApiKey)

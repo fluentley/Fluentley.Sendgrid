@@ -5,19 +5,12 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.ReverseDnses.Core;
 using Fluentley.SendGrid.Operations.ReverseDnses.Models;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.ReverseDnses.Commands
 {
-    public interface ISetupReverseDnsCommand : IContextQuery<ISetupReverseDnsCommand>
-
-    {
-        ISetupReverseDnsCommand IpAddress(string ipAdddress);
-        ISetupReverseDnsCommand SubDomain(string subDomain);
-        ISetupReverseDnsCommand Domain(string domain);
-    }
-
     internal class SetupReverseDnsCommand : AbstractCommand<ReverseDns, SetupReverseDnsCommand>,
         ISetupReverseDnsCommand,
         ICommand<ReverseDns>

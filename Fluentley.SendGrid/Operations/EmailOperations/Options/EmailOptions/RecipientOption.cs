@@ -1,23 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Fluentley.SendGrid.Common.Extensions;
+using Fluentley.SendGrid.Operations.EmailOperations.Core;
 using Fluentley.SendGrid.Operations.EmailOperations.Models;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.EmailOperations.Options.EmailOptions
 {
-    public interface IRecipientOption
-    {
-        IRecipientOption AddTo(string emailAddress, string name = null);
-        IRecipientOption AddCc(string emailAddress, string name = null);
-        IRecipientOption AddBcc(string emailAddress, string name = null);
-        IRecipientOption Subject(string subject);
-        IRecipientOption AddSubstitution(string key, string value);
-        IRecipientOption AddCustomArguments(string key, string value);
-        IRecipientOption SendAtUtc(DateTime sendTimeSpan);
-        IRecipientOption AddHeader(string key, string value);
-    }
-
     internal class RecipientOption : IRecipientOption
     {
         /*[JsonProperty("send_at")]

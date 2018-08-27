@@ -4,15 +4,11 @@ using System.Threading.Tasks;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.Webhooks.Core;
 using Fluentley.SendGrid.Operations.Webhooks.Models;
 
 namespace Fluentley.SendGrid.Operations.Webhooks.Queries
 {
-    public interface IWebhookSettingsSingleQuery : IContextQuery<IWebhookSettingsSingleQuery>
-
-    {
-    }
-
     internal class WebhookSettingsSingleQuery : AbstractSingleQuery<WebhookSettings>,
         IWebhookSettingsSingleQuery, IQuery<WebhookSettings>
     {

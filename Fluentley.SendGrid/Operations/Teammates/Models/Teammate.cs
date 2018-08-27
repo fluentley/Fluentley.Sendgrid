@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.Teammates.Models
 {
@@ -49,11 +48,5 @@ namespace Fluentley.SendGrid.Operations.Teammates.Models
 
         [JsonProperty("zip")]
         public string Zip { get; set; }
-    }
-
-    public class TeammateWithScope : Teammate
-    {
-        [JsonProperty("scopes")]
-        public IList<string> Scopes { get; set; }
     }
 }

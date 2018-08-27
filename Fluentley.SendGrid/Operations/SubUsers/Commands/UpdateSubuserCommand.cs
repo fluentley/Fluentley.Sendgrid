@@ -5,16 +5,11 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.SubUsers.Core;
 using Fluentley.SendGrid.Operations.SubUsers.Models;
 
 namespace Fluentley.SendGrid.Operations.SubUsers.Commands
 {
-    public interface IUpdateSubUserCommand : IContextQuery<IUpdateSubUserCommand>
-
-    {
-        IUpdateSubUserCommand ByModel(SubUser subUser);
-    }
-
     internal class UpdateSubUserCommand : AbstractCommand<SubUser, UpdateSubUserCommand>, IUpdateSubUserCommand,
         ICommand<SubUser>
     {

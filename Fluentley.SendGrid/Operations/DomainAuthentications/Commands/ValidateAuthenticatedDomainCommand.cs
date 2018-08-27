@@ -5,16 +5,11 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.DomainAuthentications.Core;
 using Fluentley.SendGrid.Operations.DomainAuthentications.Models;
 
 namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
 {
-    public interface IValidateAuthenticatedDomainCommand : IContextQuery<IValidateAuthenticatedDomainCommand>
-
-    {
-        IValidateAuthenticatedDomainCommand ById(string id);
-    }
-
     internal class ValidateAuthenticatedDomainCommand :
         AbstractCommand<AuthenticatedDomainValidation, ValidateAuthenticatedDomainCommand>,
         IValidateAuthenticatedDomainCommand,

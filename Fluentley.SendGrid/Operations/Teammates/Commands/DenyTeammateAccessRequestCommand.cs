@@ -6,16 +6,10 @@ using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.Alerts.Models;
+using Fluentley.SendGrid.Operations.Teammates.Core;
 
 namespace Fluentley.SendGrid.Operations.Teammates.Commands
 {
-    public interface IDenyTeammateAccessRequestCommand : IContextQuery<IDenyTeammateAccessRequestCommand>
-
-    {
-        IDenyTeammateAccessRequestCommand ById(string id);
-        IDenyTeammateAccessRequestCommand ByModel(Alert model);
-    }
-
     internal class DenyTeammateAccessRequestCommand : AbstractCommand<string, DenyTeammateAccessRequestCommand>,
         IDenyTeammateAccessRequestCommand,
         ICommand<string>

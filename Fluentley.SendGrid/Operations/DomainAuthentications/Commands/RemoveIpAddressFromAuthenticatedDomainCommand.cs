@@ -5,19 +5,12 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.DomainAuthentications.Core;
 using Fluentley.SendGrid.Operations.DomainAuthentications.Models;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
 {
-    public interface
-        IRemoveIpAddressFromAuthenticatedDomainCommand : IContextQuery<IRemoveIpAddressFromAuthenticatedDomainCommand>
-
-    {
-        IRemoveIpAddressFromAuthenticatedDomainCommand IpAddress(string ipAddress);
-        IRemoveIpAddressFromAuthenticatedDomainCommand Id(string id);
-    }
-
     internal class RemoveIpAddressFromAuthenticatedDomainCommand :
         AbstractCommand<AuthenticatedDomain, RemoveIpAddressFromAuthenticatedDomainCommand>,
         IRemoveIpAddressFromAuthenticatedDomainCommand,

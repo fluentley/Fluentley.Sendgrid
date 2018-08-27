@@ -1,15 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Fluentley.SendGrid.Operations.EmailOperations.Core;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.EmailOperations.Options
 {
-    public interface IUnsubscribeManagementOption
-    {
-        IUnsubscribeManagementOption GroupId(string value);
-        IUnsubscribeManagementOption AddUnsubscribesGroupsToDisplay(params int[] values);
-    }
-
     internal class UnsubscribeManagementOption : IUnsubscribeManagementOption
     {
         [JsonProperty("group_id")]

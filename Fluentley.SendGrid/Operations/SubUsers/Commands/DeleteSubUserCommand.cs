@@ -5,15 +5,10 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.SubUsers.Core;
 
 namespace Fluentley.SendGrid.Operations.SubUsers.Commands
 {
-    public interface IDeleteSubUserCommand : IContextQuery<IDeleteSubUserCommand>
-
-    {
-        IDeleteSubUserCommand BySubUserName(string subUserName);
-    }
-
     internal class DeleteSubUserCommand : AbstractCommand<string, DeleteSubUserCommand>, IDeleteSubUserCommand,
         ICommand<string>
     {

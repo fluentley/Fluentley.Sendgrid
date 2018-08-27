@@ -5,20 +5,12 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.SettingMail.Core;
 using Fluentley.SendGrid.Operations.SettingMail.Models;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.SettingMail.Commands
 {
-    public interface IUpdateBouncePurgeSettingCommand : IContextQuery<IUpdateBouncePurgeSettingCommand>
-
-    {
-        IUpdateBouncePurgeSettingCommand ByModel(BouncePurgeSetting value);
-        IUpdateBouncePurgeSettingCommand NumberOfHardBounces(int value);
-        IUpdateBouncePurgeSettingCommand NumberOfSoftBounces(int value);
-        IUpdateBouncePurgeSettingCommand IsEnabled(bool value);
-    }
-
     internal class UpdateBouncePurgeSettingCommand :
         AbstractCommand<BouncePurgeSetting, UpdateBouncePurgeSettingCommand>,
         IUpdateBouncePurgeSettingCommand, ICommand<BouncePurgeSetting>

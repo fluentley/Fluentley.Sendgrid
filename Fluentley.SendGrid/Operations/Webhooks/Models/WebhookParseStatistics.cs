@@ -12,16 +12,4 @@ namespace Fluentley.SendGrid.Operations.Webhooks.Models
         [JsonProperty("stats")]
         public IList<Stat> Stats { get; set; }
     }
-
-    public class WebhookParseMetrics
-    {
-        [JsonProperty("received")]
-        public int Received { get; set; }
-    }
-
-    public class WebhookParseStat
-    {
-        [JsonProperty("metrics")]
-        public Metrics Metrics { get; set; }
-    }
 }

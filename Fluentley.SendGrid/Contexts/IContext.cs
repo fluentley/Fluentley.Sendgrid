@@ -48,6 +48,7 @@ using Fluentley.SendGrid.Operations.Statistics.Models;
 using Fluentley.SendGrid.Operations.SubUsers.Commands;
 using Fluentley.SendGrid.Operations.SubUsers.Models;
 using Fluentley.SendGrid.Operations.Teammates.Commands;
+using Fluentley.SendGrid.Operations.Teammates.Core;
 using Fluentley.SendGrid.Operations.Teammates.Models;
 using Fluentley.SendGrid.Operations.Users.Commands;
 using Fluentley.SendGrid.Operations.Users.Models;

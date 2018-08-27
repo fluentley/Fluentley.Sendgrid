@@ -1,23 +1,7 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.IpAddresses.Models
 {
-    public class IpBase
-    {
-        [JsonProperty("ip")]
-        public string IpAddress { get; set; }
-    }
-
-    public class Ip : IpBase
-    {
-        [JsonProperty("pools")]
-        public IList<string> Pools { get; set; }
-
-        [JsonProperty("subusers")]
-        public IList<string> Subusers { get; set; }
-    }
-
     public class IpAddress : Ip
     {
         [JsonProperty("warmup")]

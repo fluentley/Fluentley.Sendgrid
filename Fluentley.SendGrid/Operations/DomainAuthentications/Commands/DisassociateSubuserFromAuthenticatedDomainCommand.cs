@@ -5,16 +5,10 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.DomainAuthentications.Core;
 
 namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
 {
-    public interface
-        IDisassociateSubUserFromAuthenticatedDomainCommand : IContextQuery<
-            IDisassociateSubUserFromAuthenticatedDomainCommand>
-
-    {
-    }
-
     internal class DisassociateSubUserFromAuthenticatedDomainCommand :
         AbstractCommand<string, DisassociateSubUserFromAuthenticatedDomainCommand>,
         IDisassociateSubUserFromAuthenticatedDomainCommand, ICommand<string>

@@ -4,16 +4,11 @@ using System.Threading.Tasks;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.IpAccessManagements.Core;
 using Fluentley.SendGrid.Operations.IpAccessManagements.Models;
 
 namespace Fluentley.SendGrid.Operations.IpAccessManagements.Queries
 {
-    public interface IWhiteListedIpAddressSingleQuery : IContextQuery<IWhiteListedIpAddressSingleQuery>
-
-    {
-        IWhiteListedIpAddressSingleQuery ById(string id);
-    }
-
     internal class WhiteListedIpAddressSingleQuery : AbstractSingleQuery<WhiteListedIpAddress>,
         IWhiteListedIpAddressSingleQuery,
         IQuery<WhiteListedIpAddress>

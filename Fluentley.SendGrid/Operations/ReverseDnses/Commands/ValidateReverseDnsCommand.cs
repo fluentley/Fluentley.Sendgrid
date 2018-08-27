@@ -5,16 +5,11 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.ReverseDnses.Core;
 using Fluentley.SendGrid.Operations.ReverseDnses.Models;
 
 namespace Fluentley.SendGrid.Operations.ReverseDnses.Commands
 {
-    public interface IValidateReverseDnsCommand : IContextQuery<IValidateReverseDnsCommand>
-
-    {
-        IValidateReverseDnsCommand ById(string id);
-    }
-
     internal class ValidateReverseDnsCommand : AbstractCommand<ReverseDnsValidationResult, ValidateReverseDnsCommand>,
         IValidateReverseDnsCommand,
         ICommand<ReverseDnsValidationResult>

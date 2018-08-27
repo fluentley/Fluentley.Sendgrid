@@ -1,5 +1,5 @@
 ﻿using Fluentley.SendGrid.Contexts;
-using Fluentley.SendGrid.Operations.Teammates.Commands;
+using Fluentley.SendGrid.Operations.Teammates.Core;
 using FluentValidation;
 
 namespace Fluentley.SendGrid.Operations.Teammates.Validators

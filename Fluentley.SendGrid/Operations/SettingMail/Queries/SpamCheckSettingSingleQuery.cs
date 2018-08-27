@@ -4,15 +4,11 @@ using System.Threading.Tasks;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.SettingMail.Core;
 using Fluentley.SendGrid.Operations.SettingMail.Models;
 
 namespace Fluentley.SendGrid.Operations.SettingMail.Queries
 {
-    public interface ISpamCheckSettingSingleQuery : IContextQuery<ISpamCheckSettingSingleQuery>
-
-    {
-    }
-
     internal class SpamCheckSettingSingleQuery : AbstractSingleQuery<SpamCheckSetting>, ISpamCheckSettingSingleQuery,
         IQuery<SpamCheckSetting>
     {

@@ -4,16 +4,11 @@ using System.Threading.Tasks;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.Alerts.Core;
 using Fluentley.SendGrid.Operations.Alerts.Models;
 
 namespace Fluentley.SendGrid.Operations.Alerts.Queries
 {
-    public interface IAlertSingleQuery : IContextQuery<IAlertSingleQuery>
-
-    {
-        IAlertSingleQuery ById(string id);
-    }
-
     internal class AlertSingleQuery : AbstractSingleQuery<Alert>, IAlertSingleQuery, IQuery<Alert>
     {
         public AlertSingleQuery(string defaultApiKey) : base(defaultApiKey)

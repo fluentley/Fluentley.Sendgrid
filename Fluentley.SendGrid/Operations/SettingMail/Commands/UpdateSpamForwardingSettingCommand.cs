@@ -5,19 +5,12 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.SettingMail.Core;
 using Fluentley.SendGrid.Operations.SettingMail.Models;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.SettingMail.Commands
 {
-    public interface IUpdateSpamForwardingSettingCommand : IContextQuery<IUpdateSpamForwardingSettingCommand>
-
-    {
-        IUpdateSpamForwardingSettingCommand Model(SpamForwardingSetting value);
-        IUpdateSpamForwardingSettingCommand EmailAddress(string value);
-        IUpdateSpamForwardingSettingCommand IsEnabled(bool value);
-    }
-
     internal class UpdateSpamForwardingSettingCommand :
         AbstractCommand<SpamForwardingSetting, UpdateSpamForwardingSettingCommand>,
         IUpdateSpamForwardingSettingCommand, ICommand<SpamForwardingSetting>

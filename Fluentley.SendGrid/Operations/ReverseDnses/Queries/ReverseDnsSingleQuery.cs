@@ -4,16 +4,11 @@ using System.Threading.Tasks;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.ReverseDnses.Core;
 using Fluentley.SendGrid.Operations.ReverseDnses.Models;
 
 namespace Fluentley.SendGrid.Operations.ReverseDnses.Queries
 {
-    public interface IReverseDnsSingleQuery : IContextQuery<IReverseDnsSingleQuery>
-
-    {
-        IReverseDnsSingleQuery ById(string id);
-    }
-
     internal class ReverseDnsSingleQuery : AbstractSingleQuery<ReverseDns>, IReverseDnsSingleQuery, IQuery<ReverseDns>
     {
         public ReverseDnsSingleQuery(string defaultApiKey) : base(defaultApiKey)

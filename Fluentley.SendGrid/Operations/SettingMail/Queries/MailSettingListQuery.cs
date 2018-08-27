@@ -6,16 +6,11 @@ using Fluentley.QueryBuilder.Options;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.SettingMail.Core;
 using Fluentley.SendGrid.Operations.SettingMail.Models;
 
 namespace Fluentley.SendGrid.Operations.SettingMail.Queries
 {
-    public interface IMailSettingListQuery : IListMemoryFilterQuery<IMailSettingListQuery, MailSetting>,
-        IContextQuery<IMailSettingListQuery>
-    {
-        IMailSettingListQuery UsePaging(int pageIndex, int pageSize);
-    }
-
     internal class MailSettingListQuery : AbstractListQuery<MailSetting>, IMailSettingListQuery,
         IQuery<List<MailSetting>>
     {

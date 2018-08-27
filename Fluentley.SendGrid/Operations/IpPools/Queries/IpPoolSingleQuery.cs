@@ -4,16 +4,11 @@ using System.Threading.Tasks;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.IpPools.Core;
 using Fluentley.SendGrid.Operations.IpPools.Models;
 
 namespace Fluentley.SendGrid.Operations.IpPools.Queries
 {
-    public interface IIpPoolSingleQuery : IContextQuery<IIpPoolSingleQuery>
-
-    {
-        IIpPoolSingleQuery ByName(string name);
-    }
-
     internal class IpPoolSingleQuery : AbstractSingleQuery<IpPool>, IIpPoolSingleQuery, IQuery<IpPool>
     {
         public IpPoolSingleQuery(string defaultApiKey) : base(defaultApiKey)

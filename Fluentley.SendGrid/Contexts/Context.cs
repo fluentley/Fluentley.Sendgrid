@@ -70,6 +70,7 @@ using Fluentley.SendGrid.Operations.SubUsers.Commands;
 using Fluentley.SendGrid.Operations.SubUsers.Models;
 using Fluentley.SendGrid.Operations.SubUsers.Queries;
 using Fluentley.SendGrid.Operations.Teammates.Commands;
+using Fluentley.SendGrid.Operations.Teammates.Core;
 using Fluentley.SendGrid.Operations.Teammates.Models;
 using Fluentley.SendGrid.Operations.Teammates.Queries;
 using Fluentley.SendGrid.Operations.Users.Commands;

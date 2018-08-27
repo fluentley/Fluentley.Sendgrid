@@ -5,17 +5,11 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.SettingInboundParse.Core;
 using Fluentley.SendGrid.Operations.SettingInboundParse.Models;
 
 namespace Fluentley.SendGrid.Operations.SettingInboundParse.Commands
 {
-    public interface IDeleteParseSettingCommand : IContextQuery<IDeleteParseSettingCommand>
-
-    {
-        IDeleteParseSettingCommand ByModel(ParseSetting value);
-        IDeleteParseSettingCommand ByHostName(string hostName);
-    }
-
     internal class DeleteParseSettingCommand : AbstractCommand<string, DeleteParseSettingCommand>,
         IDeleteParseSettingCommand, ICommand<string>
     {

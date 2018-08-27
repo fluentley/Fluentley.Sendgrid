@@ -4,16 +4,11 @@ using System.Threading.Tasks;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.DomainAuthentications.Core;
 using Fluentley.SendGrid.Operations.DomainAuthentications.Models;
 
 namespace Fluentley.SendGrid.Operations.DomainAuthentications.Queries
 {
-    public interface IAuthenticatedDomainSingleQuery : IContextQuery<IAuthenticatedDomainSingleQuery>
-
-    {
-        IAuthenticatedDomainSingleQuery ById(string id);
-    }
-
     internal class AuthenticatedDomainSingleQuery : AbstractSingleQuery<AuthenticatedDomain>,
         IAuthenticatedDomainSingleQuery,
         IQuery<AuthenticatedDomain>

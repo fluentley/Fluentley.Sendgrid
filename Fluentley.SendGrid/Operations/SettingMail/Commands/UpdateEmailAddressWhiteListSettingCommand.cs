@@ -6,20 +6,12 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.SettingMail.Core;
 using Fluentley.SendGrid.Operations.SettingMail.Models;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.SettingMail.Commands
 {
-    public interface
-        IUpdateEmailAddressWhiteListSettingCommand : IContextQuery<IUpdateEmailAddressWhiteListSettingCommand>
-
-    {
-        IUpdateEmailAddressWhiteListSettingCommand ByModel(EmailAddressWhiteListSetting value);
-        IUpdateEmailAddressWhiteListSettingCommand AddEmailAddress(string value);
-        IUpdateEmailAddressWhiteListSettingCommand IsEnabled(bool value);
-    }
-
     internal class UpdateEmailAddressWhiteListSettingCommand :
         AbstractCommand<EmailAddressWhiteListSetting, UpdateEmailAddressWhiteListSettingCommand>,
         IUpdateEmailAddressWhiteListSettingCommand, ICommand<EmailAddressWhiteListSetting>

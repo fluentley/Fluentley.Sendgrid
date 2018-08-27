@@ -1,13 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using Fluentley.SendGrid.Operations.EmailOperations.Core;
+using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.EmailOperations.Options.TrackingSettings
 {
-    public interface IOpenTrackingOption
-    {
-        IOpenTrackingOption Enable(bool value);
-        IOpenTrackingOption ReplacementSubstituionTag(string value);
-    }
-
     internal class OpenTrackingOption : IOpenTrackingOption
     {
         [JsonProperty("substitution_tag")]

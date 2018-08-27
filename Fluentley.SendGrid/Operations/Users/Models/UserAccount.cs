@@ -30,11 +30,4 @@ namespace Fluentley.SendGrid.Operations.Users.Models
             set => Type = value.ToAccountType();
         }
     }
-
-    public enum AccountType
-    {
-        Undefined,
-        Free,
-        Paid
-    }
 }

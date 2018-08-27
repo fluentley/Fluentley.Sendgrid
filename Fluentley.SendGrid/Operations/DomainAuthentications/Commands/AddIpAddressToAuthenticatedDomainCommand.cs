@@ -5,19 +5,12 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.DomainAuthentications.Core;
 using Fluentley.SendGrid.Operations.DomainAuthentications.Models;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
 {
-    public interface
-        IAddIpAddressToAuthenticatedDomainCommand : IContextQuery<IAddIpAddressToAuthenticatedDomainCommand>
-
-    {
-        IAddIpAddressToAuthenticatedDomainCommand IpAddress(string ipAddress);
-        IAddIpAddressToAuthenticatedDomainCommand Id(string id);
-    }
-
     internal class AddIpAddressToAuthenticatedDomainCommand :
         AbstractCommand<AuthenticatedDomain, AddIpAddressToAuthenticatedDomainCommand>,
         IAddIpAddressToAuthenticatedDomainCommand,

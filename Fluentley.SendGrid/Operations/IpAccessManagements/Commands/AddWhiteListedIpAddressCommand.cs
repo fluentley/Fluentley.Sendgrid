@@ -7,18 +7,13 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.IpAccessManagements.Core;
 using Fluentley.SendGrid.Operations.IpAccessManagements.Models;
 using Fluentley.SendGrid.Operations.IpAddresses.Models;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.IpAccessManagements.Commands
 {
-    public interface IAddWhiteListedIpAddressCommand : IContextQuery<IAddWhiteListedIpAddressCommand>
-
-    {
-        IAddWhiteListedIpAddressCommand Add(params string[] values);
-    }
-
     internal class AddWhiteListedIpAddressCommand :
         AbstractCommand<List<WhiteListedIpAddress>, AddWhiteListedIpAddressCommand>,
         IAddWhiteListedIpAddressCommand,

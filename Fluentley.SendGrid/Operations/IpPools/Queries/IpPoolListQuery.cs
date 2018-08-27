@@ -6,15 +6,11 @@ using Fluentley.QueryBuilder.Options;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.IpPools.Core;
 using Fluentley.SendGrid.Operations.IpPools.Models;
 
 namespace Fluentley.SendGrid.Operations.IpPools.Queries
 {
-    public interface IIpPoolListQuery : IListMemoryFilterQuery<IIpPoolListQuery, IpPool>,
-        IContextQuery<IIpPoolListQuery>
-    {
-    }
-
     internal class IpPoolListQuery : AbstractListQuery<IpPool>, IIpPoolListQuery, IQuery<List<IpPool>>
     {
         public IpPoolListQuery(string defaultApiKey) : base(defaultApiKey)

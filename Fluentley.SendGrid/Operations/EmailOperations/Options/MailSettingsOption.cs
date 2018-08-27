@@ -1,19 +1,11 @@
 ﻿using System;
+using Fluentley.SendGrid.Operations.EmailOperations.Core;
 using Fluentley.SendGrid.Operations.EmailOperations.Options.MailSettings;
 using Fluentley.SendGrid.Processors;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.EmailOperations.Options
 {
-    public interface IMailSettingsOption
-    {
-        IMailSettingsOption Bcc(Action<IBccOption> option);
-        IMailSettingsOption AllowBypassListManagement(Action<IBypassListManagementOption> option);
-        IMailSettingsOption SandboxMode(bool value);
-        IMailSettingsOption SpamCheck(Action<ISpamCheckOption> option);
-        IMailSettingsOption Footer(Action<IFooterOption> option);
-    }
-
     internal class MailSettingsOption : IMailSettingsOption
     {
         private readonly OptionProcessor _optionProcessor;

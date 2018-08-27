@@ -6,16 +6,11 @@ using Fluentley.QueryBuilder.Options;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.Webhooks.Core;
 using Fluentley.SendGrid.Operations.Webhooks.Models;
 
 namespace Fluentley.SendGrid.Operations.Webhooks.Queries
 {
-    public interface IWebhookParseSettingsListQuery :
-        IListMemoryFilterQuery<IWebhookParseSettingsListQuery, WebhookParseSettings>,
-        IContextQuery<IWebhookParseSettingsListQuery>
-    {
-    }
-
     internal class WebhookParseSettingsListQuery : AbstractListQuery<WebhookParseSettings>,
         IWebhookParseSettingsListQuery,
         IQuery<List<WebhookParseSettings>>

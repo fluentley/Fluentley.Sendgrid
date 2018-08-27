@@ -5,15 +5,10 @@ using Fluentley.SendGrid.Common.Models;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.InvalidEmailAddresses.Core;
 
 namespace Fluentley.SendGrid.Operations.InvalidEmailAddresses.Queries
 {
-    public interface IInvalidEmailAddressSingleQuery : IContextQuery<IInvalidEmailAddressSingleQuery>
-
-    {
-        IInvalidEmailAddressSingleQuery ByEmailAddress(string id);
-    }
-
     internal class InvalidEmailAddressSingleQuery : AbstractSingleQuery<EmailReport>,
         IInvalidEmailAddressSingleQuery,
         IQuery<EmailReport>

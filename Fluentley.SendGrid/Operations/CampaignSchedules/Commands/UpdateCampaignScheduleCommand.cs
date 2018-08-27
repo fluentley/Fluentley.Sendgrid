@@ -6,18 +6,12 @@ using Fluentley.SendGrid.Common.Extensions;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.CampaignSchedules.Core;
 using Fluentley.SendGrid.Operations.CampaignSchedules.Models;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.CampaignSchedules.Commands
 {
-    public interface IUpdateCampaignScheduleCommand : IContextQuery<IUpdateCampaignScheduleCommand>
-
-    {
-        IUpdateCampaignScheduleCommand CampaignId(string id);
-        IUpdateCampaignScheduleCommand ScheduleOnUtc(DateTime value);
-    }
-
     internal class UpdateCampaignScheduleCommand : AbstractCommand<CampaignSchedule, UpdateCampaignScheduleCommand>,
         IUpdateCampaignScheduleCommand,
         ICommand<CampaignSchedule>

@@ -4,15 +4,11 @@ using System.Threading.Tasks;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.Users.Core;
 using Fluentley.SendGrid.Operations.Users.Models;
 
 namespace Fluentley.SendGrid.Operations.Users.Queries
 {
-    public interface IUserCreditSingleQuery : IContextQuery<IUserCreditSingleQuery>
-
-    {
-    }
-
     internal class UserCreditSingleQuery : AbstractSingleQuery<UserCredit>, IUserCreditSingleQuery, IQuery<UserCredit>
     {
         public UserCreditSingleQuery(string defaultApiKey) : base(defaultApiKey)

@@ -5,20 +5,12 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.EmailCNameRecords.Core;
 using Fluentley.SendGrid.Operations.EmailCNameRecords.Models;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.EmailCNameRecords.Commands
 {
-    public interface ISendGeneratedDnsInformationCommand : IContextQuery<ISendGeneratedDnsInformationCommand>
-
-    {
-        ISendGeneratedDnsInformationCommand LinkId(string linkId);
-        ISendGeneratedDnsInformationCommand DomainId(string domainId);
-        ISendGeneratedDnsInformationCommand EmailAddress(string emailAddress);
-        ISendGeneratedDnsInformationCommand Message(string message);
-    }
-
     internal class SendGeneratedDnsInformationCommand :
         AbstractCommand<SendDnsInformationResult, SendGeneratedDnsInformationCommand>,
         ISendGeneratedDnsInformationCommand,

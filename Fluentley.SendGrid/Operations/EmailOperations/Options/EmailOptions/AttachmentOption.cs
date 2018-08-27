@@ -1,16 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using Fluentley.SendGrid.Operations.EmailOperations.Core;
+using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.EmailOperations.Options.EmailOptions
 {
-    public interface IAttachmentOption
-    {
-        IAttachmentOption Content(string value);
-        IAttachmentOption Type(string value);
-        IAttachmentOption FileName(string value);
-        IAttachmentOption Disposition(string value);
-        IAttachmentOption ContentId(string value);
-    }
-
     internal class AttachmentOption : IAttachmentOption
     {
         [JsonProperty("content")]

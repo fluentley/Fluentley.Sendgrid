@@ -7,35 +7,27 @@ using Fluentley.QueryBuilder.Options;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.Alerts.Core;
 using Fluentley.SendGrid.Operations.Alerts.Queries;
+using Fluentley.SendGrid.Operations.ApiKeys.Core;
 using Fluentley.SendGrid.Operations.ApiKeys.Queries;
+using Fluentley.SendGrid.Operations.BlockedEmailAddresses.Core;
 using Fluentley.SendGrid.Operations.BlockedEmailAddresses.Queries;
+using Fluentley.SendGrid.Operations.BouncedEmailAddresses.Core;
 using Fluentley.SendGrid.Operations.BouncedEmailAddresses.Queries;
+using Fluentley.SendGrid.Operations.InvalidEmailAddresses.Core;
 using Fluentley.SendGrid.Operations.InvalidEmailAddresses.Queries;
+using Fluentley.SendGrid.Operations.MonitorSettings.Core;
 using Fluentley.SendGrid.Operations.MonitorSettings.Queries;
+using Fluentley.SendGrid.Operations.Reputations.Core;
 using Fluentley.SendGrid.Operations.Reputations.Queries;
+using Fluentley.SendGrid.Operations.SpamReportedEmailAddresses.Core;
 using Fluentley.SendGrid.Operations.SpamReportedEmailAddresses.Queries;
+using Fluentley.SendGrid.Operations.SubUsers.Core;
 using Fluentley.SendGrid.Operations.SubUsers.Models;
 
 namespace Fluentley.SendGrid.Operations.SubUsers.Queries
 {
-    public interface ISubUserListQuery : IListMemoryFilterQuery<ISubUserListQuery, SubUser>,
-        IContextQuery<ISubUserListQuery>, IQuery<List<SubUser>>
-    {
-        ISubUserListQuery EagerLoadReputrations(Action<IReputationListQuery> queryAction);
-        ISubUserListQuery EagerLoadMonitorSetting(Action<IMonitorSettingSingleQuery> queryAction);
-        ISubUserListQuery EagerLoadBlockedEmailReports(Action<IBlockedEmailAddressListQuery> queryAction);
-        ISubUserListQuery EagerLoadInvalidEmailReports(Action<IInvalidEmailAddressListQuery> queryAction);
-        ISubUserListQuery EagerLoadBouncedEmailReports(Action<IBouncedEmailAddressListQuery> queryAction);
-
-        ISubUserListQuery EagerLoadSpamReportedEmailReports(Action<ISpamReportedEmailAddressListQuery> queryAction);
-
-        ISubUserListQuery FilterBySubUserName(string subUserName);
-        ISubUserListQuery UsePaging(int pageIndex, int pageSize);
-        ISubUserListQuery EagerLoadApiKeys(Action<IApiKeyListQuery> queryAction);
-        ISubUserListQuery EagerLoadAlerts(Action<IAlertListQuery> queryAction);
-    }
-
     internal class SubUserListQuery : AbstractListQuery<SubUser>, ISubUserListQuery
     {
         private readonly string _defaultApiKey;

@@ -5,16 +5,11 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.Webhooks.Core;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.Webhooks.Commands
 {
-    public interface ISendTestWebhookEventCommand : IContextQuery<ISendTestWebhookEventCommand>
-
-    {
-        ISendTestWebhookEventCommand Url(string url);
-    }
-
     internal class SendTestWebhookEventCommand : AbstractCommand<string, SendTestWebhookEventCommand>,
         ISendTestWebhookEventCommand, ICommand<string>
     {

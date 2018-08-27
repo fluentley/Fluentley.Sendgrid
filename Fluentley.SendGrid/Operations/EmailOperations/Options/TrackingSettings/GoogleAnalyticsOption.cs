@@ -1,17 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using Fluentley.SendGrid.Operations.EmailOperations.Core;
+using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.EmailOperations.Options.TrackingSettings
 {
-    public interface IGoogleAnalyticsOption
-    {
-        IGoogleAnalyticsOption Enable(bool value);
-        IGoogleAnalyticsOption UtmSource(string value);
-        IGoogleAnalyticsOption UtmMedium(string value);
-        IGoogleAnalyticsOption UtmTerm(string value);
-        IGoogleAnalyticsOption UtmContent(string value);
-        IGoogleAnalyticsOption UtmCampaign(string value);
-    }
-
     internal class GoogleAnalyticsOption : IGoogleAnalyticsOption
     {
         [JsonProperty("utm_campaign")]

@@ -5,17 +5,11 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.SenderIdentities.Core;
 using Fluentley.SendGrid.Operations.SenderIdentities.Models;
 
 namespace Fluentley.SendGrid.Operations.SenderIdentities.Commands
 {
-    public interface IDeleteSenderIdentityCommand : IContextQuery<IDeleteSenderIdentityCommand>
-
-    {
-        IDeleteSenderIdentityCommand ById(string id);
-        IDeleteSenderIdentityCommand ByModel(SenderIdentity model);
-    }
-
     internal class DeleteSenderIdentityCommand : AbstractCommand<string, DeleteSenderIdentityCommand>,
         IDeleteSenderIdentityCommand, ICommand<string>
     {

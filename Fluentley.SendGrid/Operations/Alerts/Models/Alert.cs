@@ -71,19 +71,4 @@ namespace Fluentley.SendGrid.Operations.Alerts.Models
             set => FrequencyText = value.ToFrequenctyText();
         }
     }
-
-    public enum AlertType
-    {
-        Undefined = 0,
-        UsageLimit = 1,
-        StatisticsNotification = 2
-    }
-
-    public enum Frequency
-    {
-        Undefined = 0,
-        Daily = 1,
-        Weekly = 2,
-        Monthly = 3
-    }
 }

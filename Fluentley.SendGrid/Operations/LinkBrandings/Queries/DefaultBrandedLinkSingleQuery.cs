@@ -4,16 +4,11 @@ using System.Threading.Tasks;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.LinkBrandings.Core;
 using Fluentley.SendGrid.Operations.LinkBrandings.Models;
 
 namespace Fluentley.SendGrid.Operations.LinkBrandings.Queries
 {
-    public interface IDefaultBrandedLinkSingleQuery : IContextQuery<IDefaultBrandedLinkSingleQuery>
-
-    {
-        IDefaultBrandedLinkSingleQuery FilterByDomainUrl(string domainUrl);
-    }
-
     internal class DefaultBrandedLinkSingleQuery : AbstractSingleQuery<BrandedLink>, IDefaultBrandedLinkSingleQuery,
         IQuery<BrandedLink>
     {

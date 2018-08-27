@@ -4,18 +4,13 @@ using System.Threading.Tasks;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
+using Fluentley.SendGrid.Operations.Campaigns.Core;
 using Fluentley.SendGrid.Operations.Campaigns.Models;
+using Fluentley.SendGrid.Operations.CampaignSchedules.Core;
 using Fluentley.SendGrid.Operations.CampaignSchedules.Queries;
 
 namespace Fluentley.SendGrid.Operations.Campaigns.Queries
 {
-    public interface ICampaignSingleQuery : IContextQuery<ICampaignSingleQuery>
-
-    {
-        ICampaignSingleQuery ById(string id);
-        ICampaignSingleQuery EagerLoadCampaignSchedule(Action<ICampaignScheduleSingleQuery> queryAction);
-    }
-
     internal class CampaignSingleQuery : AbstractSingleQuery<Campaign>, ICampaignSingleQuery, IQuery<Campaign>
     {
         public CampaignSingleQuery(string defaultApiKey) : base(defaultApiKey)
