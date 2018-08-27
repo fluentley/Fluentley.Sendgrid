@@ -15,20 +15,20 @@ namespace Test.Fluentley.SendGrid
             var filePath = @"C:\Users\cenge\OneDrive\Desktop\Test.txt";
 
             var result = await Service.SendEmail(sendEmailOption => sendEmailOption
-                .From("cengel.emre@gmail.com")
-                .ReplyTo("developer.cengel@gmail.com", "Developer Cengel")
+                .From("a6061382@nwytg.net")
+                .ReplyTo("a6061382@nwytg.net", "Developer")
                 .Subject($"Test Email From Fluentley.SendGrid {DateTime.UtcNow:d}")
                 .AddCategory("Test Message")
                 .AddRecipient(recipientOption => recipientOption
                     .AddTo("a6061382@nwytg.net")
-                    .AddSubstitution("{{FirstName}}", "Emre")
-                    .AddSubstitution("{{LastName}}", "Cengel")
+                    .AddSubstitution("{{FirstName}}", "Developer")
+                    .AddSubstitution("{{LastName}}", "Self")
                     .AddSubstitution("{{Salutation}}", "Mr.")
                     .AddSubstitution("{{CommunicationReason}}", "{{BadNewsCommunication}}"))
                 .AddRecipient(recipientOption => recipientOption
                     .AddTo("a6061382@nwytg.net")
-                    .AddSubstitution("{{FirstName}}", "Asena")
-                    .AddSubstitution("{{LastName}}", "Cengel")
+                    .AddSubstitution("{{FirstName}}", "Developer")
+                    .AddSubstitution("{{LastName}}", "Wife")
                     .AddSubstitution("{{Salutation}}", "Mrs.")
                     .AddSubstitution("{{CommunicationReason}}", "{{GoodNewsCommunication}}"))
                 .AddContentOption(contentOption => contentOption
