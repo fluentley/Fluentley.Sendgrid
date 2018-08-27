@@ -205,20 +205,17 @@ namespace Fluentley.SendGrid
         public IQuery<List<EmailReport>> BlockedEmailAddresses(
             Action<IBlockedEmailAddressListQuery> queryAction = null)
         {
-            return _optionProcessor.Process<IBlockedEmailAddressListQuery, BlockedEmailAddressListQuery>(queryAction)
-                ;
+            return _optionProcessor.Process<IBlockedEmailAddressListQuery, BlockedEmailAddressListQuery>(queryAction);
         }
 
         public IQuery<EmailReport> BlockedEmailAddressById(Action<IBlockedEmailAddressSingleQuery> queryAction)
         {
-            return _optionProcessor
-                .Process<IBlockedEmailAddressSingleQuery, BlockedEmailAddressSingleQuery>(queryAction);
+            return _optionProcessor.Process<IBlockedEmailAddressSingleQuery, BlockedEmailAddressSingleQuery>(queryAction);
         }
 
         public ICommand<string> DeleteBlockedEmailAddress(Action<IDeleteBlockedEmailAddressCommand> commandAction)
         {
-            return _optionProcessor
-                .Process<IDeleteBlockedEmailAddressCommand, DeleteBlockedEmailAddressCommand>(commandAction);
+            return _optionProcessor.Process<IDeleteBlockedEmailAddressCommand, DeleteBlockedEmailAddressCommand>(commandAction);
         }
 
         #endregion
@@ -233,8 +230,7 @@ namespace Fluentley.SendGrid
 
         public IQuery<EmailReport> BouncedEmailAddressById(Action<IBouncedEmailAddressSingleQuery> queryAction)
         {
-            return _optionProcessor
-                .Process<IBouncedEmailAddressSingleQuery, BouncedEmailAddressSingleQuery>(queryAction);
+            return _optionProcessor.Process<IBouncedEmailAddressSingleQuery, BouncedEmailAddressSingleQuery>(queryAction);
         }
 
         public ICommand<string> DeleteBouncedEmailAddress(Action<IDeleteBouncedEmailAddressCommand> commandAction)
@@ -867,9 +863,7 @@ namespace Fluentley.SendGrid
         public ICommand<ApproveTeammateRequestResult> ApproveTeammateAccessRequest(
             Action<IApproveTeammateAccessRequestCommand> commandAction)
         {
-            return _optionProcessor
-                    .Process<IApproveTeammateAccessRequestCommand, ApproveTeammateAccessRequestCommand>(commandAction)
-                ;
+            return _optionProcessor.Process<IApproveTeammateAccessRequestCommand, ApproveTeammateAccessRequestCommand>(commandAction);
         }
 
         public ICommand<string> DenyTeammateAccessRequest(Action<IDenyTeammateAccessRequestCommand> commandAction)
