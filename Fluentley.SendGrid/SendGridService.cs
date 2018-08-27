@@ -128,8 +128,7 @@ namespace Fluentley.SendGrid
             Action<ISendGeneratedDnsInformationCommand> commandAction)
         {
             return _optionProcessor
-                    .Process<ISendGeneratedDnsInformationCommand, SendGeneratedDnsInformationCommand>(commandAction)
-                ;
+                    .Process<ISendGeneratedDnsInformationCommand, SendGeneratedDnsInformationCommand>(commandAction);
         }
 
         #endregion
@@ -229,8 +228,7 @@ namespace Fluentley.SendGrid
         public IQuery<List<EmailReport>> BouncedEmailAddresses(
             Action<IBouncedEmailAddressListQuery> queryAction = null)
         {
-            return _optionProcessor.Process<IBouncedEmailAddressListQuery, BouncedEmailAddressListQuery>(queryAction)
-                ;
+            return _optionProcessor.Process<IBouncedEmailAddressListQuery, BouncedEmailAddressListQuery>(queryAction);
         }
 
         public IQuery<EmailReport> BouncedEmailAddressById(Action<IBouncedEmailAddressSingleQuery> queryAction)
@@ -260,8 +258,7 @@ namespace Fluentley.SendGrid
             Action<ISpamReportedEmailAddressSingleQuery> queryAction)
         {
             return _optionProcessor
-                    .Process<ISpamReportedEmailAddressSingleQuery, SpamReportedEmailAddressSingleQuery>(queryAction)
-                ;
+                    .Process<ISpamReportedEmailAddressSingleQuery, SpamReportedEmailAddressSingleQuery>(queryAction);
         }
 
         public ICommand<string> DeleteSpamReportedEmailAddress(
@@ -269,8 +266,7 @@ namespace Fluentley.SendGrid
         {
             return _optionProcessor
                     .Process<IDeleteSpamReportedEmailAddressCommand, DeleteSpamReportedEmailAddressCommand>(
-                        commandAction)
-                ;
+                        commandAction);
         }
 
         #endregion
@@ -280,8 +276,7 @@ namespace Fluentley.SendGrid
         public IQuery<List<EmailReport>> InvalidEmailAddresses(
             Action<IInvalidEmailAddressListQuery> queryAction = null)
         {
-            return _optionProcessor.Process<IInvalidEmailAddressListQuery, InvalidEmailAddressListQuery>(queryAction)
-                ;
+            return _optionProcessor.Process<IInvalidEmailAddressListQuery, InvalidEmailAddressListQuery>(queryAction);
         }
 
         public IQuery<EmailReport> InvalidEmailAddressById(Action<IInvalidEmailAddressSingleQuery> queryAction)
@@ -302,20 +297,17 @@ namespace Fluentley.SendGrid
 
         public IQuery<MonitorSetting> MonitorSetting(Action<IMonitorSettingSingleQuery> queryAction = null)
         {
-            return _optionProcessor.Process<IMonitorSettingSingleQuery, MonitorSettingSingleQuery>(queryAction)
-                ;
+            return _optionProcessor.Process<IMonitorSettingSingleQuery, MonitorSettingSingleQuery>(queryAction);
         }
 
         public ICommand<MonitorSetting> UpdateMonitorSetting(Action<IUpdateMonitorSettingCommand> commandAction)
         {
-            return _optionProcessor.Process<IUpdateMonitorSettingCommand, UpdateMonitorSettingCommand>(commandAction)
-                ;
+            return _optionProcessor.Process<IUpdateMonitorSettingCommand, UpdateMonitorSettingCommand>(commandAction);
         }
 
         public ICommand<string> DeleteMonitorSetting(Action<IDeleteMonitorSettingCommand> commandAction)
         {
-            return _optionProcessor.Process<IDeleteMonitorSettingCommand, DeleteMonitorSettingCommand>(commandAction)
-                ;
+            return _optionProcessor.Process<IDeleteMonitorSettingCommand, DeleteMonitorSettingCommand>(commandAction);
         }
 
         #endregion
@@ -359,8 +351,7 @@ namespace Fluentley.SendGrid
         public IQuery<CampaignSchedule> CampaignScheduleByCampaignId(
             Action<ICampaignScheduleSingleQuery> queryAction)
         {
-            return _optionProcessor.Process<ICampaignScheduleSingleQuery, CampaignScheduleSingleQuery>(queryAction)
-                ;
+            return _optionProcessor.Process<ICampaignScheduleSingleQuery, CampaignScheduleSingleQuery>(queryAction);
         }
 
         public ICommand<CampaignSchedule> CreateCampaignSchedule(
@@ -409,8 +400,7 @@ namespace Fluentley.SendGrid
 
         public ICommand<string> EnableOrDisableSubUser(Action<IEnableOrDisableSubUserCommand> queryAction = null)
         {
-            return _optionProcessor.Process<IEnableOrDisableSubUserCommand, EnableOrDisableSubUserCommand>(queryAction)
-                ;
+            return _optionProcessor.Process<IEnableOrDisableSubUserCommand, EnableOrDisableSubUserCommand>(queryAction);
         }
 
         #endregion
@@ -419,50 +409,42 @@ namespace Fluentley.SendGrid
 
         public IQuery<User> User(Action<IUserSingleQuery> queryAction = null)
         {
-            return _optionProcessor.Process<IUserSingleQuery, UserSingleQuery>(queryAction)
-                ;
+            return _optionProcessor.Process<IUserSingleQuery, UserSingleQuery>(queryAction);
         }
 
         public IQuery<UserAccount> UserAccount(Action<IUserAccountSingleQuery> queryAction = null)
         {
-            return _optionProcessor.Process<IUserAccountSingleQuery, UserAccountSingleQuery>(queryAction)
-                ;
+            return _optionProcessor.Process<IUserAccountSingleQuery, UserAccountSingleQuery>(queryAction);
         }
 
         public IQuery<UserProfile> UserProfile(Action<IUserProfileSingleQuery> queryAction = null)
         {
-            return _optionProcessor.Process<IUserProfileSingleQuery, UserProfileSingleQuery>(queryAction)
-                ;
+            return _optionProcessor.Process<IUserProfileSingleQuery, UserProfileSingleQuery>(queryAction);
         }
 
         public IQuery<UserCredit> UserCredit(Action<IUserCreditSingleQuery> queryAction = null)
         {
-            return _optionProcessor.Process<IUserCreditSingleQuery, UserCreditSingleQuery>(queryAction)
-                ;
+            return _optionProcessor.Process<IUserCreditSingleQuery, UserCreditSingleQuery>(queryAction);
         }
 
         public IQuery<UserEmailAddress> UserEmailAddress(Action<IUserEmailAddressSingleQuery> queryAction = null)
         {
-            return _optionProcessor.Process<IUserEmailAddressSingleQuery, UserEmailAddressSingleQuery>(queryAction)
-                ;
+            return _optionProcessor.Process<IUserEmailAddressSingleQuery, UserEmailAddressSingleQuery>(queryAction);
         }
 
         public ICommand<UserEmailAddress> UpdateUserEmailAddress(Action<IUpdateUserEmailAddressCommand> command)
         {
-            return _optionProcessor.Process<IUpdateUserEmailAddressCommand, UpdateUserEmailAddressCommand>(command)
-                ;
+            return _optionProcessor.Process<IUpdateUserEmailAddressCommand, UpdateUserEmailAddressCommand>(command);
         }
 
         public ICommand<UserProfile> UpdateUserProfile(Action<IUpdateUserProfileCommand> command)
         {
-            return _optionProcessor.Process<IUpdateUserProfileCommand, UpdateUserProfileCommand>(command)
-                ;
+            return _optionProcessor.Process<IUpdateUserProfileCommand, UpdateUserProfileCommand>(command);
         }
 
         public ICommand<string> UpdateUserPassword(Action<IUpdateUserPasswordCommand> command)
         {
-            return _optionProcessor.Process<IUpdateUserPasswordCommand, UpdateUserPasswordCommand>(command)
-                ;
+            return _optionProcessor.Process<IUpdateUserPasswordCommand, UpdateUserPasswordCommand>(command);
         }
 
         #endregion
@@ -476,26 +458,22 @@ namespace Fluentley.SendGrid
 
         public IQuery<SenderIdentity> SenderIdentityById(Action<ISenderIdentitySingleQuery> queryAction)
         {
-            return _optionProcessor.Process<ISenderIdentitySingleQuery, SenderIdentitySingleQuery>(queryAction)
-                ;
+            return _optionProcessor.Process<ISenderIdentitySingleQuery, SenderIdentitySingleQuery>(queryAction);
         }
 
         public ICommand<SenderIdentity> CreateSenderIdentity(Action<ICreateSenderIdentityCommand> commandAction)
         {
-            return _optionProcessor.Process<ICreateSenderIdentityCommand, CreateSenderIdentityCommand>(commandAction)
-                ;
+            return _optionProcessor.Process<ICreateSenderIdentityCommand, CreateSenderIdentityCommand>(commandAction);
         }
 
         public ICommand<SenderIdentity> UpdateSenderIdentity(Action<IUpdateSenderIdentityCommand> commandAction)
         {
-            return _optionProcessor.Process<IUpdateSenderIdentityCommand, UpdateSenderIdentityCommand>(commandAction)
-                ;
+            return _optionProcessor.Process<IUpdateSenderIdentityCommand, UpdateSenderIdentityCommand>(commandAction);
         }
 
         public ICommand<string> DeleteSenderIdentity(Action<IDeleteSenderIdentityCommand> commandAction)
         {
-            return _optionProcessor.Process<IDeleteSenderIdentityCommand, DeleteSenderIdentityCommand>(commandAction)
-                ;
+            return _optionProcessor.Process<IDeleteSenderIdentityCommand, DeleteSenderIdentityCommand>(commandAction);
         }
 
         public ICommand<string> ResendVerificationSenderIdentity(
@@ -551,15 +529,12 @@ namespace Fluentley.SendGrid
 
         public ICommand<IpAddress> AddIpAddressToPool(Action<IAddIpAddressToPoolCommand> commandAction)
         {
-            return _optionProcessor.Process<IAddIpAddressToPoolCommand, AddIpAddressToPoolCommand>(commandAction)
-                ;
+            return _optionProcessor.Process<IAddIpAddressToPoolCommand, AddIpAddressToPoolCommand>(commandAction);
         }
 
         public ICommand<string> RemoveIpAddressFromPool(Action<IRemoveIpAddressFromPoolCommand> commandAction)
         {
-            return _optionProcessor.Process<IRemoveIpAddressFromPoolCommand, RemoveIpAddressFromPoolCommand>(
-                    commandAction)
-                ;
+            return _optionProcessor.Process<IRemoveIpAddressFromPoolCommand, RemoveIpAddressFromPoolCommand>(commandAction);
         }
 
         public ICommand<IpPool> UpdateIpPool(Action<IUpdateIpPoolCommand> commandAction)
@@ -579,8 +554,7 @@ namespace Fluentley.SendGrid
         public IQuery<List<WebhookParseSettings>> WebhookParseSettings(
             Action<IWebhookParseSettingsListQuery> queryAction = null)
         {
-            return _optionProcessor.Process<IWebhookParseSettingsListQuery, WebhookParseSettingsListQuery>(queryAction)
-                ;
+            return _optionProcessor.Process<IWebhookParseSettingsListQuery, WebhookParseSettingsListQuery>(queryAction);
         }
 
         public IQuery<List<WebhookParseStatistics>> WebhookParseStatistics(
@@ -593,20 +567,17 @@ namespace Fluentley.SendGrid
         public IQuery<WebhookSettings> WebhookSettingsSingleQuery(
             Action<IWebhookSettingsSingleQuery> queryAction)
         {
-            return _optionProcessor.Process<IWebhookSettingsSingleQuery, WebhookSettingsSingleQuery>(queryAction)
-                ;
+            return _optionProcessor.Process<IWebhookSettingsSingleQuery, WebhookSettingsSingleQuery>(queryAction);
         }
 
         public ICommand<string> SendTestWebhookEvent(Action<ISendTestWebhookEventCommand> commandAction)
         {
-            return _optionProcessor.Process<ISendTestWebhookEventCommand, SendTestWebhookEventCommand>(commandAction)
-                ;
+            return _optionProcessor.Process<ISendTestWebhookEventCommand, SendTestWebhookEventCommand>(commandAction);
         }
 
         public ICommand<WebhookSettings> UpdateWebhookSettings(Action<IUpdateWebHookSettingsCommand> commandAction)
         {
-            return _optionProcessor.Process<IUpdateWebHookSettingsCommand, UpdateWebHookSettingsCommand>(commandAction)
-                ;
+            return _optionProcessor.Process<IUpdateWebHookSettingsCommand, UpdateWebHookSettingsCommand>(commandAction);
         }
 
         #endregion
@@ -616,8 +587,7 @@ namespace Fluentley.SendGrid
         public IQuery<List<AssignedIpAddress>> AssignedIpAddresses(
             Action<IAssignedIpAddressListQuery> queryAction = null)
         {
-            return _optionProcessor.Process<IAssignedIpAddressListQuery, AssignedIpAddressListQuery>(queryAction)
-                ;
+            return _optionProcessor.Process<IAssignedIpAddressListQuery, AssignedIpAddressListQuery>(queryAction);
         }
 
         public IQuery<List<IpAddress>> IpAddresses(Action<IIpAddressListQuery> queryAction = null)
@@ -628,8 +598,7 @@ namespace Fluentley.SendGrid
         public IQuery<List<RemainingIpAddress>> RemaningIpAddresses(
             Action<IRemainingIpAddressListQuery> queryAction = null)
         {
-            return _optionProcessor.Process<IRemainingIpAddressListQuery, RemainingIpAddressListQuery>(queryAction)
-                ;
+            return _optionProcessor.Process<IRemainingIpAddressListQuery, RemainingIpAddressListQuery>(queryAction);
         }
 
         public IQuery<IpAddress> IpAddress(Action<IIpAddressSingleQuery> queryAction)
@@ -656,8 +625,7 @@ namespace Fluentley.SendGrid
         public ICommand<string> RemoveWhiteListedIpAddress(Action<IRemoveWhiteListedIpAddressCommand> commandAction)
         {
             return _optionProcessor
-                    .Process<IRemoveWhiteListedIpAddressCommand, RemoveWhiteListedIpAddressCommand>(commandAction)
-                ;
+                    .Process<IRemoveWhiteListedIpAddressCommand, RemoveWhiteListedIpAddressCommand>(commandAction);
         }
 
         public IQuery<List<IpAccessManagementSettingActivity>> IpAccessManagementSettingActivity(
@@ -698,8 +666,7 @@ namespace Fluentley.SendGrid
 
         public IQuery<BrandedLink> DefaultBrandedLink(Action<IDefaultBrandedLinkSingleQuery> queryAction)
         {
-            return _optionProcessor.Process<IDefaultBrandedLinkSingleQuery, DefaultBrandedLinkSingleQuery>(queryAction)
-                ;
+            return _optionProcessor.Process<IDefaultBrandedLinkSingleQuery, DefaultBrandedLinkSingleQuery>(queryAction);
         }
 
         public IQuery<BrandedLink> BrandedLink(Action<IBrandedLinkSingleQuery> queryAction)
@@ -715,43 +682,37 @@ namespace Fluentley.SendGrid
 
         public ICommand<BrandedLink> CreateBrandedLink(Action<ICreateBrandedLinkCommand> commandAction)
         {
-            return _optionProcessor.Process<ICreateBrandedLinkCommand, CreateBrandedLinkCommand>(commandAction)
-                ;
+            return _optionProcessor.Process<ICreateBrandedLinkCommand, CreateBrandedLinkCommand>(commandAction);
         }
 
         public ICommand<string> DeleteBrandedLink(Action<IDeleteBrandedLinkCommand> commandAction)
         {
-            return _optionProcessor.Process<IDeleteBrandedLinkCommand, DeleteBrandedLinkCommand>(commandAction)
-                ;
+            return _optionProcessor.Process<IDeleteBrandedLinkCommand, DeleteBrandedLinkCommand>(commandAction);
         }
 
         public ICommand<BrandedLink> UpdateBrandedLink(Action<IUpdateBrandedLinkCommand> commandAction)
         {
-            return _optionProcessor.Process<IUpdateBrandedLinkCommand, UpdateBrandedLinkCommand>(commandAction)
-                ;
+            return _optionProcessor.Process<IUpdateBrandedLinkCommand, UpdateBrandedLinkCommand>(commandAction);
         }
 
         public ICommand<BrandedLinkValidationResult> ValidateBrandedLink(
             Action<IValidateBrandedLinkCommand> commandAction)
         {
-            return _optionProcessor.Process<IValidateBrandedLinkCommand, ValidateBrandedLinkCommand>(commandAction)
-                ;
+            return _optionProcessor.Process<IValidateBrandedLinkCommand, ValidateBrandedLinkCommand>(commandAction);
         }
 
         public ICommand<string> AssociateBrandedForSubUser(
             Action<IAssociateBrandedForSubUserCommand> commandAction)
         {
             return _optionProcessor
-                    .Process<IAssociateBrandedForSubUserCommand, AssociateBrandedForSubUserCommand>(commandAction)
-                ;
+                    .Process<IAssociateBrandedForSubUserCommand, AssociateBrandedForSubUserCommand>(commandAction);
         }
 
         public ICommand<string> DisassociateBrandedForSubUser(
             Action<IDisassociateBrandedForSubUserCommand> commandAction)
         {
             return _optionProcessor
-                    .Process<IDisassociateBrandedForSubUserCommand, DisassociateBrandedForSubUserCommand>(commandAction)
-                ;
+                    .Process<IDisassociateBrandedForSubUserCommand, DisassociateBrandedForSubUserCommand>(commandAction);
         }
 
         #endregion
@@ -762,22 +723,19 @@ namespace Fluentley.SendGrid
             Action<IValidateReverseDnsCommand> commandAction)
         {
             return _optionProcessor
-                    .Process<IValidateReverseDnsCommand, ValidateReverseDnsCommand>(commandAction)
-                ;
+                    .Process<IValidateReverseDnsCommand, ValidateReverseDnsCommand>(commandAction);
         }
 
         public ICommand<ReverseDns> SetupReverseDns(Action<ISetupReverseDnsCommand> commandAction)
         {
             return _optionProcessor
-                    .Process<ISetupReverseDnsCommand, SetupReverseDnsCommand>(commandAction)
-                ;
+                    .Process<ISetupReverseDnsCommand, SetupReverseDnsCommand>(commandAction);
         }
 
         public ICommand<string> DeleteReverseDns(Action<IDeleteReverseDnsCommand> commandAction)
         {
             return _optionProcessor
-                    .Process<IDeleteReverseDnsCommand, DeleteReverseDnsCommand>(commandAction)
-                ;
+                    .Process<IDeleteReverseDnsCommand, DeleteReverseDnsCommand>(commandAction);
         }
 
         public IQuery<ReverseDns> ReverseDns(Action<IReverseDnsSingleQuery> queryAction)
@@ -834,8 +792,7 @@ namespace Fluentley.SendGrid
         {
             return _optionProcessor
                     .Process<IAddIpAddressToAuthenticatedDomainCommand, AddIpAddressToAuthenticatedDomainCommand>(
-                        commandAction)
-                ;
+                        commandAction);
         }
 
         public ICommand<AuthenticatedDomain> AuthenticateToDomain(
@@ -843,8 +800,7 @@ namespace Fluentley.SendGrid
         {
             return _optionProcessor
                     .Process<IAuthenticateToDomainCommand, AuthenticateToDomainCommand>(
-                        commandAction)
-                ;
+                        commandAction);
         }
 
         public ICommand<AuthenticatedDomain> AssociateSubuserToAuthenticatedDomain(
@@ -852,9 +808,7 @@ namespace Fluentley.SendGrid
         {
             return _optionProcessor
                     .Process<IAssociateSubuserToAuthenticatedDomainCommand, AssociateSubuserToAuthenticatedDomainCommand
-                    >(
-                        commandAction)
-                ;
+                    >(commandAction);
         }
 
         public ICommand<string> DisAssociateSubuserToAuthenticatedDomain(
@@ -862,8 +816,7 @@ namespace Fluentley.SendGrid
         {
             return _optionProcessor
                     .Process<IDisassociateSubUserFromAuthenticatedDomainCommand,
-                        DisassociateSubUserFromAuthenticatedDomainCommand>(commandAction)
-                ;
+                        DisassociateSubUserFromAuthenticatedDomainCommand>(commandAction);
         }
 
         public ICommand<AuthenticatedDomain> RemoveIpAddressToAuthenticatedDomain(
@@ -871,9 +824,7 @@ namespace Fluentley.SendGrid
         {
             return _optionProcessor
                     .Process<IRemoveIpAddressFromAuthenticatedDomainCommand,
-                        RemoveIpAddressFromAuthenticatedDomainCommand>(
-                        commandAction)
-                ;
+                        RemoveIpAddressFromAuthenticatedDomainCommand>(commandAction);
         }
 
         public ICommand<AuthenticatedDomainSetting> UpdateAuthenticatedDomainSetting(
@@ -881,9 +832,7 @@ namespace Fluentley.SendGrid
         {
             return _optionProcessor
                     .Process<IUpdateAuthenticatedDomainSettingCommand,
-                        UpdateAuthenticatedDomainSettingCommand>(
-                        commandAction)
-                ;
+                        UpdateAuthenticatedDomainSettingCommand>(commandAction);
         }
 
         public ICommand<string> DeleteAuthenticatedDomain(
@@ -891,17 +840,14 @@ namespace Fluentley.SendGrid
         {
             return _optionProcessor
                     .Process<IDeleteAuthenticatedDomainCommand,
-                        DeleteAuthenticatedDomainCommand>(
-                        commandAction)
-                ;
+                        DeleteAuthenticatedDomainCommand>(commandAction);
         }
 
         public ICommand<AuthenticatedDomainValidation> ValidateAuthenticatedDomain(
             Action<IValidateAuthenticatedDomainCommand> commandAction)
         {
             return _optionProcessor
-                    .Process<IValidateAuthenticatedDomainCommand, ValidateAuthenticatedDomainCommand>(commandAction)
-                ;
+                    .Process<IValidateAuthenticatedDomainCommand, ValidateAuthenticatedDomainCommand>(commandAction);
         }
 
         #endregion
@@ -936,8 +882,7 @@ namespace Fluentley.SendGrid
             Action<IDeletePendingTeammateInviteCommand> commandAction)
         {
             return _optionProcessor
-                    .Process<IDeletePendingTeammateInviteCommand, DeletePendingTeammateInviteCommand>(commandAction)
-                ;
+                    .Process<IDeletePendingTeammateInviteCommand, DeletePendingTeammateInviteCommand>(commandAction);
         }
 
         public ICommand<TeammateInviteResult> InviteTeammate(Action<IInviteTeammateCommand> commandAction)
@@ -948,8 +893,7 @@ namespace Fluentley.SendGrid
         public ICommand<TeammateInviteResult> ResendTeammateInvite(
             Action<IResendTeammateInviteCommand> commandAction)
         {
-            return _optionProcessor.Process<IResendTeammateInviteCommand, ResendTeammateInviteCommand>(commandAction)
-                ;
+            return _optionProcessor.Process<IResendTeammateInviteCommand, ResendTeammateInviteCommand>(commandAction);
         }
 
         public IQuery<List<Teammate>> Teammates(Action<ITeammateListQuery> queryAction = null)
@@ -965,16 +909,13 @@ namespace Fluentley.SendGrid
         public IQuery<List<TeammateAccessRequest>> TeammateAccessRequests(
             Action<ITeammateAccessRequestListQuery> queryAction = null)
         {
-            return _optionProcessor
-                .Process<ITeammateAccessRequestListQuery, TeammateAccessRequestListQuery>(queryAction);
+            return _optionProcessor.Process<ITeammateAccessRequestListQuery, TeammateAccessRequestListQuery>(queryAction);
         }
 
         public IQuery<List<PendingTeammateInvitation>> PendingTemmateInvitations(
             Action<IPendingTeammateInvitationListQuery> queryAction = null)
         {
-            return _optionProcessor
-                    .Process<IPendingTeammateInvitationListQuery, PendingTeammateInvitationListQuery>(queryAction)
-                ;
+            return _optionProcessor.Process<IPendingTeammateInvitationListQuery, PendingTeammateInvitationListQuery>(queryAction);
         }
 
         #endregion
