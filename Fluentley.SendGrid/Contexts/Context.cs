@@ -539,7 +539,7 @@ namespace Fluentley.SendGrid.Contexts
 
         public Task<Response<Alert>> UpdateAlert(UpdateAlertCommand command)
         {
-            return _context.UpdateAlert(command.Id, command);
+            return _context.UpdateAlert(command.IdForAlert, command);
         }
 
         public Task<Response<List<Alert>>> Alerts()

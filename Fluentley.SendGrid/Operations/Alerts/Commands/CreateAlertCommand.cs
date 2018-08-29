@@ -8,6 +8,7 @@ using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.Alerts.Core;
 using Fluentley.SendGrid.Operations.Alerts.Extensions;
 using Fluentley.SendGrid.Operations.Alerts.Models;
+using Fluentley.SendGrid.Operations.Alerts.Validators;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.Alerts.Commands
@@ -19,23 +20,23 @@ namespace Fluentley.SendGrid.Operations.Alerts.Commands
         }
 
         [JsonProperty("type")]
-        internal string TypeText { get; set; }
+        internal string TypeTextForAlert { get; set; }
 
         [JsonProperty("email_to")]
-        internal string EmailTo { get; set; }
+        internal string EmailToForAlert { get; set; }
 
         [JsonProperty("frequency")]
-        internal string FrequencyText { get; set; }
+        internal string FrequencyTextForAlert { get; set; }
 
         [JsonProperty("percentage")]
-        internal int? Percentage { get; set; }
+        internal int? PercentageForAlert { get; set; }
 
         [JsonIgnore]
-        internal AlertType Type
+        internal AlertType TypeForAlert
         {
             get
             {
-                switch (TypeText)
+                switch (TypeTextForAlert)
                 {
                     case "stats_notification":
                         return AlertType.StatisticsNotification;
@@ -46,15 +47,15 @@ namespace Fluentley.SendGrid.Operations.Alerts.Commands
                         return AlertType.Undefined;
                 }
             }
-            set => TypeText = value.ToAlertTypeText();
+            set => TypeTextForAlert = value.ToAlertTypeText();
         }
 
         [JsonIgnore]
-        internal Frequency Frequency
+        internal Frequency FrequencyForAlert
         {
             get
             {
-                switch (FrequencyText)
+                switch (FrequencyTextForAlert)
                 {
                     case "daily":
                         return Frequency.Daily;
@@ -67,27 +68,27 @@ namespace Fluentley.SendGrid.Operations.Alerts.Commands
                         return Frequency.Undefined;
                 }
             }
-            set => FrequencyText = value.ToFrequenctyText();
+            set => FrequencyTextForAlert = value.ToFrequenctyText();
         }
 
         public Task<IResult<Alert>> Execute()
         {
             return Processor.Process<Alert, ICreateAlertCommand, CreateAlertCommand>(this,
-                context => context.CreateAlert(this) /*, context =>
+                context => context.CreateAlert(this), context =>
                 {
                     var validator = new CreateAlertCommandValidator();
                     return validator.ValidateAsync(this);
-                }*/);
+                });
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<Alert, ICreateAlertCommand, CreateAlertCommand>(this,
-                context => context.CreateAlert(this) /*, context =>
+                context => context.CreateAlert(this), context =>
                 {
                     var validator = new CreateAlertCommandValidator();
                     return validator.ValidateAsync(this);
-                }*/);
+                });
         }
 
         public ICreateAlertCommand ByModel(Alert alert)
@@ -95,22 +96,35 @@ namespace Fluentley.SendGrid.Operations.Alerts.Commands
             if (alert == null)
                 return this;
 
-            TypeText = alert.TypeText;
-            EmailTo = alert.EmailTo;
-            Percentage = alert.Percentage;
-            FrequencyText = alert.FrequencyText;
+            TypeTextForAlert = alert.TypeText;
+            EmailToForAlert = alert.EmailTo;
+            PercentageForAlert = alert.Percentage;
+            FrequencyTextForAlert = alert.FrequencyText;
 
             return this;
         }
 
-        public ICreateAlertCommand Using(AlertType alertType, string emailTo,
-            Frequency frequency = Frequency.Undefined, int? percentage = null)
+        public ICreateAlertCommand Type(AlertType value)
         {
-            Type = alertType;
-            EmailTo = emailTo;
-            Percentage = percentage;
-            Frequency = frequency;
+            TypeForAlert = value;
+            return this;
+        }
 
+        public ICreateAlertCommand SendAlertTo(string value)
+        {
+            EmailToForAlert = value;
+            return this;
+        }
+
+        public ICreateAlertCommand AlertFrequency(Frequency value)
+        {
+            FrequencyForAlert = value;
+            return this;
+        }
+
+        public ICreateAlertCommand ThresholdUsagePercentage(int value)
+        {
+            PercentageForAlert = value;
             return this;
         }
 

@@ -19,7 +19,7 @@ namespace Test.Fluentley.SendGrid.RequestIntegrationTests.Alerts
                 Type = AlertType.StatisticsNotification
             };
 
-            var result = await Service.CreateAlert(option => option.ByModel(alert)).GenerateRequest();
+            var result = await Service.CreateAlert(option =>  option.ByModel(alert)).GenerateRequest();
 
             Assert.AreEqual($"Bearer {SendGridApiKey}", result.Data.Headers.Authorization.ToString());
             Assert.AreEqual(true, result.IsSuccess);

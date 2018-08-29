@@ -183,16 +183,55 @@ namespace Fluentley.SendGrid
             return _optionProcessor.Process<IAlertSingleQuery, AlertSingleQuery>(queryAction);
         }
 
+        /// <summary>
+        ///     Alerts allow you to specify an email address to receive notifications regarding your email usage or statistics.
+        ///     There are two types of alerts that can be created with this endpoint
+        ///     <list type="table">
+        ///         <item>
+        ///             <description>usage_limit allows you to set the threshold at which an alert will be sent.</description>
+        ///         </item>
+        ///         <item>
+        ///             <description>
+        ///                 stats_notification allows you to set how frequently you would like to receive email statistics
+        ///                 reports. For example, "daily", "weekly", or "monthly".
+        ///             </description>
+        ///         </item>
+        ///     </list>
+        /// </summary>
+        /// <param name="commandAction"><see cref="ICreateAlertCommand" /> - Create Alert Command</param>
+        /// <returns></returns>
         public ICommand<Alert> CreateAlert(Action<ICreateAlertCommand> commandAction)
         {
             return _optionProcessor.Process<ICreateAlertCommand, CreateAlertCommand>(commandAction);
         }
 
+        /// <summary>
+        ///     This endpoint allows you to update an alert.
+        ///     Alerts allow you to specify an email address to receive notifications regarding your email usage or statistics.
+        ///     <list type="table">
+        ///         <item>
+        ///             <description>Usage alerts allow you to set the threshold at which an alert will be sent.</description>
+        ///         </item>
+        ///         <item>
+        ///             <description>
+        ///                 Stats notifications allow you to set how frequently you would like to receive email statistics
+        ///                 reports. For example, "daily", "weekly", or "monthly".
+        ///             </description>
+        ///         </item>
+        ///     </list>
+        /// </summary>
+        /// <param name="commandAction"><see cref="IUpdateAlertCommand" /> - Update Alert Command</param>
+        /// <returns></returns>
         public ICommand<Alert> UpdateAlert(Action<IUpdateAlertCommand> commandAction)
         {
             return _optionProcessor.Process<IUpdateAlertCommand, UpdateAlertCommand>(commandAction);
         }
 
+        /// <summary>
+        ///     This endpoint allows you to delete an alert.
+        /// </summary>
+        /// <param name="commandAction"><see cref="IDeleteAlertCommand" /> - Delete Alert Command</param>
+        /// <returns></returns>
         public ICommand<string> DeleteAlert(Action<IDeleteAlertCommand> commandAction)
         {
             return _optionProcessor.Process<IDeleteAlertCommand, DeleteAlertCommand>(commandAction);

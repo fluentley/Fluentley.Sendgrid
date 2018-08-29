@@ -8,10 +8,10 @@ namespace Fluentley.SendGrid.Operations.Alerts.Validators
     {
         public CreateAlertCommandValidator()
         {
-            RuleFor(x => x.Type).NotEqual(AlertType.Undefined);
-            RuleFor(x => x.EmailTo).NotEmpty();
-            RuleFor(x => x.Percentage).GreaterThan(0).When(x => x.Percentage.HasValue);
-            RuleFor(x => x.Percentage).NotNull().When(x => x.Type == AlertType.UsageLimit)
+            RuleFor(x => x.TypeForAlert).NotEqual(AlertType.Undefined);
+            RuleFor(x => x.EmailToForAlert).EmailAddress();
+            RuleFor(x => x.PercentageForAlert).GreaterThan(0).When(x => x.PercentageForAlert.HasValue);
+            RuleFor(x => x.PercentageForAlert).NotNull().When(x => x.TypeForAlert == AlertType.UsageLimit)
                 .WithMessage("Percentage cannot be empty when Alert Type is Usage Limit");
         }
     }

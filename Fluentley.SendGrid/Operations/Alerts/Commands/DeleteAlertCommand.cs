@@ -7,6 +7,7 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.Alerts.Core;
 using Fluentley.SendGrid.Operations.Alerts.Models;
+using Fluentley.SendGrid.Operations.Alerts.Validators;
 
 namespace Fluentley.SendGrid.Operations.Alerts.Commands
 {
@@ -17,37 +18,37 @@ namespace Fluentley.SendGrid.Operations.Alerts.Commands
         {
         }
 
-        internal string Id { get; set; }
+        internal string IdForAlert { get; set; }
 
         public Task<IResult<string>> Execute()
         {
             return Processor.Process<string, IDeleteAlertCommand, DeleteAlertCommand>(this,
-                context => context.DeleteAlertById(Id) /*, context =>
+                context => context.DeleteAlertById(IdForAlert), context =>
                 {
-                    var validator = new DeleteAlertCommandValidator(context);
-                    return validator.ValidateAsync(Id);
-                }*/);
+                    var validator = new DeleteAlertCommandValidator();
+                    return validator.ValidateAsync(this);
+                });
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<string, IDeleteAlertCommand, DeleteAlertCommand>(this,
-                context => context.DeleteAlertById(Id) /*, context =>
+                context => context.DeleteAlertById(IdForAlert), context =>
                 {
-                    var validator = new DeleteAlertCommandValidator(context);
-                    return validator.ValidateAsync(Id);
-                }*/);
+                    var validator = new DeleteAlertCommandValidator();
+                    return validator.ValidateAsync(this);
+                });
         }
 
         public IDeleteAlertCommand ById(string id)
         {
-            Id = id;
+            IdForAlert = id;
             return this;
         }
 
         public IDeleteAlertCommand ByModel(Alert model)
         {
-            Id = model?.Id;
+            IdForAlert = model?.Id;
             return this;
         }
 
