@@ -87,7 +87,7 @@ namespace Fluentley.SendGrid.Operations.ApiKeys.Commands
         public ICreateApiKeyCommand UseContextOption(Action<IContextOption> option)
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
-            return this
-         }
+            return this;
+        }
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Fluentley.SendGrid.Common.Models;
+﻿using Fluentley.SendGrid.Common.Models;
 using Fluentley.SendGrid.Contexts.Extensions;
 using Fluentley.SendGrid.Contexts.HttpClientHelpers;
 using Fluentley.SendGrid.Operations.Alerts.Commands;
@@ -79,6 +74,11 @@ using Fluentley.SendGrid.Operations.Webhooks.Commands;
 using Fluentley.SendGrid.Operations.Webhooks.Models;
 using Fluentley.SendGrid.Operations.Webhooks.Queries;
 using RestEase;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using User = Fluentley.SendGrid.Operations.Users.Models.User;
 
 namespace Fluentley.SendGrid.Contexts
@@ -722,7 +722,7 @@ namespace Fluentley.SendGrid.Contexts
 
         public Task<Response<string>> EnableOrDisableSubUser(string subUserName, bool isDisabled)
         {
-            return _context.EnableOrDisableSubUser(subUserName, new {disabled = isDisabled});
+            return _context.EnableOrDisableSubUser(subUserName, new { disabled = isDisabled });
         }
 
         public Task<Response<List<SubUser>>> SubUsers(

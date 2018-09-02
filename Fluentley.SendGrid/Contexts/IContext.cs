@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
-using Fluentley.SendGrid.Common.Models;
+﻿using Fluentley.SendGrid.Common.Models;
 using Fluentley.SendGrid.Operations.Alerts.Commands;
 using Fluentley.SendGrid.Operations.Alerts.Models;
 using Fluentley.SendGrid.Operations.ApiKeys.Commands;
@@ -55,6 +52,9 @@ using Fluentley.SendGrid.Operations.Users.Models;
 using Fluentley.SendGrid.Operations.Webhooks.Commands;
 using Fluentley.SendGrid.Operations.Webhooks.Models;
 using RestEase;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using User = Fluentley.SendGrid.Operations.Users.Models.User;
 
 [assembly: InternalsVisibleTo(RestClient.FactoryAssemblyName)]

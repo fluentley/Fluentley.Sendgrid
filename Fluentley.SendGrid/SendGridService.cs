@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Fluentley.SendGrid.Common.Commands;
+﻿using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Models;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Operations.Alerts.Commands;
@@ -113,6 +111,8 @@ using Fluentley.SendGrid.Operations.Webhooks.Core;
 using Fluentley.SendGrid.Operations.Webhooks.Models;
 using Fluentley.SendGrid.Operations.Webhooks.Queries;
 using Fluentley.SendGrid.Processors;
+using System;
+using System.Collections.Generic;
 using User = Fluentley.SendGrid.Operations.Users.Models.User;
 
 namespace Fluentley.SendGrid

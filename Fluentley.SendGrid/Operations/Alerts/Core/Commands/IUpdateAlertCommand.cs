@@ -39,6 +39,8 @@ namespace Fluentley.SendGrid.Operations.Alerts.Core.Commands
         /// </summary>
         /// <param name="value">Alert Id <c>[Required]</c></param>
         /// <returns></returns>
-        IUpdateAlertCommand Id(string value);
-    
+        IUpdateAlertCommand Id(string value);
+
+
+    }
 }
