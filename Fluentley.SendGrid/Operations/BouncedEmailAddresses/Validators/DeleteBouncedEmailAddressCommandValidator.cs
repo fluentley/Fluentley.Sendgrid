@@ -5,11 +5,5 @@ namespace Fluentley.SendGrid.Operations.BouncedEmailAddresses.Validators
 {
     internal class DeleteBouncedEmailAddressCommandValidator : AbstractValidator<DeleteBouncedEmailAddressCommand>
     {
-        
-
-        public DeleteBouncedEmailAddressCommandValidator()
-        {
-        
-        }
     }
 }

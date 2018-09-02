@@ -1,5 +1,4 @@
-﻿using Fluentley.SendGrid.Contexts;
-using Fluentley.SendGrid.Operations.SpamReportedEmailAddresses.Commands;
+﻿using Fluentley.SendGrid.Operations.SpamReportedEmailAddresses.Commands;
 using FluentValidation;
 
 namespace Fluentley.SendGrid.Operations.SpamReportedEmailAddresses.Validators

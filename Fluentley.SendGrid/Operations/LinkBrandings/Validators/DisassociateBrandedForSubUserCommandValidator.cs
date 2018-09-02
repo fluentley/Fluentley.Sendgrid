@@ -1,5 +1,4 @@
-﻿using Fluentley.SendGrid.Contexts;
-using Fluentley.SendGrid.Operations.LinkBrandings.Commands;
+﻿using Fluentley.SendGrid.Operations.LinkBrandings.Commands;
 using FluentValidation;
 
 namespace Fluentley.SendGrid.Operations.LinkBrandings.Validators

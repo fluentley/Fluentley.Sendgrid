@@ -8,9 +8,6 @@ namespace Fluentley.SendGrid.Operations.DomainAuthentications.Validators
             AssociateSubuserToAuthenticatedDomainCommand>
     {
 
-        public AssociateSubuserToAuthenticatedDomainCommandValidator()
-        {
-            
-        }
+       
     }
 }

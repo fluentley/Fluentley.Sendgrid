@@ -7,9 +7,6 @@ namespace Fluentley.SendGrid.Operations.DomainAuthentications.Validators
         AddIpAddressToAuthenticatedDomainCommandValidator : AbstractValidator<AddIpAddressToAuthenticatedDomainCommand>
     {
         
-        public AddIpAddressToAuthenticatedDomainCommandValidator()
-        {
-            
-        }
+      
     }
 }

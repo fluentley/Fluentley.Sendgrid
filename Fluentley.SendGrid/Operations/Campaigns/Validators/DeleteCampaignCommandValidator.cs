@@ -5,11 +5,5 @@ namespace Fluentley.SendGrid.Operations.Campaigns.Validators
 {
     internal class DeleteCampaignCommandValidator : AbstractValidator<DeleteCampaignCommand>
     {
-       
-
-        public DeleteCampaignCommandValidator()
-        {
-            
-        }
     }
 }

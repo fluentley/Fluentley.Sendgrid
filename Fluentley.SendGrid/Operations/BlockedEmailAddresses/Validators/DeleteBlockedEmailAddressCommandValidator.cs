@@ -7,9 +7,5 @@ namespace Fluentley.SendGrid.Operations.BlockedEmailAddresses.Validators
     {
       
 
-        public DeleteBlockedEmailAddressCommandValidator()
-        {
-           
-        }
     }
 }
