@@ -6,6 +6,8 @@ using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.Users.Core;
+using Fluentley.SendGrid.Operations.Users.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.Users.Commands
@@ -26,21 +28,13 @@ namespace Fluentley.SendGrid.Operations.Users.Commands
         public Task<IResult<string>> Execute()
         {
             return Processor.Process<string, IUpdateUserPasswordCommand, UpdateUserPasswordCommand>(this,
-                context => context.UpdateUserPassword(this) /*, context =>
-                {
-                    var validator = new UpdateUserPasswordCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.UpdateUserPassword(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<string, IUpdateUserPasswordCommand, UpdateUserPasswordCommand>(this,
-                context => context.UpdateUserPassword(this) /*, context =>
-                {
-                    var validator = new UpdateUserPasswordCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.UpdateUserPassword(this));
         }
 
         public IUpdateUserPasswordCommand UseContextOption(Action<IContextOption> option)
@@ -54,6 +48,12 @@ namespace Fluentley.SendGrid.Operations.Users.Commands
             OldPassword = oldPassword;
             NewPassword = newPassword;
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new UpdateUserPasswordCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

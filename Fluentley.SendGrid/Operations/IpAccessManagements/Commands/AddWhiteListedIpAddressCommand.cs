@@ -9,7 +9,9 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.IpAccessManagements.Core;
 using Fluentley.SendGrid.Operations.IpAccessManagements.Models;
+using Fluentley.SendGrid.Operations.IpAccessManagements.Validators;
 using Fluentley.SendGrid.Operations.IpAddresses.Models;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.IpAccessManagements.Commands
@@ -51,11 +53,7 @@ namespace Fluentley.SendGrid.Operations.IpAccessManagements.Commands
             return Processor
                 .Process<List<WhiteListedIpAddress>, IAddWhiteListedIpAddressCommand, AddWhiteListedIpAddressCommand>(
                     this,
-                    context => context.AddWhiteListedIpAddress(this) /*, context =>
-                    {
-                        var validator = new AddWhiteListedIpAddressCommandValidator();
-                        return validator.ValidateAsync(this);
-                    }*/);
+                    context => context.AddWhiteListedIpAddress(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
@@ -63,11 +61,13 @@ namespace Fluentley.SendGrid.Operations.IpAccessManagements.Commands
             return RequestGenerator
                 .Process<List<WhiteListedIpAddress>, IAddWhiteListedIpAddressCommand, AddWhiteListedIpAddressCommand>(
                     this,
-                    context => context.AddWhiteListedIpAddress(this) /*, context =>
-                    {
-                        var validator = new AddWhiteListedIpAddressCommandValidator();
-                        return validator.ValidateAsync(this);
-                    }*/);
+                    context => context.AddWhiteListedIpAddress(this));
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new AddWhiteListedIpAddressCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.SettingEnforcedTls.Core;
 using Fluentley.SendGrid.Operations.SettingEnforcedTls.Models;
+using Fluentley.SendGrid.Operations.SettingEnforcedTls.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.SettingEnforcedTls.Commands
@@ -27,21 +29,13 @@ namespace Fluentley.SendGrid.Operations.SettingEnforcedTls.Commands
         public Task<IResult<EnforcedTls>> Execute()
         {
             return Processor.Process<EnforcedTls, IUpdateEnforcedTlsCommand, UpdateEnforcedTlsCommand>(this,
-                context => context.UpdateEnforcedTls(this) /*, context =>
-                {
-                    var validator = new UpdateEnforcedTlsCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.UpdateEnforcedTls(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<EnforcedTls, IUpdateEnforcedTlsCommand, UpdateEnforcedTlsCommand>(this,
-                context => context.UpdateEnforcedTls(this) /*, context =>
-                {
-                    var validator = new UpdateEnforcedTlsCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.UpdateEnforcedTls(this));
         }
 
         public IUpdateEnforcedTlsCommand ByModel(EnforcedTls value)
@@ -55,6 +49,12 @@ namespace Fluentley.SendGrid.Operations.SettingEnforcedTls.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new UpdateEnforcedTlsCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

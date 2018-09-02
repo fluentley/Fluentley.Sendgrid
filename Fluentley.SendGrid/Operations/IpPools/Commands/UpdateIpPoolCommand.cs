@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.IpPools.Core;
 using Fluentley.SendGrid.Operations.IpPools.Models;
+using Fluentley.SendGrid.Operations.IpPools.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.IpPools.Commands
@@ -27,21 +29,13 @@ namespace Fluentley.SendGrid.Operations.IpPools.Commands
         public Task<IResult<IpPool>> Execute()
         {
             return Processor.Process<IpPool, IUpdateIpPoolCommand, UpdateIpPoolCommand>(this,
-                context => context.UpdateIpPool(this) /*, context =>
-                {
-                    var validator = new UpdateIpPoolCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.UpdateIpPool(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<IpPool, IUpdateIpPoolCommand, UpdateIpPoolCommand>(this,
-                context => context.UpdateIpPool(this) /*, context =>
-                {
-                    var validator = new UpdateIpPoolCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.UpdateIpPool(this));
         }
 
         public IUpdateIpPoolCommand UseContextOption(Action<IContextOption> option)
@@ -56,6 +50,12 @@ namespace Fluentley.SendGrid.Operations.IpPools.Commands
             NewName = newName;
 
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new UpdateIpPoolCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

@@ -4,11 +4,13 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Models;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Operations.Alerts.Commands;
-using Fluentley.SendGrid.Operations.Alerts.Core;
+using Fluentley.SendGrid.Operations.Alerts.Core.Commands;
+using Fluentley.SendGrid.Operations.Alerts.Core.Queries;
 using Fluentley.SendGrid.Operations.Alerts.Models;
 using Fluentley.SendGrid.Operations.Alerts.Queries;
 using Fluentley.SendGrid.Operations.ApiKeys.Commands;
-using Fluentley.SendGrid.Operations.ApiKeys.Core;
+using Fluentley.SendGrid.Operations.ApiKeys.Core.Commands;
+using Fluentley.SendGrid.Operations.ApiKeys.Core.Queires;
 using Fluentley.SendGrid.Operations.ApiKeys.Models;
 using Fluentley.SendGrid.Operations.ApiKeys.Queries;
 using Fluentley.SendGrid.Operations.BlockedEmailAddresses.Commands;
@@ -173,12 +175,23 @@ namespace Fluentley.SendGrid
 
         #region Alerts
 
+        /// <summary>
+        /// Alerts allow you to specify an email address to receive notifications regarding your email usage or statistics.
+        /// </summary>
+        /// <param name="queryAction">Query</param>
+        /// <returns></returns>
         public IQuery<List<Alert>> Alerts(Action<IAlertListQuery> queryAction = null)
         {
             return _optionProcessor.Process<IAlertListQuery, AlertListQuery>(queryAction);
         }
 
-        public IQuery<Alert> AlertById(Action<IAlertSingleQuery> queryAction)
+
+        /// <summary>
+        /// Alerts allow you to specify an email address to receive notifications regarding your email usage or statistics.
+        /// </summary>
+        /// <param name="queryAction">Query</param>
+        /// <returns></returns>
+        public IQuery<Alert> Alert(Action<IAlertSingleQuery> queryAction)
         {
             return _optionProcessor.Process<IAlertSingleQuery, AlertSingleQuery>(queryAction);
         }
@@ -241,16 +254,29 @@ namespace Fluentley.SendGrid
 
         #region ApiKeys
 
+        /// <summary>
+        /// This endpoint allows you to retrieve all API Keys that belong to the authenticated user.
+        /// </summary>
+        /// <param name="queryAction">Query</param>
+        /// <returns></returns>
         public IQuery<List<ApiKey>> ApiKeys(Action<IApiKeyListQuery> queryAction = null)
         {
             return _optionProcessor.Process<IApiKeyListQuery, ApiKeyListQuery>(queryAction);
         }
 
-        public IQuery<ApiKey> ApiKeyById(Action<IApiKeySingleQuery> queryAction)
+        public IQuery<ApiKey> ApiKey(Action<IApiKeySingleQuery> queryAction)
         {
             return _optionProcessor.Process<IApiKeySingleQuery, ApiKeySingleQuery>(queryAction);
         }
 
+        /// <summary>
+        /// This endpoint allows you to create a new random API Key for the user.
+        /// A JSON request body containing a "name" property is required. If number of maximum keys is reached, HTTP 403 will be returned.
+        /// There is a limit of 100 API Keys on your account.
+        /// The API Keys feature allows customers to be able to generate an API Key credential which can be used for authentication with the SendGrid v3 Web API or the .
+        /// </summary>
+        /// <param name="commandAction">The command action.</param>
+        /// <returns></returns>
         public ICommand<ApiKey> CreateApiKey(Action<ICreateApiKeyCommand> commandAction)
         {
             return _optionProcessor.Process<ICreateApiKeyCommand, CreateApiKeyCommand>(commandAction);

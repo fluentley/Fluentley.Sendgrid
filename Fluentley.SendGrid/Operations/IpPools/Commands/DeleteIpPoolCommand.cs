@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.IpPools.Core;
 using Fluentley.SendGrid.Operations.IpPools.Models;
+using Fluentley.SendGrid.Operations.IpPools.Validators;
+using FluentValidation.Results;
 
 namespace Fluentley.SendGrid.Operations.IpPools.Commands
 {
@@ -22,21 +24,13 @@ namespace Fluentley.SendGrid.Operations.IpPools.Commands
         public Task<IResult<string>> Execute()
         {
             return Processor.Process<string, IDeleteIpPoolCommand, DeleteIpPoolCommand>(this,
-                context => context.DeleteIpPoolByName(Name) /*, context =>
-                {
-                    var validator = new DeleteIpPoolCommandValidator(context);
-                    return validator.ValidateAsync(Name);
-                }*/);
+                context => context.DeleteIpPoolByName(Name));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<string, IDeleteIpPoolCommand, DeleteIpPoolCommand>(this,
-                context => context.DeleteIpPoolByName(Name) /*, context =>
-                {
-                    var validator = new DeleteIpPoolCommandValidator(context);
-                    return validator.ValidateAsync(Name);
-                }*/);
+                context => context.DeleteIpPoolByName(Name));
         }
 
         public IDeleteIpPoolCommand ByName(string name)
@@ -55,6 +49,12 @@ namespace Fluentley.SendGrid.Operations.IpPools.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new DeleteIpPoolCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

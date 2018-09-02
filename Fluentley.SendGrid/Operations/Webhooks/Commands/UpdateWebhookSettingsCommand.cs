@@ -1,14 +1,15 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Fluentley.SendGrid.Common.Commands;
+﻿using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.Webhooks.Core;
 using Fluentley.SendGrid.Operations.Webhooks.Models;
-using Fluentley.SendGrid.Operations.Webhooks.Validators;
 using Newtonsoft.Json;
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Fluentley.SendGrid.Operations.Webhooks.Validators;
+using FluentValidation.Results;
 
 namespace Fluentley.SendGrid.Operations.Webhooks.Commands
 {
@@ -62,24 +63,14 @@ namespace Fluentley.SendGrid.Operations.Webhooks.Commands
         public Task<IResult<WebhookSettings>> Execute()
         {
             return Processor.Process<WebhookSettings, IUpdateWebHookSettingsCommand, UpdateWebHookSettingsCommand>(
-                this,
-                context => context.UpdateWebhookSettings(this), context =>
-                {
-                    var validator = new UpdateWebhookSettingsCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                });
+                this, context => context.UpdateWebhookSettings(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator
                 .Process<WebhookSettings, IUpdateWebHookSettingsCommand, UpdateWebHookSettingsCommand>(
-                    this,
-                    context => context.UpdateWebhookSettings(this), context =>
-                    {
-                        var validator = new UpdateWebhookSettingsCommandValidator(context);
-                        return validator.ValidateAsync(this);
-                    });
+                    this, context => context.UpdateWebhookSettings(this));
         }
 
         public IUpdateWebHookSettingsCommand ByModel(WebhookSettings webhookSettings)
@@ -103,6 +94,12 @@ namespace Fluentley.SendGrid.Operations.Webhooks.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new UpdateWebhookSettingsCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

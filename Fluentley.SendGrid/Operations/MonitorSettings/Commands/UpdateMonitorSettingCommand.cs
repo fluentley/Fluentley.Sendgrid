@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.MonitorSettings.Core;
 using Fluentley.SendGrid.Operations.MonitorSettings.Models;
+using Fluentley.SendGrid.Operations.MonitorSettings.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.MonitorSettings.Commands
@@ -35,26 +37,14 @@ namespace Fluentley.SendGrid.Operations.MonitorSettings.Commands
         public Task<IResult<MonitorSetting>> Execute()
         {
             return Processor.Process<MonitorSetting, IUpdateMonitorSettingCommand, UpdateMonitorSettingCommand>(this,
-                context => context.UpdateMonitorSettingByUserName(UserName, this) /*, context =>
-                {
-                    var validator = new UpdateMonitorSettingCommandValidator(_defaultApiKey, context);
-                    return validator.ValidateAsync(options => options
-                        .FilterBySubUserName(SubUserName)
-                        .UsePaging(0, 1));
-                }*/);
+                context => context.UpdateMonitorSettingByUserName(UserName, this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<MonitorSetting, IUpdateMonitorSettingCommand, UpdateMonitorSettingCommand>(
                 this,
-                context => context.UpdateMonitorSettingByUserName(UserName, this) /*, context =>
-                {
-                    var validator = new UpdateMonitorSettingCommandValidator(_defaultApiKey, context);
-                    return validator.ValidateAsync(options => options
-                        .FilterBySubUserName(SubUserName)
-                        .UsePaging(0, 1));
-                }*/);
+                context => context.UpdateMonitorSettingByUserName(UserName, this));
         }
 
         public IUpdateMonitorSettingCommand SubUserName(string subUserName)
@@ -77,9 +67,14 @@ namespace Fluentley.SendGrid.Operations.MonitorSettings.Commands
 
         public IUpdateMonitorSettingCommand UseContextOption(Action<IContextOption> option)
         {
-            ContextOptionAction = option;
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new UpdateMonitorSettingCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

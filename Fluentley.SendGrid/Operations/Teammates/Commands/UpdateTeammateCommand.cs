@@ -9,6 +9,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.Teammates.Core;
 using Fluentley.SendGrid.Operations.Teammates.Models;
+using Fluentley.SendGrid.Operations.Teammates.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.Teammates.Commands
@@ -32,21 +34,13 @@ namespace Fluentley.SendGrid.Operations.Teammates.Commands
         public Task<IResult<TeammateWithScope>> Execute()
         {
             return Processor.Process<TeammateWithScope, IUpdateTeammateCommand, UpdateTeammateCommand>(this,
-                context => context.UpdateTeammateByUserName(this) /*, context =>
-                {
-                    var validator = new UpdateTeammateCommandValidator(context);
-                    return validator.ValidateAsync(UserName);
-                }*/);
+                context => context.UpdateTeammateByUserName(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<TeammateWithScope, IUpdateTeammateCommand, UpdateTeammateCommand>(this,
-                context => context.UpdateTeammateByUserName(this) /*, context =>
-                {
-                    var validator = new UpdateTeammateCommandValidator(context);
-                    return validator.ValidateAsync(UserName);
-                }*/);
+                context => context.UpdateTeammateByUserName(this));
         }
 
         public IUpdateTeammateCommand IsAdminTeammate(bool value)
@@ -70,6 +64,12 @@ namespace Fluentley.SendGrid.Operations.Teammates.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new UpdateTeammateCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

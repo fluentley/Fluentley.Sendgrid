@@ -1,5 +1,4 @@
-﻿using Fluentley.SendGrid.Contexts;
-using Fluentley.SendGrid.Operations.DomainAuthentications.Commands;
+﻿using Fluentley.SendGrid.Operations.DomainAuthentications.Commands;
 using FluentValidation;
 
 namespace Fluentley.SendGrid.Operations.DomainAuthentications.Validators
@@ -7,11 +6,10 @@ namespace Fluentley.SendGrid.Operations.DomainAuthentications.Validators
     internal class
         AddIpAddressToAuthenticatedDomainCommandValidator : AbstractValidator<AddIpAddressToAuthenticatedDomainCommand>
     {
-        private readonly Context _context;
-
-        public AddIpAddressToAuthenticatedDomainCommandValidator(Context context)
+        
+        public AddIpAddressToAuthenticatedDomainCommandValidator()
         {
-            _context = context;
+            
         }
     }
 }

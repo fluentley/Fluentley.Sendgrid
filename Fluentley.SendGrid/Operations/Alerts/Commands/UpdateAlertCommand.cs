@@ -5,10 +5,11 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
-using Fluentley.SendGrid.Operations.Alerts.Core;
+using Fluentley.SendGrid.Operations.Alerts.Core.Commands;
 using Fluentley.SendGrid.Operations.Alerts.Extensions;
 using Fluentley.SendGrid.Operations.Alerts.Models;
 using Fluentley.SendGrid.Operations.Alerts.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.Alerts.Commands
@@ -55,21 +56,19 @@ namespace Fluentley.SendGrid.Operations.Alerts.Commands
         public Task<IResult<Alert>> Execute()
         {
             return Processor.Process<Alert, IUpdateAlertCommand, UpdateAlertCommand>(this,
-                context => context.UpdateAlert(this), context =>
-                {
-                    var validator = new UpdateAlertCommandValidator();
-                    return validator.ValidateAsync(this);
-                });
+                context => context.UpdateAlert(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<Alert, IUpdateAlertCommand, UpdateAlertCommand>(this,
-                context => context.UpdateAlert(this), context =>
-                {
-                    var validator = new UpdateAlertCommandValidator();
-                    return validator.ValidateAsync(this);
-                });
+                context => context.UpdateAlert(this));
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new UpdateAlertCommandValidator();
+            return validator.ValidateAsync(this);
         }
 
         public IUpdateAlertCommand ByModel(Alert alert)

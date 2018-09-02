@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.SubUsers.Core;
 using Fluentley.SendGrid.Operations.SubUsers.Models;
+using Fluentley.SendGrid.Operations.SubUsers.Validators;
+using FluentValidation.Results;
 
 namespace Fluentley.SendGrid.Operations.SubUsers.Commands
 {
@@ -25,21 +27,13 @@ namespace Fluentley.SendGrid.Operations.SubUsers.Commands
         public Task<IResult<SubUser>> Execute()
         {
             return Processor.Process<SubUser, IUpdateSubUserCommand, UpdateSubUserCommand>(this,
-                context => context.UpdateSubUser(Model) /*, context =>
-                {
-                    var validator = new UpdateSubUserCommandValidator(_defaultApiKey, context);
-                    return validator.ValidateAsync(x => x.FilterBySubUserName(Model.UserName));
-                }*/);
+                context => context.UpdateSubUser(Model));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<SubUser, IUpdateSubUserCommand, UpdateSubUserCommand>(this,
-                context => context.UpdateSubUser(Model) /*, context =>
-                {
-                    var validator = new UpdateSubUserCommandValidator(_defaultApiKey, context);
-                    return validator.ValidateAsync(x => x.FilterBySubUserName(Model.UserName));
-                }*/);
+                context => context.UpdateSubUser(Model));
         }
 
         public IUpdateSubUserCommand ByModel(SubUser subUser)
@@ -50,9 +44,14 @@ namespace Fluentley.SendGrid.Operations.SubUsers.Commands
 
         public IUpdateSubUserCommand UseContextOption(Action<IContextOption> option)
         {
-            ContextOptionAction = option;
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new UpdateSubUserCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

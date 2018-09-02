@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.Alerts.Models;
 using Fluentley.SendGrid.Operations.Teammates.Core;
+using Fluentley.SendGrid.Operations.Teammates.Validators;
+using FluentValidation.Results;
 
 namespace Fluentley.SendGrid.Operations.Teammates.Commands
 {
@@ -23,22 +25,14 @@ namespace Fluentley.SendGrid.Operations.Teammates.Commands
         public Task<IResult<string>> Execute()
         {
             return Processor.Process<string, IDenyTeammateAccessRequestCommand, DenyTeammateAccessRequestCommand>(this,
-                context => context.DenyTeammateAccessRequestById(Id) /*, context =>
-                {
-                    var validator = new DenyTeammateAccessRequestCommandValidator(context);
-                    return validator.ValidateAsync(Id);
-                }*/);
+                context => context.DenyTeammateAccessRequestById(Id));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator
                 .Process<string, IDenyTeammateAccessRequestCommand, DenyTeammateAccessRequestCommand>(this,
-                    context => context.DenyTeammateAccessRequestById(Id) /*, context =>
-                    {
-                        var validator = new DenyTeammateAccessRequestCommandValidator(context);
-                        return validator.ValidateAsync(Id);
-                    }*/);
+                    context => context.DenyTeammateAccessRequestById(Id));
         }
 
         public IDenyTeammateAccessRequestCommand ById(string id)
@@ -57,6 +51,12 @@ namespace Fluentley.SendGrid.Operations.Teammates.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new DenyTeammateAccessRequestCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

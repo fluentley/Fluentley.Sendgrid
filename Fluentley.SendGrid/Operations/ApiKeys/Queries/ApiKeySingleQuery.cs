@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
-using Fluentley.SendGrid.Operations.ApiKeys.Core;
+using Fluentley.SendGrid.Operations.ApiKeys.Core.Commands;
 using Fluentley.SendGrid.Operations.ApiKeys.Models;
 
 namespace Fluentley.SendGrid.Operations.ApiKeys.Queries

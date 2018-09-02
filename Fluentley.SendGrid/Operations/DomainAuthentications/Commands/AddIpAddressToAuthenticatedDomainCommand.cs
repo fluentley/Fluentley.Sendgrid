@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.DomainAuthentications.Core;
 using Fluentley.SendGrid.Operations.DomainAuthentications.Models;
+using Fluentley.SendGrid.Operations.DomainAuthentications.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
@@ -49,11 +51,7 @@ namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
             return Processor
                 .Process<AuthenticatedDomain, IAddIpAddressToAuthenticatedDomainCommand,
                     AddIpAddressToAuthenticatedDomainCommand>(this,
-                    context => context.AddIpAddressToAuthenticatedDomain(this) /*, context =>
-                    {
-                        var validator = new AddIpAddressToAuthenticatedDomainCommandValidator(context);
-                        return validator.ValidateAsync(this);
-                    }*/);
+                    context => context.AddIpAddressToAuthenticatedDomain(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
@@ -61,11 +59,13 @@ namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
             return RequestGenerator
                 .Process<AuthenticatedDomain, IAddIpAddressToAuthenticatedDomainCommand,
                     AddIpAddressToAuthenticatedDomainCommand>(this,
-                    context => context.AddIpAddressToAuthenticatedDomain(this) /*, context =>
-                    {
-                        var validator = new AddIpAddressToAuthenticatedDomainCommandValidator(context);
-                        return validator.ValidateAsync(this);
-                    }*/);
+                    context => context.AddIpAddressToAuthenticatedDomain(this));
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new AddIpAddressToAuthenticatedDomainCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

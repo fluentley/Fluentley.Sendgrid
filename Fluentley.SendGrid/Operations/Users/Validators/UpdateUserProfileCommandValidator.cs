@@ -6,11 +6,6 @@ namespace Fluentley.SendGrid.Operations.Users.Validators
 {
     internal class UpdateUserProfileCommandValidator : AbstractValidator<UpdateUserProfileCommand>
     {
-        private readonly Context _context;
-
-        public UpdateUserProfileCommandValidator(Context context)
-        {
-            _context = context;
-        }
+       
     }
 }

@@ -8,6 +8,8 @@ using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.IpAccessManagements.Core;
+using Fluentley.SendGrid.Operations.IpAccessManagements.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.IpAccessManagements.Commands
@@ -27,11 +29,7 @@ namespace Fluentley.SendGrid.Operations.IpAccessManagements.Commands
         {
             return Processor.Process<string, IRemoveWhiteListedIpAddressCommand, RemoveWhiteListedIpAddressCommand>(
                 this,
-                context => context.RemoveWhiteListedIpAddress(this) /*, context =>
-                {
-                    var validator = new RemoveWhiteListedIpAddressCommandValidator();
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.RemoveWhiteListedIpAddress(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
@@ -39,11 +37,7 @@ namespace Fluentley.SendGrid.Operations.IpAccessManagements.Commands
             return RequestGenerator
                 .Process<string, IRemoveWhiteListedIpAddressCommand, RemoveWhiteListedIpAddressCommand>(
                     this,
-                    context => context.RemoveWhiteListedIpAddress(this) /*, context =>
-                    {
-                        var validator = new RemoveWhiteListedIpAddressCommandValidator();
-                        return validator.ValidateAsync(this);
-                    }*/);
+                    context => context.RemoveWhiteListedIpAddress(this));
         }
 
         public IRemoveWhiteListedIpAddressCommand UseContextOption(Action<IContextOption> option)
@@ -61,6 +55,12 @@ namespace Fluentley.SendGrid.Operations.IpAccessManagements.Commands
                 Ids.AddRange(ipAddressId);
 
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+           var validator = new RemoveWhiteListedIpAddressCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

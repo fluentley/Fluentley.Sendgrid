@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.Teammates.Core;
 using Fluentley.SendGrid.Operations.Teammates.Models;
+using Fluentley.SendGrid.Operations.Teammates.Validators;
+using FluentValidation.Results;
 
 namespace Fluentley.SendGrid.Operations.Teammates.Commands
 {
@@ -22,21 +24,13 @@ namespace Fluentley.SendGrid.Operations.Teammates.Commands
         public Task<IResult<string>> Execute()
         {
             return Processor.Process<string, IDeleteTeammateCommand, DeleteTeammateCommand>(this,
-                context => context.DeleteTeammateByUserName(UserName) /*, context =>
-                {
-                    var validator = new DeleteTeammateCommandValidator(context);
-                    return validator.ValidateAsync(UserName);
-                }*/);
+                context => context.DeleteTeammateByUserName(UserName));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<string, IDeleteTeammateCommand, DeleteTeammateCommand>(this,
-                context => context.DeleteTeammateByUserName(UserName) /*, context =>
-                {
-                    var validator = new DeleteTeammateCommandValidator(context);
-                    return validator.ValidateAsync(UserName);
-                }*/);
+                context => context.DeleteTeammateByUserName(UserName));
         }
 
         public IDeleteTeammateCommand ByUserName(string userName)
@@ -55,6 +49,12 @@ namespace Fluentley.SendGrid.Operations.Teammates.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new DeleteTeammateCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

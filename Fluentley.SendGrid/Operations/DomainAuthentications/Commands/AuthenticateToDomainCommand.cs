@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.DomainAuthentications.Core;
 using Fluentley.SendGrid.Operations.DomainAuthentications.Models;
+using Fluentley.SendGrid.Operations.DomainAuthentications.Validators;
+using FluentValidation.Results;
 
 namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
 {
@@ -38,24 +40,19 @@ namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
         public Task<IResult<AuthenticatedDomain>> Execute()
         {
             return Processor.Process<AuthenticatedDomain, IAuthenticateToDomainCommand, AuthenticateToDomainCommand>(
-                this,
-                context => context.AuthenticateToDomain(DomainAuthenticate) /*, context =>
-                {
-                    var validator = new AuthenticateToDomainCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                this,context => context.AuthenticateToDomain(DomainAuthenticate));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
-            return RequestGenerator
-                .Process<AuthenticatedDomain, IAuthenticateToDomainCommand, AuthenticateToDomainCommand>(
-                    this,
-                    context => context.AuthenticateToDomain(DomainAuthenticate) /*, context =>
-                    {
-                        var validator = new AuthenticateToDomainCommandValidator(context);
-                        return validator.ValidateAsync(this);
-                    }*/);
+            return RequestGenerator.Process<AuthenticatedDomain, IAuthenticateToDomainCommand, AuthenticateToDomainCommand>(
+                    this,context => context.AuthenticateToDomain(DomainAuthenticate));
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new AuthenticateToDomainCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

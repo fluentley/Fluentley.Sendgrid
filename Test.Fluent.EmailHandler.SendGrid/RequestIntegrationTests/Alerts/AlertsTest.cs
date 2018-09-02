@@ -1,6 +1,6 @@
-using System.Threading.Tasks;
 using Fluentley.SendGrid.Operations.Alerts.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Threading.Tasks;
 
 namespace Test.Fluentley.SendGrid.RequestIntegrationTests.Alerts
 {
@@ -19,7 +19,11 @@ namespace Test.Fluentley.SendGrid.RequestIntegrationTests.Alerts
                 Type = AlertType.StatisticsNotification
             };
 
-            var result = await Service.CreateAlert(option =>  option.ByModel(alert)).GenerateRequest();
+            var command = Service.CreateAlert(option => option.ByModel(alert));
+
+            var validationResult = await command.Validate();
+            Assert.AreEqual(true, validationResult.IsValid, validationResult.ToString());
+            var result = await command.GenerateRequest();
 
             Assert.AreEqual($"Bearer {SendGridApiKey}", result.Data.Headers.Authorization.ToString());
             Assert.AreEqual(true, result.IsSuccess);
@@ -38,7 +42,12 @@ namespace Test.Fluentley.SendGrid.RequestIntegrationTests.Alerts
                 EmailTo = "example@example.com"
             };
 
-            var result = await Service.UpdateAlert(option => option.ByModel(alert)).GenerateRequest();
+            var command = Service.UpdateAlert(option => option.ByModel(alert));
+
+            var validationResult = await command.Validate();
+            Assert.AreEqual(true, validationResult.IsValid, validationResult.ToString());
+            var result = await command.GenerateRequest();
+
 
             Assert.AreEqual($"Bearer {SendGridApiKey}", result.Data.Headers.Authorization.ToString());
             Assert.AreEqual(true, result.IsSuccess);
@@ -82,7 +91,7 @@ namespace Test.Fluentley.SendGrid.RequestIntegrationTests.Alerts
         public async Task SingleTest()
         {
             var result =
-                await Service.AlertById(option => option
+                await Service.Alert(option => option
                     .ById("1")
                 ).GenerateRequest();
 

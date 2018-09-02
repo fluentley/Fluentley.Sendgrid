@@ -6,6 +6,8 @@ using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.ReverseDnses.Core;
+using Fluentley.SendGrid.Operations.ReverseDnses.Validators;
+using FluentValidation.Results;
 
 namespace Fluentley.SendGrid.Operations.ReverseDnses.Commands
 {
@@ -28,6 +30,12 @@ namespace Fluentley.SendGrid.Operations.ReverseDnses.Commands
         {
             return RequestGenerator.Process<string, IDeleteReverseDnsCommand, DeleteReverseDnsCommand>(this,
                 context => context.DeleteReverseDns(Id));
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new DeleteReverseDnsCommandValidator();
+            return validator.ValidateAsync(this);
         }
 
         public IDeleteReverseDnsCommand UseContextOption(Action<IContextOption> option)

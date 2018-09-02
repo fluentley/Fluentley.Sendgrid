@@ -1,38 +1,9 @@
-﻿using System;
-using System.Linq;
-using Fluentley.SendGrid.Contexts;
-using Fluentley.SendGrid.Operations.SubUsers.Core;
-using Fluentley.SendGrid.Operations.SubUsers.Queries;
+﻿using Fluentley.SendGrid.Operations.MonitorSettings.Commands;
 using FluentValidation;
-using FluentValidation.Results;
 
 namespace Fluentley.SendGrid.Operations.MonitorSettings.Validators
 {
-    internal class DeleteMonitorSettingCommandValidator : AbstractValidator<Action<ISubUserListQuery>>
+    internal class DeleteMonitorSettingCommandValidator : AbstractValidator<DeleteMonitorSettingCommand>
     {
-        private readonly Context _context;
-        private readonly SubUserListQuery _subUserListQuery;
-
-        public DeleteMonitorSettingCommandValidator(string defaultKey, Context context)
-        {
-            _context = context;
-
-            _subUserListQuery = new SubUserListQuery(defaultKey);
-        }
-
-        protected override bool PreValidate(ValidationContext<Action<ISubUserListQuery>> context,
-            ValidationResult result)
-        {
-            context.InstanceToValidate(_subUserListQuery);
-            var subUserListResult = _context.SubUsers(_subUserListQuery).Result;
-
-            if (!subUserListResult.ResponseMessage.IsSuccessStatusCode || !subUserListResult.GetContent().Any())
-            {
-                result.Errors.Add(new ValidationFailure("", "SubUser does not exists anymore"));
-                return false;
-            }
-
-            return true;
-        }
     }
 }

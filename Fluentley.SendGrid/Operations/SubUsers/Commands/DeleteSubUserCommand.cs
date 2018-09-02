@@ -6,6 +6,8 @@ using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.SubUsers.Core;
+using Fluentley.SendGrid.Operations.SubUsers.Validators;
+using FluentValidation.Results;
 
 namespace Fluentley.SendGrid.Operations.SubUsers.Commands
 {
@@ -24,25 +26,13 @@ namespace Fluentley.SendGrid.Operations.SubUsers.Commands
         public Task<IResult<string>> Execute()
         {
             return Processor.Process<string, IDeleteSubUserCommand, DeleteSubUserCommand>(this,
-                context => context.DeleteSubUserById(SubUserName) /*, context =>
-                {
-                    var validator = new DeleteSubUserCommandValidator(_defaultApiKey, context);
-                    return validator.ValidateAsync(options => options
-                        .FilterBySubUserName(SubUserName)
-                        .UsePaging(0, 1));
-                }*/);
+                context => context.DeleteSubUserById(SubUserName));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<string, IDeleteSubUserCommand, DeleteSubUserCommand>(this,
-                context => context.DeleteSubUserById(SubUserName) /*, context =>
-                {
-                    var validator = new DeleteSubUserCommandValidator(_defaultApiKey, context);
-                    return validator.ValidateAsync(options => options
-                        .FilterBySubUserName(SubUserName)
-                        .UsePaging(0, 1));
-                }*/);
+                context => context.DeleteSubUserById(SubUserName));
         }
 
         public IDeleteSubUserCommand BySubUserName(string subUserName)
@@ -53,9 +43,14 @@ namespace Fluentley.SendGrid.Operations.SubUsers.Commands
 
         public IDeleteSubUserCommand UseContextOption(Action<IContextOption> option)
         {
-            ContextOptionAction = option;
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new DeleteSubUserCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

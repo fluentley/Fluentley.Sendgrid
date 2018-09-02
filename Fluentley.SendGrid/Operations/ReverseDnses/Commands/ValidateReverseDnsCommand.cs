@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.ReverseDnses.Core;
 using Fluentley.SendGrid.Operations.ReverseDnses.Models;
+using Fluentley.SendGrid.Operations.ReverseDnses.Validators;
+using FluentValidation.Results;
 
 namespace Fluentley.SendGrid.Operations.ReverseDnses.Commands
 {
@@ -44,6 +46,12 @@ namespace Fluentley.SendGrid.Operations.ReverseDnses.Commands
         {
             Id = id;
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new ValidateReverseDnsCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

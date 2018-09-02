@@ -6,6 +6,8 @@ using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.CampaignSchedules.Core;
+using Fluentley.SendGrid.Operations.CampaignSchedules.Validators;
+using FluentValidation.Results;
 
 namespace Fluentley.SendGrid.Operations.CampaignSchedules.Commands
 {
@@ -22,22 +24,14 @@ namespace Fluentley.SendGrid.Operations.CampaignSchedules.Commands
         public Task<IResult<string>> Execute()
         {
             return Processor.Process<string, IDeleteCampaignScheduleCommand, DeleteCampaignScheduleCommand>(this,
-                context => context.DeleteScheduleCampaignById(Id) /*, context =>
-                {
-                    var validator = new DeleteCampaignScheduleCommandValidator(context);
-                    return validator.ValidateAsync(Id);
-                }*/);
+                context => context.DeleteScheduleCampaignById(Id));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<string, IDeleteCampaignScheduleCommand, DeleteCampaignScheduleCommand>(
                 this,
-                context => context.DeleteScheduleCampaignById(Id) /*, context =>
-                {
-                    var validator = new DeleteCampaignScheduleCommandValidator(context);
-                    return validator.ValidateAsync(Id);
-                }*/);
+                context => context.DeleteScheduleCampaignById(Id));
         }
 
         public IDeleteCampaignScheduleCommand ById(string id)
@@ -48,9 +42,14 @@ namespace Fluentley.SendGrid.Operations.CampaignSchedules.Commands
 
         public IDeleteCampaignScheduleCommand UseContextOption(Action<IContextOption> option)
         {
-            ContextOptionAction = option;
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new DeleteCampaignScheduleCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

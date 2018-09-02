@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.Campaigns.Core;
 using Fluentley.SendGrid.Operations.Campaigns.Models;
+using Fluentley.SendGrid.Operations.Campaigns.Validators;
+using FluentValidation.Results;
 
 namespace Fluentley.SendGrid.Operations.Campaigns.Commands
 {
@@ -22,21 +24,13 @@ namespace Fluentley.SendGrid.Operations.Campaigns.Commands
         public Task<IResult<string>> Execute()
         {
             return Processor.Process<string, IDeleteCampaignCommand, DeleteCampaignCommand>(this,
-                context => context.DeleteCampaignById(Id) /*, context =>
-                {
-                    var validator = new DeleteCampaignCommandValidator(context);
-                    return validator.ValidateAsync(Id);
-                }*/);
+                context => context.DeleteCampaignById(Id));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<string, IDeleteCampaignCommand, DeleteCampaignCommand>(this,
-                context => context.DeleteCampaignById(Id) /*, context =>
-                {
-                    var validator = new DeleteCampaignCommandValidator(context);
-                    return validator.ValidateAsync(Id);
-                }*/);
+                context => context.DeleteCampaignById(Id));
         }
 
         public IDeleteCampaignCommand ById(string id)
@@ -55,6 +49,12 @@ namespace Fluentley.SendGrid.Operations.Campaigns.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new DeleteCampaignCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

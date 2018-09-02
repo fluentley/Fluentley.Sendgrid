@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.Users.Core;
 using Fluentley.SendGrid.Operations.Users.Models;
+using Fluentley.SendGrid.Operations.Users.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.Users.Commands
@@ -55,21 +57,13 @@ namespace Fluentley.SendGrid.Operations.Users.Commands
         public Task<IResult<UserProfile>> Execute()
         {
             return Processor.Process<UserProfile, IUpdateUserProfileCommand, UpdateUserProfileCommand>(this,
-                context => context.UpdateUserProfile(this) /*, context =>
-                {
-                    var validator = new UpdateUserProfileCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.UpdateUserProfile(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<UserProfile, IUpdateUserProfileCommand, UpdateUserProfileCommand>(this,
-                context => context.UpdateUserProfile(this) /*, context =>
-                {
-                    var validator = new UpdateUserProfileCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.UpdateUserProfile(this));
         }
 
         public IUpdateUserProfileCommand ByModel(UserProfile userProfile)
@@ -92,6 +86,12 @@ namespace Fluentley.SendGrid.Operations.Users.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new UpdateUserProfileCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.DomainAuthentications.Core;
 using Fluentley.SendGrid.Operations.DomainAuthentications.Models;
+using Fluentley.SendGrid.Operations.DomainAuthentications.Validators;
+using FluentValidation.Results;
 
 namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
 {
@@ -23,22 +25,14 @@ namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
         public Task<IResult<string>> Execute()
         {
             return Processor.Process<string, IDeleteAuthenticatedDomainCommand, DeleteAuthenticatedDomainCommand>(this,
-                context => context.DeleteAuthenticatedDomainById(Id) /*, context =>
-                {
-                    var validator = new DeleteAuthenticatedDomainCommandValidator(context);
-                    return validator.ValidateAsync(Id);
-                }*/);
+                context => context.DeleteAuthenticatedDomainById(Id));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator
                 .Process<string, IDeleteAuthenticatedDomainCommand, DeleteAuthenticatedDomainCommand>(this,
-                    context => context.DeleteAuthenticatedDomainById(Id) /*, context =>
-                    {
-                        var validator = new DeleteAuthenticatedDomainCommandValidator(context);
-                        return validator.ValidateAsync(Id);
-                    }*/);
+                    context => context.DeleteAuthenticatedDomainById(Id));
         }
 
         public IDeleteAuthenticatedDomainCommand ById(string id)
@@ -57,6 +51,12 @@ namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new DeleteAuthenticatedDomainCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

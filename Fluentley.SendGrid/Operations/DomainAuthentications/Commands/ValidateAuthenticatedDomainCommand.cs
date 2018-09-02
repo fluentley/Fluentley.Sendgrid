@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.DomainAuthentications.Core;
 using Fluentley.SendGrid.Operations.DomainAuthentications.Models;
+using Fluentley.SendGrid.Operations.DomainAuthentications.Validators;
+using FluentValidation.Results;
 
 namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
 {
@@ -47,6 +49,12 @@ namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
         {
             Id = id;
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new ValidateAuthenticatedDomainCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

@@ -8,6 +8,8 @@ using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.BouncedEmailAddresses.Core;
+using Fluentley.SendGrid.Operations.BouncedEmailAddresses.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.BouncedEmailAddresses.Commands
@@ -68,9 +70,15 @@ namespace Fluentley.SendGrid.Operations.BouncedEmailAddresses.Commands
 
         public IDeleteBouncedEmailAddressCommand UseContextOption(Action<IContextOption> option)
         {
-            ContextOptionAction = option;
+          
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new DeleteBouncedEmailAddressCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

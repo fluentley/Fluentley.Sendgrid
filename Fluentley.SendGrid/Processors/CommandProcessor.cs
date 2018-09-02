@@ -1,15 +1,14 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Fluentley.SendGrid.Common.Commands;
+﻿using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Models;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Contexts;
-using FluentValidation.Results;
 using Newtonsoft.Json;
 using RestEase;
+using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Fluentley.SendGrid.Processors
 {
@@ -23,8 +22,7 @@ namespace Fluentley.SendGrid.Processors
         }
 
         public async Task<IResult<T>> Process<T, TInterfaceCommand, TCommand>(TCommand command,
-            Func<Context, Task<Response<T>>> operation,
-            Func<Context, Task<ValidationResult>> validationOperation = null)
+            Func<Context, Task<Response<T>>> operation)
             where TInterfaceCommand : IContextQuery<TInterfaceCommand>
             where TCommand : AbstractCommand<T, TCommand>, TInterfaceCommand, ICommand<T>
         {
@@ -42,35 +40,16 @@ namespace Fluentley.SendGrid.Processors
                 if (command?.ContextOption != null)
                     context = command?.ContextOption?.Process(context);
 
-                var isValid = false;
-                ValidationResult validationResult = null;
 
-                if (validationOperation == null)
-                {
-                    isValid = true;
-                }
-                else
-                {
-                    validationResult = await validationOperation(context);
-                    isValid = validationResult.IsValid;
-                }
+                var operationResult = await operation(context);
 
-                if (!isValid)
-                {
-                    result.IsSuccess = false;
-                    result.ErrorMessages.Add(new ErrorMessage(ErrorType.Validation, validationResult?.Errors));
-                }
-                else
-                {
-                    var operationResult = await operation(context);
+                if (!operationResult.ResponseMessage.IsSuccessStatusCode)
+                    throw new Exception(
+                        $"{operationResult.ResponseMessage.ReasonPhrase} - {operationResult.StringContent}");
 
-                    if (!operationResult.ResponseMessage.IsSuccessStatusCode)
-                        throw new Exception(
-                            $"{operationResult.ResponseMessage.ReasonPhrase} - {operationResult.StringContent}");
+                result.Data = operationResult.GetContent();
+                result.IsSuccess = true;
 
-                    result.Data = operationResult.GetContent();
-                    result.IsSuccess = true;
-                }
             }
             catch (ApiException exception)
             {

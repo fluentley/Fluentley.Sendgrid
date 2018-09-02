@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.SettingInboundParse.Core;
 using Fluentley.SendGrid.Operations.SettingInboundParse.Models;
+using Fluentley.SendGrid.Operations.SettingInboundParse.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.SettingInboundParse.Commands
@@ -33,21 +35,13 @@ namespace Fluentley.SendGrid.Operations.SettingInboundParse.Commands
         public Task<IResult<ParseSetting>> Execute()
         {
             return Processor.Process<ParseSetting, ICreateParseSettingCommand, CreateParseSettingCommand>(this,
-                context => context.CreateParseSetting(this) /*, context =>
-                {
-                    var validator = new CreateParseSettingCommandValidator();
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.CreateParseSetting(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<ParseSetting, ICreateParseSettingCommand, CreateParseSettingCommand>(this,
-                context => context.CreateParseSetting(this) /*, context =>
-                {
-                    var validator = new CreateParseSettingCommandValidator();
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.CreateParseSetting(this));
         }
 
         public ICreateParseSettingCommand HostName(string value)
@@ -94,6 +88,12 @@ namespace Fluentley.SendGrid.Operations.SettingInboundParse.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator= new CreateParseSettingCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

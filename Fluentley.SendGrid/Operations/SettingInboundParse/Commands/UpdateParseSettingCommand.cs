@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.SettingInboundParse.Core;
 using Fluentley.SendGrid.Operations.SettingInboundParse.Models;
+using Fluentley.SendGrid.Operations.SettingInboundParse.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.SettingInboundParse.Commands
@@ -86,6 +88,12 @@ namespace Fluentley.SendGrid.Operations.SettingInboundParse.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new UpdateParseSettingCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

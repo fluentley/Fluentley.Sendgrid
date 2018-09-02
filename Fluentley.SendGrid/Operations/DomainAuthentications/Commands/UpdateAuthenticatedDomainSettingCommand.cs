@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.DomainAuthentications.Core;
 using Fluentley.SendGrid.Operations.DomainAuthentications.Models;
+using Fluentley.SendGrid.Operations.DomainAuthentications.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
@@ -34,11 +36,7 @@ namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
             return Processor
                 .Process<AuthenticatedDomainSetting, IUpdateAuthenticatedDomainSettingCommand,
                     UpdateAuthenticatedDomainSettingCommand>(this,
-                    context => context.UpdateAuthenticatedDomainSetting(this) /*, context =>
-                    {
-                        var validator = new UpdateAuthenticatedDomainSettingCommandValidator(context);
-                        return validator.ValidateAsync(this);
-                    }*/);
+                    context => context.UpdateAuthenticatedDomainSetting(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
@@ -46,11 +44,7 @@ namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
             return RequestGenerator
                 .Process<AuthenticatedDomainSetting, IUpdateAuthenticatedDomainSettingCommand,
                     UpdateAuthenticatedDomainSettingCommand>(this,
-                    context => context.UpdateAuthenticatedDomainSetting(this) /*, context =>
-                    {
-                        var validator = new UpdateAuthenticatedDomainSettingCommandValidator(context);
-                        return validator.ValidateAsync(this);
-                    }*/);
+                    context => context.UpdateAuthenticatedDomainSetting(this));
         }
 
         public IUpdateAuthenticatedDomainSettingCommand ByModel(AuthenticatedDomainSetting value)
@@ -65,6 +59,12 @@ namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new UpdateAuthenticatedDomainSettingCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

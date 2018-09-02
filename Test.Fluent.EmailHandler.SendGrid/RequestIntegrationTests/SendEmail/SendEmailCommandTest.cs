@@ -53,6 +53,7 @@ namespace Test.Fluentley.SendGrid.RequestIntegrationTests.SendEmail
             Assert.AreEqual("POST", result.Data.Method.Method);
             Assert.AreEqual("https://api.sendgrid.com/v3/mail/send", result.Data.RequestUri.AbsoluteUri);
         }
+
         [TestMethod]
         public async Task SendEmailBasicTest()
         {

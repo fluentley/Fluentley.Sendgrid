@@ -8,6 +8,8 @@ using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.BlockedEmailAddresses.Core;
+using Fluentley.SendGrid.Operations.BlockedEmailAddresses.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.BlockedEmailAddresses.Commands
@@ -30,22 +32,14 @@ namespace Fluentley.SendGrid.Operations.BlockedEmailAddresses.Commands
         public Task<IResult<string>> Execute()
         {
             return Processor.Process<string, IDeleteBlockedEmailAddressCommand, DeleteBlockedEmailAddressCommand>(this,
-                context => context.DeleteBlockedEmailAddress(this) /*, context =>
-                {
-                    var validator = new DeleteBlockedEmailAddressCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.DeleteBlockedEmailAddress(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator
                 .Process<string, IDeleteBlockedEmailAddressCommand, DeleteBlockedEmailAddressCommand>(this,
-                    context => context.DeleteBlockedEmailAddress(this) /*, context =>
-                    {
-                        var validator = new DeleteBlockedEmailAddressCommandValidator(context);
-                        return validator.ValidateAsync(this);
-                    }*/);
+                    context => context.DeleteBlockedEmailAddress(this));
         }
 
         public IDeleteBlockedEmailAddressCommand DeleteAll(bool value)
@@ -66,9 +60,14 @@ namespace Fluentley.SendGrid.Operations.BlockedEmailAddresses.Commands
 
         public IDeleteBlockedEmailAddressCommand UseContextOption(Action<IContextOption> option)
         {
-            ContextOptionAction = option;
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new DeleteBlockedEmailAddressCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

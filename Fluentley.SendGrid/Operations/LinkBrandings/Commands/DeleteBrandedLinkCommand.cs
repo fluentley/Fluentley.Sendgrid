@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.LinkBrandings.Core;
 using Fluentley.SendGrid.Operations.LinkBrandings.Models;
+using Fluentley.SendGrid.Operations.LinkBrandings.Validators;
+using FluentValidation.Results;
 
 namespace Fluentley.SendGrid.Operations.LinkBrandings.Commands
 {
@@ -22,21 +24,13 @@ namespace Fluentley.SendGrid.Operations.LinkBrandings.Commands
         public Task<IResult<string>> Execute()
         {
             return Processor.Process<string, IDeleteBrandedLinkCommand, DeleteBrandedLinkCommand>(this,
-                context => context.DeleteBrandedLinkById(Id) /*, context =>
-                {
-                    var validator = new DeleteBrandedLinkCommandValidator(context);
-                    return validator.ValidateAsync(Id);
-                }*/);
+                context => context.DeleteBrandedLinkById(Id));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<string, IDeleteBrandedLinkCommand, DeleteBrandedLinkCommand>(this,
-                context => context.DeleteBrandedLinkById(Id) /*, context =>
-                {
-                    var validator = new DeleteBrandedLinkCommandValidator(context);
-                    return validator.ValidateAsync(Id);
-                }*/);
+                context => context.DeleteBrandedLinkById(Id));
         }
 
         public IDeleteBrandedLinkCommand ById(string id)
@@ -55,6 +49,12 @@ namespace Fluentley.SendGrid.Operations.LinkBrandings.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new DeleteBrandedLinkCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

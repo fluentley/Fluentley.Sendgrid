@@ -9,6 +9,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.IpAddresses.Core;
 using Fluentley.SendGrid.Operations.IpAddresses.Models;
+using Fluentley.SendGrid.Operations.IpAddresses.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.IpAddresses.Commands
@@ -34,7 +36,6 @@ namespace Fluentley.SendGrid.Operations.IpAddresses.Commands
 
         public IAddIpAddressCommand UseContextOption(Action<IContextOption> option)
         {
-            ContextOptionAction = option;
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
         }
@@ -71,21 +72,19 @@ namespace Fluentley.SendGrid.Operations.IpAddresses.Commands
         public Task<IResult<AddIpResult>> Execute()
         {
             return Processor.Process<AddIpResult, IAddIpAddressCommand, AddIpAddressCommand>(this,
-                context => context.AddIpAddress(this) /*, context =>
-                {
-                    var validator = new AddIpAddressCommandValidator();
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.AddIpAddress(this) );
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<AddIpResult, IAddIpAddressCommand, AddIpAddressCommand>(this,
-                context => context.AddIpAddress(this) /*, context =>
-                {
-                    var validator = new AddIpAddressCommandValidator();
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.AddIpAddress(this));
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new AddIpAddressCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

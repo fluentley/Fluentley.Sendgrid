@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.ReverseDnses.Core;
 using Fluentley.SendGrid.Operations.ReverseDnses.Models;
+using Fluentley.SendGrid.Operations.ReverseDnses.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.ReverseDnses.Commands
@@ -62,6 +64,12 @@ namespace Fluentley.SendGrid.Operations.ReverseDnses.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new SetupReverseDnsCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

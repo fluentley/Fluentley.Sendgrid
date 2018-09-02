@@ -6,6 +6,8 @@ using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.DomainAuthentications.Core;
+using Fluentley.SendGrid.Operations.DomainAuthentications.Validators;
+using FluentValidation.Results;
 
 namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
 {
@@ -37,6 +39,12 @@ namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+          var validator = new DisassociateSubUserFromAuthenticatedDomainCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

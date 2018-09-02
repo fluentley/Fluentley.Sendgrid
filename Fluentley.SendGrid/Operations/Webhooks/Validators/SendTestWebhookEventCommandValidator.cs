@@ -6,11 +6,6 @@ namespace Fluentley.SendGrid.Operations.Webhooks.Validators
 {
     internal class SendTestWebhookEventCommandValidator : AbstractValidator<SendTestWebhookEventCommand>
     {
-        private readonly Context _context;
-
-        public SendTestWebhookEventCommandValidator(Context context)
-        {
-            _context = context;
-        }
+       
     }
 }

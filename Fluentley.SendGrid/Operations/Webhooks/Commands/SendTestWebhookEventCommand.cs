@@ -6,6 +6,8 @@ using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.Webhooks.Core;
+using Fluentley.SendGrid.Operations.Webhooks.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.Webhooks.Commands
@@ -23,21 +25,13 @@ namespace Fluentley.SendGrid.Operations.Webhooks.Commands
         public Task<IResult<string>> Execute()
         {
             return Processor.Process<string, ISendTestWebhookEventCommand, SendTestWebhookEventCommand>(this,
-                context => context.SendTestWebhookEvent(this) /*, context =>
-                {
-                    var validator = new SendTestWebhookEventCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.SendTestWebhookEvent(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<string, ISendTestWebhookEventCommand, SendTestWebhookEventCommand>(this,
-                context => context.SendTestWebhookEvent(this) /*, context =>
-                {
-                    var validator = new SendTestWebhookEventCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.SendTestWebhookEvent(this));
         }
 
         public ISendTestWebhookEventCommand Url(string value)
@@ -50,6 +44,12 @@ namespace Fluentley.SendGrid.Operations.Webhooks.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new SendTestWebhookEventCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

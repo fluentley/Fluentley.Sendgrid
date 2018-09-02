@@ -6,6 +6,8 @@ using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.LinkBrandings.Core;
+using Fluentley.SendGrid.Operations.LinkBrandings.Validators;
+using FluentValidation.Results;
 
 namespace Fluentley.SendGrid.Operations.LinkBrandings.Commands
 {
@@ -23,22 +25,14 @@ namespace Fluentley.SendGrid.Operations.LinkBrandings.Commands
         {
             return Processor
                 .Process<string, IDisassociateBrandedForSubUserCommand, DisassociateBrandedForSubUserCommand>(this,
-                    context => context.DisassociateBrandedForSubUser(UserName) /*, context =>
-                    {
-                        var validator = new DisassociateBrandedForSubUserCommandValidator(context);
-                        return validator.ValidateAsync(UserName);
-                    }*/);
+                    context => context.DisassociateBrandedForSubUser(UserName));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator
                 .Process<string, IDisassociateBrandedForSubUserCommand, DisassociateBrandedForSubUserCommand>(this,
-                    context => context.DisassociateBrandedForSubUser(UserName) /*, context =>
-                    {
-                        var validator = new DisassociateBrandedForSubUserCommandValidator(context);
-                        return validator.ValidateAsync(UserName);
-                    }*/);
+                    context => context.DisassociateBrandedForSubUser(UserName));
         }
 
         public IDisassociateBrandedForSubUserCommand UseContextOption(Action<IContextOption> option)
@@ -51,6 +45,12 @@ namespace Fluentley.SendGrid.Operations.LinkBrandings.Commands
         {
             UserName = value;
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new DisassociateBrandedForSubUserCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

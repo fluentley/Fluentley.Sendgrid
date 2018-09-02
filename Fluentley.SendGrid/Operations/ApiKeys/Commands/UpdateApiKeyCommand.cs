@@ -7,9 +7,11 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
-using Fluentley.SendGrid.Operations.ApiKeys.Core;
+using Fluentley.SendGrid.Operations.ApiKeys.Core.Queires;
 using Fluentley.SendGrid.Operations.ApiKeys.Extensions;
 using Fluentley.SendGrid.Operations.ApiKeys.Models;
+using Fluentley.SendGrid.Operations.ApiKeys.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.ApiKeys.Commands
@@ -39,21 +41,19 @@ namespace Fluentley.SendGrid.Operations.ApiKeys.Commands
         public Task<IResult<ApiKey>> Execute()
         {
             return Processor.Process<ApiKey, IUpdateApiKeyCommand, UpdateApiKeyCommand>(this,
-                context => context.UpdateApiKey(this) /*, context =>
-                {
-                    var validator = new UpdateApiKeyCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.UpdateApiKey(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<ApiKey, IUpdateApiKeyCommand, UpdateApiKeyCommand>(this,
-                context => context.UpdateApiKey(this) /*, context =>
-                {
-                    var validator = new UpdateApiKeyCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.UpdateApiKey(this));
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new UpdateApiKeyCommandValidator();
+            return validator.ValidateAsync(this);
         }
 
         public IUpdateApiKeyCommand ByModel(ApiKey apiKey)
@@ -69,7 +69,6 @@ namespace Fluentley.SendGrid.Operations.ApiKeys.Commands
 
         public IUpdateApiKeyCommand UseContextOption(Action<IContextOption> option)
         {
-            ContextOptionAction = option;
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
         }
@@ -94,17 +93,6 @@ namespace Fluentley.SendGrid.Operations.ApiKeys.Commands
 
         public IUpdateApiKeyCommand AddToExistingScopes(params Scope[] scopes)
         {
-            if (Scopes == null)
-            {
-                var result = _service.ApiKeyById(option => option
-                    .UseContextOption(ContextOptionAction)
-                    .ById(ApiKeyId)
-                ).Execute().Result;
-
-                if (result.IsSuccess && result.Data != null)
-                    Scopes = result.Data.Scopes ?? new List<Scope>();
-            }
-
             if (scopes.Any())
                 Scopes?.AddRange(scopes);
 

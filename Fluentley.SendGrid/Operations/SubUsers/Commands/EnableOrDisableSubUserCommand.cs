@@ -6,6 +6,8 @@ using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.SubUsers.Core;
+using Fluentley.SendGrid.Operations.SubUsers.Validators;
+using FluentValidation.Results;
 
 namespace Fluentley.SendGrid.Operations.SubUsers.Commands
 {
@@ -27,31 +29,18 @@ namespace Fluentley.SendGrid.Operations.SubUsers.Commands
         public Task<IResult<string>> Execute()
         {
             return Processor.Process<string, IEnableOrDisableSubUserCommand, EnableOrDisableSubUserCommand>(this,
-                context => context.EnableOrDisableSubUser(SubUserName, IsDisabled) /*, context =>
-                {
-                    var validator = new EnabledOrDisableSubUserCommandValidator(_defaultApiKey, context);
-                    return validator.ValidateAsync(options => options
-                        .FilterBySubUserName(SubUserName)
-                        .UsePaging(0, 1));
-                }*/);
+                context => context.EnableOrDisableSubUser(SubUserName, IsDisabled));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<string, IEnableOrDisableSubUserCommand, EnableOrDisableSubUserCommand>(
                 this,
-                context => context.EnableOrDisableSubUser(SubUserName, IsDisabled) /*, context =>
-                {
-                    var validator = new EnabledOrDisableSubUserCommandValidator(_defaultApiKey, context);
-                    return validator.ValidateAsync(options => options
-                        .FilterBySubUserName(SubUserName)
-                        .UsePaging(0, 1));
-                }*/);
+                context => context.EnableOrDisableSubUser(SubUserName, IsDisabled));
         }
 
         public IEnableOrDisableSubUserCommand UseContextOption(Action<IContextOption> option)
         {
-            ContextOptionAction = option;
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
         }
@@ -61,6 +50,12 @@ namespace Fluentley.SendGrid.Operations.SubUsers.Commands
             SubUserName = subUserName;
             IsDisabled = value;
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new EnabledOrDisableSubUserCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

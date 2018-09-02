@@ -6,7 +6,7 @@ using Fluentley.QueryBuilder.Options;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
-using Fluentley.SendGrid.Operations.Alerts.Core;
+using Fluentley.SendGrid.Operations.Alerts.Core.Queries;
 using Fluentley.SendGrid.Operations.Alerts.Models;
 
 namespace Fluentley.SendGrid.Operations.Alerts.Queries

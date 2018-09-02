@@ -5,8 +5,10 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
-using Fluentley.SendGrid.Operations.ApiKeys.Core;
+using Fluentley.SendGrid.Operations.ApiKeys.Core.Queires;
 using Fluentley.SendGrid.Operations.ApiKeys.Models;
+using Fluentley.SendGrid.Operations.ApiKeys.Validators;
+using FluentValidation.Results;
 
 namespace Fluentley.SendGrid.Operations.ApiKeys.Commands
 {
@@ -22,21 +24,19 @@ namespace Fluentley.SendGrid.Operations.ApiKeys.Commands
         public Task<IResult<string>> Execute()
         {
             return Processor.Process<string, IDeleteApiKeyCommand, DeleteApiKeyCommand>(this,
-                context => context.DeleteApiKeyById(Id) /*, context =>
-                {
-                    var validator = new DeleteApiKeyCommandValidator(context);
-                    return validator.ValidateAsync(Id);
-                }*/);
+                context => context.DeleteApiKeyById(Id));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<string, IDeleteApiKeyCommand, DeleteApiKeyCommand>(this,
-                context => context.DeleteApiKeyById(Id) /*, context =>
-                {
-                    var validator = new DeleteApiKeyCommandValidator(context);
-                    return validator.ValidateAsync(Id);
-                }*/);
+                context => context.DeleteApiKeyById(Id));
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new DeleteApiKeyCommandValidator();
+            return validator.ValidateAsync(this);
         }
 
         public IDeleteApiKeyCommand ById(string id)
@@ -53,7 +53,6 @@ namespace Fluentley.SendGrid.Operations.ApiKeys.Commands
 
         public IDeleteApiKeyCommand UseContextOption(Action<IContextOption> option)
         {
-            ContextOptionAction = option;
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
         }

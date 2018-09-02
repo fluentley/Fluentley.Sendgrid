@@ -6,6 +6,8 @@ using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.MonitorSettings.Core;
+using Fluentley.SendGrid.Operations.MonitorSettings.Validators;
+using FluentValidation.Results;
 
 namespace Fluentley.SendGrid.Operations.MonitorSettings.Commands
 {
@@ -24,25 +26,13 @@ namespace Fluentley.SendGrid.Operations.MonitorSettings.Commands
         public Task<IResult<string>> Execute()
         {
             return Processor.Process<string, IDeleteMonitorSettingCommand, DeleteMonitorSettingCommand>(this,
-                context => context.DeleteMonitorSettingByUserName(SubUserName) /*, context =>
-                {
-                    var validator = new DeleteMonitorSettingCommandValidator(_defaultApiKey, context);
-                    return validator.ValidateAsync(options => options
-                        .FilterBySubUserName(SubUserName)
-                        .UsePaging(0, 1));
-                }*/);
+                context => context.DeleteMonitorSettingByUserName(SubUserName));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<string, IDeleteMonitorSettingCommand, DeleteMonitorSettingCommand>(this,
-                context => context.DeleteMonitorSettingByUserName(SubUserName) /*, context =>
-                {
-                    var validator = new DeleteMonitorSettingCommandValidator(_defaultApiKey, context);
-                    return validator.ValidateAsync(options => options
-                        .FilterBySubUserName(SubUserName)
-                        .UsePaging(0, 1));
-                }*/);
+                context => context.DeleteMonitorSettingByUserName(SubUserName));
         }
 
         public IDeleteMonitorSettingCommand ByUserName(string subUserName)
@@ -53,9 +43,14 @@ namespace Fluentley.SendGrid.Operations.MonitorSettings.Commands
 
         public IDeleteMonitorSettingCommand UseContextOption(Action<IContextOption> option)
         {
-            ContextOptionAction = option;
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new DeleteMonitorSettingCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

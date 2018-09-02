@@ -1,15 +1,11 @@
 ﻿using Fluentley.SendGrid.Contexts;
+using Fluentley.SendGrid.Operations.Teammates.Commands;
 using FluentValidation;
 
 namespace Fluentley.SendGrid.Operations.Teammates.Validators
 {
-    internal class ApproveTeammateAccessRequestCommandValidator : AbstractValidator<string>
+    internal class ApproveTeammateAccessRequestCommandValidator : AbstractValidator<ApproveTeammateAccessRequestCommand>
     {
-        private readonly Context _context;
-
-        public ApproveTeammateAccessRequestCommandValidator(Context context)
-        {
-            _context = context;
-        }
+       
     }
 }

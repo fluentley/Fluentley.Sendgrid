@@ -5,10 +5,11 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
-using Fluentley.SendGrid.Operations.Alerts.Core;
+using Fluentley.SendGrid.Operations.Alerts.Core.Commands;
 using Fluentley.SendGrid.Operations.Alerts.Extensions;
 using Fluentley.SendGrid.Operations.Alerts.Models;
 using Fluentley.SendGrid.Operations.Alerts.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.Alerts.Commands
@@ -73,22 +74,18 @@ namespace Fluentley.SendGrid.Operations.Alerts.Commands
 
         public Task<IResult<Alert>> Execute()
         {
-            return Processor.Process<Alert, ICreateAlertCommand, CreateAlertCommand>(this,
-                context => context.CreateAlert(this), context =>
-                {
-                    var validator = new CreateAlertCommandValidator();
-                    return validator.ValidateAsync(this);
-                });
+            return Processor.Process<Alert, ICreateAlertCommand, CreateAlertCommand>(this, context => context.CreateAlert(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
-            return RequestGenerator.Process<Alert, ICreateAlertCommand, CreateAlertCommand>(this,
-                context => context.CreateAlert(this), context =>
-                {
-                    var validator = new CreateAlertCommandValidator();
-                    return validator.ValidateAsync(this);
-                });
+            return RequestGenerator.Process<Alert, ICreateAlertCommand, CreateAlertCommand>(this, context => context.CreateAlert(this));
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new CreateAlertCommandValidator();
+            return validator.ValidateAsync(this);
         }
 
         public ICreateAlertCommand ByModel(Alert alert)

@@ -1,13 +1,15 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Fluentley.SendGrid.Common.Commands;
+﻿using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.DomainAuthentications.Core;
 using Fluentley.SendGrid.Operations.DomainAuthentications.Models;
+using Fluentley.SendGrid.Operations.DomainAuthentications.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
 {
@@ -49,23 +51,20 @@ namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
             return Processor
                 .Process<AuthenticatedDomain, IAssociateSubuserToAuthenticatedDomainCommand,
                     AssociateSubuserToAuthenticatedDomainCommand>(this,
-                    context => context.AssociateSubuserToAuthenticatedDomain(this) /*, context =>
-                    {
-                        var validator = new AssociateSubuserToAuthenticatedDomainCommandValidator(context);
-                        return validator.ValidateAsync(this);
-                    }*/);
+                    context => context.AssociateSubuserToAuthenticatedDomain(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator
                 .Process<AuthenticatedDomain, IAssociateSubuserToAuthenticatedDomainCommand,
-                    AssociateSubuserToAuthenticatedDomainCommand>(this,
-                    context => context.AssociateSubuserToAuthenticatedDomain(this) /*, context =>
-                    {
-                        var validator = new AssociateSubuserToAuthenticatedDomainCommandValidator(context);
-                        return validator.ValidateAsync(this);
-                    }*/);
+                    AssociateSubuserToAuthenticatedDomainCommand>(this, context => context.AssociateSubuserToAuthenticatedDomain(this));
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new AssociateSubuserToAuthenticatedDomainCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

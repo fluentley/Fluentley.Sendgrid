@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.ResultArguments;
@@ -11,7 +10,6 @@ namespace Fluentley.SendGrid.Common.Queries
     internal abstract class AbstractCommand<T, TCommand> where TCommand : ICommand<T>
     {
         internal ContextOption ContextOption;
-        internal Action<IContextOption> ContextOptionAction;
         internal OptionProcessor OptionProcessor;
         internal CommandProcessor Processor;
         internal CommandRequestGenerator RequestGenerator;

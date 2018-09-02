@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.Users.Core;
 using Fluentley.SendGrid.Operations.Users.Models;
+using Fluentley.SendGrid.Operations.Users.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.Users.Commands
@@ -24,21 +26,13 @@ namespace Fluentley.SendGrid.Operations.Users.Commands
         public Task<IResult<User>> Execute()
         {
             return Processor.Process<User, IUpdateUserNameCommand, UpdateUserNameCommand>(this,
-                context => context.UpdateUserName(this) /*, context =>
-                {
-                    var validator = new UpdateUserNameCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.UpdateUserName(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<User, IUpdateUserNameCommand, UpdateUserNameCommand>(this,
-                context => context.UpdateUserName(this) /*, context =>
-                {
-                    var validator = new UpdateUserNameCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.UpdateUserName(this));
         }
 
         public IUpdateUserNameCommand ByModel(User user)
@@ -52,6 +46,12 @@ namespace Fluentley.SendGrid.Operations.Users.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new UpdateUserNameCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

@@ -9,6 +9,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.Campaigns.Core;
 using Fluentley.SendGrid.Operations.Campaigns.Models;
+using Fluentley.SendGrid.Operations.Campaigns.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.Campaigns.Commands
@@ -49,44 +51,19 @@ namespace Fluentley.SendGrid.Operations.Campaigns.Commands
         public async Task<IResult<Campaign>> Execute()
         {
             return await Processor.Process<Campaign, IUpdateCampaignCommand, UpdateCampaignCommand>(this,
-                async context =>
-                {
-                    if (ScheduledTime.HasValue)
-                    {
-                        var campaignScheduleResult = await _service.CampaignScheduleByCampaignId(option => option
-                            .ByCampaignId(IdOfCampaign)
-                        ).Execute();
-
-                        if (campaignScheduleResult.Data == null)
-                            await _service.CreateCampaignSchedule(option => option
-                                .UseContextOption(ContextOptionAction)
-                                .CampaignId(IdOfCampaign)
-                                .ScheduleOnUtc(ScheduledTime.Value)
-                            ).Execute();
-                        else
-                            await _service.UpdateCampaignSchedule(option => option
-                                .UseContextOption(ContextOptionAction)
-                                .CampaignId(IdOfCampaign)
-                                .ScheduleOnUtc(ScheduledTime.Value)
-                            ).Execute();
-                    }
-
-                    return await context.UpdateCampaign(this);
-                } /*, context =>
-                {
-                    var validator = new UpdateCampaignCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                async context => await context.UpdateCampaign(this));
         }
 
         public async Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return await RequestGenerator.Process<Campaign, IUpdateCampaignCommand, UpdateCampaignCommand>(this,
-                async context => await context.UpdateCampaign(this) /*, context =>
-                {
-                    var validator = new UpdateCampaignCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                async context => await context.UpdateCampaign(this));
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new UpdateCampaignCommandValidator();
+            return validator.ValidateAsync(this);
         }
 
         public IUpdateCampaignCommand ByModel(Campaign campaign)

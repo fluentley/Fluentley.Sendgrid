@@ -1,15 +1,11 @@
 ﻿using Fluentley.SendGrid.Contexts;
+using Fluentley.SendGrid.Operations.Teammates.Commands;
 using FluentValidation;
 
 namespace Fluentley.SendGrid.Operations.Teammates.Validators
 {
-    internal class DeleteTeammateCommandValidator : AbstractValidator<string>
+    internal class DeleteTeammateCommandValidator : AbstractValidator<DeleteTeammateCommand>
     {
-        private readonly Context _context;
-
-        public DeleteTeammateCommandValidator(Context context)
-        {
-            _context = context;
-        }
+       
     }
 }

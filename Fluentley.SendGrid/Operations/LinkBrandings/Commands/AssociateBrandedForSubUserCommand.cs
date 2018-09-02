@@ -6,6 +6,8 @@ using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.LinkBrandings.Core;
+using Fluentley.SendGrid.Operations.LinkBrandings.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.LinkBrandings.Commands
@@ -46,11 +48,7 @@ namespace Fluentley.SendGrid.Operations.LinkBrandings.Commands
         {
             return Processor.Process<string, IAssociateBrandedForSubUserCommand, AssociateBrandedForSubUserCommand>(
                 this,
-                context => context.AssociateBrandedForSubUser(this) /*, context =>
-                {
-                    var validator = new AssociateBrandedForSubUserCommandValidator(context);
-                    return validator.ValidateAsync(Id);
-                }*/);
+                context => context.AssociateBrandedForSubUser(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
@@ -58,11 +56,13 @@ namespace Fluentley.SendGrid.Operations.LinkBrandings.Commands
             return RequestGenerator
                 .Process<string, IAssociateBrandedForSubUserCommand, AssociateBrandedForSubUserCommand>(
                     this,
-                    context => context.AssociateBrandedForSubUser(this) /*, context =>
-                    {
-                        var validator = new AssociateBrandedForSubUserCommandValidator(context);
-                        return validator.ValidateAsync(Id);
-                    }*/);
+                    context => context.AssociateBrandedForSubUser(this));
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new AssociateBrandedForSubUserCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

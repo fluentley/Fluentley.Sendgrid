@@ -7,9 +7,11 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
-using Fluentley.SendGrid.Operations.ApiKeys.Core;
+using Fluentley.SendGrid.Operations.ApiKeys.Core.Queires;
 using Fluentley.SendGrid.Operations.ApiKeys.Extensions;
 using Fluentley.SendGrid.Operations.ApiKeys.Models;
+using Fluentley.SendGrid.Operations.ApiKeys.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.ApiKeys.Commands
@@ -22,7 +24,7 @@ namespace Fluentley.SendGrid.Operations.ApiKeys.Commands
         }
 
         [JsonProperty("name")]
-        internal string Name { get; set; }
+        internal string NameOfApiKey { get; set; }
 
         [JsonProperty("scopes")]
         internal IList<string> StringScopes
@@ -36,21 +38,19 @@ namespace Fluentley.SendGrid.Operations.ApiKeys.Commands
         public Task<IResult<ApiKey>> Execute()
         {
             return Processor.Process<ApiKey, ICreateApiKeyCommand, CreateApiKeyCommand>(this,
-                context => context.CreateApiKey(this) /*, context =>
-                {
-                    var validator = new CreateApiKeyCommandValidator();
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.CreateApiKey(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<ApiKey, ICreateApiKeyCommand, CreateApiKeyCommand>(this,
-                context => context.CreateApiKey(this) /*, context =>
-                {
-                    var validator = new CreateApiKeyCommandValidator();
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.CreateApiKey(this));
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new CreateApiKeyCommandValidator();
+            return validator.ValidateAsync(this);
         }
 
         public ICreateApiKeyCommand ByModel(ApiKey apiKey)
@@ -58,7 +58,7 @@ namespace Fluentley.SendGrid.Operations.ApiKeys.Commands
             if (Scopes == null)
                 Scopes = new List<Scope>();
 
-            Name = apiKey?.Name;
+            NameOfApiKey = apiKey?.Name;
 
             if (apiKey?.Scopes?.Any() ?? false)
                 Scopes.AddRange(apiKey.Scopes);
@@ -66,16 +66,11 @@ namespace Fluentley.SendGrid.Operations.ApiKeys.Commands
             return this;
         }
 
-        public ICreateApiKeyCommand Initiate(string name, params Scope[] scopes)
+        public ICreateApiKeyCommand Name(string name)
         {
-            Name = name;
+            NameOfApiKey = name;
 
-            if (Scopes == null)
-                Scopes = new List<Scope>();
-
-            if (scopes.Any())
-                Scopes.AddRange(scopes);
-
+          
             return this;
         }
 
@@ -91,9 +86,8 @@ namespace Fluentley.SendGrid.Operations.ApiKeys.Commands
 
         public ICreateApiKeyCommand UseContextOption(Action<IContextOption> option)
         {
-            ContextOptionAction = option;
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
-            return this;
-        }
+            return this
+         }
     }
 }

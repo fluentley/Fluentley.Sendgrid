@@ -8,6 +8,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.Campaigns.Core;
 using Fluentley.SendGrid.Operations.Campaigns.Models;
+using Fluentley.SendGrid.Operations.Campaigns.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.Campaigns.Commands
@@ -55,21 +57,13 @@ namespace Fluentley.SendGrid.Operations.Campaigns.Commands
         public Task<IResult<Campaign>> Execute()
         {
             return Processor.Process<Campaign, ICreateCampaignCommand, CreateCampaignCommand>(this,
-                context => context.CreateCampaign(this) /*, context =>
-                {
-                    var validator = new CreateCampaignCommandValidator();
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.CreateCampaign(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<Campaign, ICreateCampaignCommand, CreateCampaignCommand>(this,
-                context => context.CreateCampaign(this) /*, context =>
-                {
-                    var validator = new CreateCampaignCommandValidator();
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.CreateCampaign(this));
         }
 
         public ICreateCampaignCommand ByModel(Campaign campaign)
@@ -96,6 +90,12 @@ namespace Fluentley.SendGrid.Operations.Campaigns.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+           var validator = new CreateCampaignCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

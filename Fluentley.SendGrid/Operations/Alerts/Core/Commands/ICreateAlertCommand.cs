@@ -1,7 +1,7 @@
 ﻿using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Operations.Alerts.Models;
 
-namespace Fluentley.SendGrid.Operations.Alerts.Core
+namespace Fluentley.SendGrid.Operations.Alerts.Core.Commands
 {
     public interface ICreateAlertCommand : IContextQuery<ICreateAlertCommand>
 

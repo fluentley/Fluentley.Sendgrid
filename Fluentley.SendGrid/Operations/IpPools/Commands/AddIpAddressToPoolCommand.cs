@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.IpAddresses.Models;
 using Fluentley.SendGrid.Operations.IpPools.Core;
+using Fluentley.SendGrid.Operations.IpPools.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.IpPools.Commands
@@ -46,21 +48,19 @@ namespace Fluentley.SendGrid.Operations.IpPools.Commands
         public Task<IResult<IpAddress>> Execute()
         {
             return Processor.Process<IpAddress, IAddIpAddressToPoolCommand, AddIpAddressToPoolCommand>(this,
-                context => context.AddIpAddressToPool(this) /*, context =>
-                {
-                    var validator = new AddIpAddressToPoolCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.AddIpAddressToPool(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<IpAddress, IAddIpAddressToPoolCommand, AddIpAddressToPoolCommand>(this,
-                context => context.AddIpAddressToPool(this) /*, context =>
-                {
-                    var validator = new AddIpAddressToPoolCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.AddIpAddressToPool(this));
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new AddIpAddressToPoolCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

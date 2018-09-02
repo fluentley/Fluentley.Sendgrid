@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.SenderIdentities.Core;
 using Fluentley.SendGrid.Operations.SenderIdentities.Models;
+using Fluentley.SendGrid.Operations.SenderIdentities.Validators;
+using FluentValidation.Results;
 
 namespace Fluentley.SendGrid.Operations.SenderIdentities.Commands
 {
@@ -22,21 +24,13 @@ namespace Fluentley.SendGrid.Operations.SenderIdentities.Commands
         public Task<IResult<string>> Execute()
         {
             return Processor.Process<string, IDeleteSenderIdentityCommand, DeleteSenderIdentityCommand>(this,
-                context => context.DeleteSenderIdentityById(Id) /*, context =>
-                {
-                    var validator = new DeleteSenderIdentityCommandValidator(context);
-                    return validator.ValidateAsync(Id);
-                }*/);
+                context => context.DeleteSenderIdentityById(Id));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<string, IDeleteSenderIdentityCommand, DeleteSenderIdentityCommand>(this,
-                context => context.DeleteSenderIdentityById(Id) /*, context =>
-                {
-                    var validator = new DeleteSenderIdentityCommandValidator(context);
-                    return validator.ValidateAsync(Id);
-                }*/);
+                context => context.DeleteSenderIdentityById(Id));
         }
 
         public IDeleteSenderIdentityCommand ById(string id)
@@ -55,6 +49,16 @@ namespace Fluentley.SendGrid.Operations.SenderIdentities.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        /// <summary>
+        /// Validates this instance.
+        /// </summary>
+        /// <returns></returns>
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new DeleteSenderIdentityCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

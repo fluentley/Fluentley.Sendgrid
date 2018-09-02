@@ -6,11 +6,6 @@ namespace Fluentley.SendGrid.Operations.SettingEnforcedTls.Validators
 {
     internal class UpdateEnforcedTlsCommandValidator : AbstractValidator<UpdateEnforcedTlsCommand>
     {
-        private readonly Context _context;
-
-        public UpdateEnforcedTlsCommandValidator(Context context)
-        {
-            _context = context;
-        }
+       
     }
 }

@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.Teammates.Core;
 using Fluentley.SendGrid.Operations.Teammates.Models;
+using Fluentley.SendGrid.Operations.Teammates.Validators;
+using FluentValidation.Results;
 
 namespace Fluentley.SendGrid.Operations.Teammates.Commands
 {
@@ -24,11 +26,7 @@ namespace Fluentley.SendGrid.Operations.Teammates.Commands
         {
             return Processor.Process<TeammateInviteResult, IResendTeammateInviteCommand, ResendTeammateInviteCommand>(
                 this,
-                context => context.ResendTeammateInviteByToken(Token) /*, context =>
-                {
-                    var validator = new ResendTeammateInviteCommandValidator(context);
-                    return validator.ValidateAsync(Token);
-                }*/);
+                context => context.ResendTeammateInviteByToken(Token));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
@@ -36,11 +34,7 @@ namespace Fluentley.SendGrid.Operations.Teammates.Commands
             return RequestGenerator
                 .Process<TeammateInviteResult, IResendTeammateInviteCommand, ResendTeammateInviteCommand>(
                     this,
-                    context => context.ResendTeammateInviteByToken(Token) /*, context =>
-                    {
-                        var validator = new ResendTeammateInviteCommandValidator(context);
-                        return validator.ValidateAsync(Token);
-                    }*/);
+                    context => context.ResendTeammateInviteByToken(Token));
         }
 
         public IResendTeammateInviteCommand ByToken(string value)
@@ -53,6 +47,12 @@ namespace Fluentley.SendGrid.Operations.Teammates.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new ResendTeammateInviteCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

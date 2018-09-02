@@ -89,7 +89,7 @@ namespace Test.Fluentley.SendGrid.RequestIntegrationTests.ApiKeys
         public async Task SingleTest()
         {
             var result =
-                await Service.ApiKeyById(option => option
+                await Service.ApiKey(option => option
                     .ById("1")
                 ).GenerateRequest();
 

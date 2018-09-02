@@ -5,9 +5,10 @@ using Fluentley.SendGrid.Common.Commands;
 using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
-using Fluentley.SendGrid.Operations.Alerts.Core;
+using Fluentley.SendGrid.Operations.Alerts.Core.Commands;
 using Fluentley.SendGrid.Operations.Alerts.Models;
 using Fluentley.SendGrid.Operations.Alerts.Validators;
+using FluentValidation.Results;
 
 namespace Fluentley.SendGrid.Operations.Alerts.Commands
 {
@@ -23,21 +24,13 @@ namespace Fluentley.SendGrid.Operations.Alerts.Commands
         public Task<IResult<string>> Execute()
         {
             return Processor.Process<string, IDeleteAlertCommand, DeleteAlertCommand>(this,
-                context => context.DeleteAlertById(IdForAlert), context =>
-                {
-                    var validator = new DeleteAlertCommandValidator();
-                    return validator.ValidateAsync(this);
-                });
+                context => context.DeleteAlertById(IdForAlert));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<string, IDeleteAlertCommand, DeleteAlertCommand>(this,
-                context => context.DeleteAlertById(IdForAlert), context =>
-                {
-                    var validator = new DeleteAlertCommandValidator();
-                    return validator.ValidateAsync(this);
-                });
+                context => context.DeleteAlertById(IdForAlert));
         }
 
         public IDeleteAlertCommand ById(string id)
@@ -56,6 +49,12 @@ namespace Fluentley.SendGrid.Operations.Alerts.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new DeleteAlertCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.SenderIdentities.Core;
 using Fluentley.SendGrid.Operations.SenderIdentities.Models;
+using Fluentley.SendGrid.Operations.SenderIdentities.Validators;
+using FluentValidation.Results;
 
 namespace Fluentley.SendGrid.Operations.SenderIdentities.Commands
 {
@@ -26,11 +28,7 @@ namespace Fluentley.SendGrid.Operations.SenderIdentities.Commands
             return Processor
                 .Process<string, IResendVerificationSenderIdentityCommand, ResendVerificationSenderIdentityCommand>(
                     this,
-                    context => context.ResendVerificationSenderIdentityById(Id) /*, context =>
-                    {
-                        var validator = new ResendVerificationSenderIdentityCommandValidator(context);
-                        return validator.ValidateAsync(Id);
-                    }*/);
+                    context => context.ResendVerificationSenderIdentityById(Id));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
@@ -38,11 +36,7 @@ namespace Fluentley.SendGrid.Operations.SenderIdentities.Commands
             return RequestGenerator
                 .Process<string, IResendVerificationSenderIdentityCommand, ResendVerificationSenderIdentityCommand>(
                     this,
-                    context => context.ResendVerificationSenderIdentityById(Id) /*, context =>
-                    {
-                        var validator = new ResendVerificationSenderIdentityCommandValidator(context);
-                        return validator.ValidateAsync(Id);
-                    }*/);
+                    context => context.ResendVerificationSenderIdentityById(Id));
         }
 
         public IResendVerificationSenderIdentityCommand ById(string id)
@@ -61,6 +55,12 @@ namespace Fluentley.SendGrid.Operations.SenderIdentities.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+           var validator = new ResendVerificationSenderIdentityCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

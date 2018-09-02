@@ -1,15 +1,11 @@
 ﻿using Fluentley.SendGrid.Contexts;
+using Fluentley.SendGrid.Operations.LinkBrandings.Commands;
 using FluentValidation;
 
 namespace Fluentley.SendGrid.Operations.LinkBrandings.Validators
 {
-    internal class DisassociateBrandedForSubUserCommandValidator : AbstractValidator<string>
+    internal class DisassociateBrandedForSubUserCommandValidator : AbstractValidator<DisassociateBrandedForSubUserCommand>
     {
-        private readonly Context _context;
-
-        public DisassociateBrandedForSubUserCommandValidator(Context context)
-        {
-            _context = context;
-        }
+       
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Fluentley.SendGrid.Common.Queries;
-using Fluentley.SendGrid.Operations.Alerts.Core;
-using Fluentley.SendGrid.Operations.ApiKeys.Core;
+using Fluentley.SendGrid.Operations.Alerts.Core.Queries;
+using Fluentley.SendGrid.Operations.ApiKeys.Core.Commands;
 using Fluentley.SendGrid.Operations.BlockedEmailAddresses.Core;
 using Fluentley.SendGrid.Operations.BouncedEmailAddresses.Core;
 using Fluentley.SendGrid.Operations.InvalidEmailAddresses.Core;

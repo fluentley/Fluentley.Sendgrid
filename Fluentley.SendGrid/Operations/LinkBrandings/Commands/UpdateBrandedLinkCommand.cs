@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.LinkBrandings.Core;
 using Fluentley.SendGrid.Operations.LinkBrandings.Models;
+using Fluentley.SendGrid.Operations.LinkBrandings.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.LinkBrandings.Commands
@@ -28,21 +30,13 @@ namespace Fluentley.SendGrid.Operations.LinkBrandings.Commands
         public Task<IResult<BrandedLink>> Execute()
         {
             return Processor.Process<BrandedLink, IUpdateBrandedLinkCommand, UpdateBrandedLinkCommand>(this,
-                context => context.UpdateBrandedLink(this) /*, context =>
-                {
-                    var validator = new UpdateBrandedLinkCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.UpdateBrandedLink(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<BrandedLink, IUpdateBrandedLinkCommand, UpdateBrandedLinkCommand>(this,
-                context => context.UpdateBrandedLink(this) /*, context =>
-                {
-                    var validator = new UpdateBrandedLinkCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.UpdateBrandedLink(this));
         }
 
         public IUpdateBrandedLinkCommand IsDefault(bool value)
@@ -61,6 +55,12 @@ namespace Fluentley.SendGrid.Operations.LinkBrandings.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new UpdateBrandedLinkCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

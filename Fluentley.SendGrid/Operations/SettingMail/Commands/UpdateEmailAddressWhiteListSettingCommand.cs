@@ -8,6 +8,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.SettingMail.Core;
 using Fluentley.SendGrid.Operations.SettingMail.Models;
+using Fluentley.SendGrid.Operations.SettingMail.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.SettingMail.Commands
@@ -68,6 +70,12 @@ namespace Fluentley.SendGrid.Operations.SettingMail.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new UpdateEmailAddressWhiteListSettingCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

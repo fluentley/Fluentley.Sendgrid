@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.LinkBrandings.Core;
 using Fluentley.SendGrid.Operations.LinkBrandings.Models;
+using Fluentley.SendGrid.Operations.LinkBrandings.Validators;
+using FluentValidation.Results;
 
 namespace Fluentley.SendGrid.Operations.LinkBrandings.Commands
 {
@@ -59,6 +61,12 @@ namespace Fluentley.SendGrid.Operations.LinkBrandings.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new ValidateBrandedLinkCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

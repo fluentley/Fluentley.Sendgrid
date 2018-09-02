@@ -11,6 +11,8 @@ using Fluentley.SendGrid.Operations.EmailOperations.Core;
 using Fluentley.SendGrid.Operations.EmailOperations.Models;
 using Fluentley.SendGrid.Operations.EmailOperations.Options;
 using Fluentley.SendGrid.Operations.EmailOperations.Options.EmailOptions;
+using Fluentley.SendGrid.Operations.EmailOperations.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.EmailOperations
@@ -78,21 +80,13 @@ namespace Fluentley.SendGrid.Operations.EmailOperations
         public Task<IResult<string>> Execute()
         {
             return Processor.Process<string, ISendEmailCommand, SendEmailCommand>(this,
-                context => context.SendEmail(this) /*, context =>
-                {
-                    var validator = new SendEmailCommandValidator();
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.SendEmail(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<string, ISendEmailCommand, SendEmailCommand>(this,
-                context => context.SendEmail(this) /*, context =>
-                {
-                    var validator = new SendEmailCommandValidator();
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.SendEmail(this));
         }
 
         public ISendEmailCommand FromIpPoolName(string name)
@@ -222,9 +216,14 @@ namespace Fluentley.SendGrid.Operations.EmailOperations
 
         public ISendEmailCommand UseContextOption(Action<IContextOption> option)
         {
-            ContextOptionAction = option;
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new SendEmailCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

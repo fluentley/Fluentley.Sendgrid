@@ -8,6 +8,8 @@ using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.EmailOperations.Models;
 using Fluentley.SendGrid.Operations.SenderIdentities.Core;
 using Fluentley.SendGrid.Operations.SenderIdentities.Models;
+using Fluentley.SendGrid.Operations.SenderIdentities.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.SenderIdentities.Commands
@@ -56,22 +58,14 @@ namespace Fluentley.SendGrid.Operations.SenderIdentities.Commands
         public Task<IResult<SenderIdentity>> Execute()
         {
             return Processor.Process<SenderIdentity, ICreateSenderIdentityCommand, CreateSenderIdentityCommand>(this,
-                context => context.CreateSenderIdentity(this) /*, context =>
-                {
-                    var validator = new CreateSenderIdentityCommandValidator();
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.CreateSenderIdentity(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<SenderIdentity, ICreateSenderIdentityCommand, CreateSenderIdentityCommand>(
                 this,
-                context => context.CreateSenderIdentity(this) /*, context =>
-                {
-                    var validator = new CreateSenderIdentityCommandValidator();
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.CreateSenderIdentity(this));
         }
 
         public ICreateSenderIdentityCommand ByModel(SenderIdentity senderIdentity)
@@ -98,6 +92,12 @@ namespace Fluentley.SendGrid.Operations.SenderIdentities.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new CreateSenderIdentityCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

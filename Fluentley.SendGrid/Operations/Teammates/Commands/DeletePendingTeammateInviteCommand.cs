@@ -6,6 +6,8 @@ using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.Teammates.Core;
+using Fluentley.SendGrid.Operations.Teammates.Validators;
+using FluentValidation.Results;
 
 namespace Fluentley.SendGrid.Operations.Teammates.Commands
 {
@@ -23,11 +25,7 @@ namespace Fluentley.SendGrid.Operations.Teammates.Commands
         {
             return Processor.Process<string, IDeletePendingTeammateInviteCommand, DeletePendingTeammateInviteCommand>(
                 this,
-                context => context.DeletePendingTeammateInviteByToken(Token) /*, context =>
-                {
-                    var validator = new DeletePendingTeammateInviteCommandValidator(context);
-                    return validator.ValidateAsync(Token);
-                }*/);
+                context => context.DeletePendingTeammateInviteByToken(Token));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
@@ -35,11 +33,7 @@ namespace Fluentley.SendGrid.Operations.Teammates.Commands
             return RequestGenerator
                 .Process<string, IDeletePendingTeammateInviteCommand, DeletePendingTeammateInviteCommand>(
                     this,
-                    context => context.DeletePendingTeammateInviteByToken(Token) /*, context =>
-                    {
-                        var validator = new DeletePendingTeammateInviteCommandValidator(context);
-                        return validator.ValidateAsync(Token);
-                    }*/);
+                    context => context.DeletePendingTeammateInviteByToken(Token));
         }
 
         public IDeletePendingTeammateInviteCommand ByToken(string value)
@@ -52,6 +46,12 @@ namespace Fluentley.SendGrid.Operations.Teammates.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new DeletePendingTeammateInviteCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.DomainAuthentications.Core;
 using Fluentley.SendGrid.Operations.DomainAuthentications.Models;
+using Fluentley.SendGrid.Operations.DomainAuthentications.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
@@ -30,11 +32,7 @@ namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
             return Processor
                 .Process<AuthenticatedDomain, IRemoveIpAddressFromAuthenticatedDomainCommand,
                     RemoveIpAddressFromAuthenticatedDomainCommand>(this,
-                    context => context.RemoveIpAddressFromAuthenticatedDomain(this) /*, context =>
-                    {
-                        var validator = new RemoveIpAddressFromAuthenticatedDomainCommandValidator(context);
-                        return validator.ValidateAsync(this);
-                    }*/);
+                    context => context.RemoveIpAddressFromAuthenticatedDomain(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
@@ -42,11 +40,7 @@ namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
             return RequestGenerator
                 .Process<AuthenticatedDomain, IRemoveIpAddressFromAuthenticatedDomainCommand,
                     RemoveIpAddressFromAuthenticatedDomainCommand>(this,
-                    context => context.RemoveIpAddressFromAuthenticatedDomain(this) /*, context =>
-                    {
-                        var validator = new RemoveIpAddressFromAuthenticatedDomainCommandValidator(context);
-                        return validator.ValidateAsync(this);
-                    }*/);
+                    context => context.RemoveIpAddressFromAuthenticatedDomain(this));
         }
 
         public IRemoveIpAddressFromAuthenticatedDomainCommand UseContextOption(Action<IContextOption> option)
@@ -65,6 +59,12 @@ namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
         {
             AuthenticatedDomainId = id;
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new RemoveIpAddressFromAuthenticatedDomainCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

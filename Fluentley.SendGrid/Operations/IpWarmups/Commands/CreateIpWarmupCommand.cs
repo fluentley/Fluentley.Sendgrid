@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.IpWarmups.Core;
 using Fluentley.SendGrid.Operations.IpWarmups.Models;
+using Fluentley.SendGrid.Operations.IpWarmups.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.IpWarmups.Commands
@@ -24,21 +26,13 @@ namespace Fluentley.SendGrid.Operations.IpWarmups.Commands
         public Task<IResult<IpWarmup>> Execute()
         {
             return Processor.Process<IpWarmup, ICreateIpWarmupCommand, CreateIpWarmupCommand>(this,
-                context => context.CreateIpWarmup(this) /*, context =>
-                {
-                    var validator = new CreateIpWarmupCommandValidator();
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.CreateIpWarmup(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<IpWarmup, ICreateIpWarmupCommand, CreateIpWarmupCommand>(this,
-                context => context.CreateIpWarmup(this) /*, context =>
-                {
-                    var validator = new CreateIpWarmupCommandValidator();
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.CreateIpWarmup(this));
         }
 
         public ICreateIpWarmupCommand IpAddress(string value)
@@ -54,6 +48,12 @@ namespace Fluentley.SendGrid.Operations.IpWarmups.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new CreateIpWarmupCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

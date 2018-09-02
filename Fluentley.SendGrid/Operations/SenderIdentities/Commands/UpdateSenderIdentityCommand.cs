@@ -8,6 +8,8 @@ using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.EmailOperations.Models;
 using Fluentley.SendGrid.Operations.SenderIdentities.Core;
 using Fluentley.SendGrid.Operations.SenderIdentities.Models;
+using Fluentley.SendGrid.Operations.SenderIdentities.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.SenderIdentities.Commands
@@ -59,22 +61,14 @@ namespace Fluentley.SendGrid.Operations.SenderIdentities.Commands
         public Task<IResult<SenderIdentity>> Execute()
         {
             return Processor.Process<SenderIdentity, IUpdateSenderIdentityCommand, UpdateSenderIdentityCommand>(this,
-                context => context.UpdateSenderIdentity(this) /*, context =>
-                {
-                    var validator = new UpdateSenderIdentityCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.UpdateSenderIdentity(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<SenderIdentity, IUpdateSenderIdentityCommand, UpdateSenderIdentityCommand>(
                 this,
-                context => context.UpdateSenderIdentity(this) /*, context =>
-                {
-                    var validator = new UpdateSenderIdentityCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.UpdateSenderIdentity(this));
         }
 
         public IUpdateSenderIdentityCommand ByModel(SenderIdentity senderIdentity)
@@ -98,6 +92,12 @@ namespace Fluentley.SendGrid.Operations.SenderIdentities.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new UpdateSenderIdentityCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

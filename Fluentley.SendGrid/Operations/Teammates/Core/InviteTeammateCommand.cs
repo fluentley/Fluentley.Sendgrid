@@ -8,6 +8,8 @@ using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.Teammates.Models;
+using Fluentley.SendGrid.Operations.Teammates.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.Teammates.Core
@@ -32,21 +34,13 @@ namespace Fluentley.SendGrid.Operations.Teammates.Core
         public Task<IResult<TeammateInviteResult>> Execute()
         {
             return Processor.Process<TeammateInviteResult, IInviteTeammateCommand, InviteTeammateCommand>(this,
-                context => context.InviteTeammate(this) /*, context =>
-                {
-                    var validator = new InviteTeammateCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.InviteTeammate(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<TeammateInviteResult, IInviteTeammateCommand, InviteTeammateCommand>(this,
-                context => context.InviteTeammate(this) /*, context =>
-                {
-                    var validator = new InviteTeammateCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.InviteTeammate(this));
         }
 
         public IInviteTeammateCommand EmailAddress(string value)
@@ -76,6 +70,12 @@ namespace Fluentley.SendGrid.Operations.Teammates.Core
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new InviteTeammateCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

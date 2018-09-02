@@ -8,6 +8,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.CampaignSchedules.Core;
 using Fluentley.SendGrid.Operations.CampaignSchedules.Models;
+using Fluentley.SendGrid.Operations.CampaignSchedules.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.CampaignSchedules.Commands
@@ -31,11 +33,7 @@ namespace Fluentley.SendGrid.Operations.CampaignSchedules.Commands
         {
             return Processor.Process<CampaignSchedule, IUpdateCampaignScheduleCommand, UpdateCampaignScheduleCommand>(
                 this,
-                context => context.UpdateScheduleCampaignById(this) /*, context =>
-                {
-                    var validator = new UpdateCampaignScheduleCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.UpdateScheduleCampaignById(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
@@ -43,11 +41,7 @@ namespace Fluentley.SendGrid.Operations.CampaignSchedules.Commands
             return RequestGenerator
                 .Process<CampaignSchedule, IUpdateCampaignScheduleCommand, UpdateCampaignScheduleCommand>(
                     this,
-                    context => context.UpdateScheduleCampaignById(this) /*, context =>
-                    {
-                        var validator = new UpdateCampaignScheduleCommandValidator(context);
-                        return validator.ValidateAsync(this);
-                    }*/);
+                    context => context.UpdateScheduleCampaignById(this));
         }
 
         public IUpdateCampaignScheduleCommand CampaignId(string id)
@@ -64,9 +58,14 @@ namespace Fluentley.SendGrid.Operations.CampaignSchedules.Commands
 
         public IUpdateCampaignScheduleCommand UseContextOption(Action<IContextOption> option)
         {
-            ContextOptionAction = option;
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+          var validator = new UpdateCampaignScheduleCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

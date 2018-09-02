@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.Users.Core;
 using Fluentley.SendGrid.Operations.Users.Models;
+using Fluentley.SendGrid.Operations.Users.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.Users.Commands
@@ -26,11 +28,7 @@ namespace Fluentley.SendGrid.Operations.Users.Commands
         {
             return Processor.Process<UserEmailAddress, IUpdateUserEmailAddressCommand, UpdateUserEmailAddressCommand>(
                 this,
-                context => context.UpdateUserEmailAddress(this) /*, context =>
-                {
-                    var validator = new UpdateUserEmailAddressCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.UpdateUserEmailAddress(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
@@ -38,11 +36,7 @@ namespace Fluentley.SendGrid.Operations.Users.Commands
             return RequestGenerator
                 .Process<UserEmailAddress, IUpdateUserEmailAddressCommand, UpdateUserEmailAddressCommand>(
                     this,
-                    context => context.UpdateUserEmailAddress(this) /*, context =>
-                    {
-                        var validator = new UpdateUserEmailAddressCommandValidator(context);
-                        return validator.ValidateAsync(this);
-                    }*/);
+                    context => context.UpdateUserEmailAddress(this));
         }
 
         public IUpdateUserEmailAddressCommand ByModel(UserEmailAddress userEmailAddress)
@@ -55,6 +49,12 @@ namespace Fluentley.SendGrid.Operations.Users.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new UpdateUserEmailAddressCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

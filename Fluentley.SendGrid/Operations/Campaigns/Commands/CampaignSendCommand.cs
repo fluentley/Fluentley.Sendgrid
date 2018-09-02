@@ -8,7 +8,9 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.Campaigns.Core;
 using Fluentley.SendGrid.Operations.Campaigns.Models;
+using Fluentley.SendGrid.Operations.Campaigns.Validators;
 using Fluentley.SendGrid.Operations.CampaignSchedules.Models;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.Campaigns.Commands
@@ -71,6 +73,12 @@ namespace Fluentley.SendGrid.Operations.Campaigns.Commands
         {
             TestEmailTo = value;
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new CampaignSendCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

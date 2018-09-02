@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.Teammates.Core;
 using Fluentley.SendGrid.Operations.Teammates.Models;
+using Fluentley.SendGrid.Operations.Teammates.Validators;
+using FluentValidation.Results;
 
 namespace Fluentley.SendGrid.Operations.Teammates.Commands
 {
@@ -38,11 +40,7 @@ namespace Fluentley.SendGrid.Operations.Teammates.Commands
             return Processor
                 .Process<ApproveTeammateRequestResult, IApproveTeammateAccessRequestCommand,
                     ApproveTeammateAccessRequestCommand>(this,
-                    context => context.ApproveTeammateAccessRequestById(Id) /*, context =>
-                    {
-                        var validator = new ApproveTeammateAccessRequestCommandValidator(context);
-                        return validator.ValidateAsync(Id);
-                    }*/);
+                    context => context.ApproveTeammateAccessRequestById(Id));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
@@ -50,11 +48,13 @@ namespace Fluentley.SendGrid.Operations.Teammates.Commands
             return RequestGenerator
                 .Process<ApproveTeammateRequestResult, IApproveTeammateAccessRequestCommand,
                     ApproveTeammateAccessRequestCommand>(this,
-                    context => context.ApproveTeammateAccessRequestById(Id) /*, context =>
-                    {
-                        var validator = new ApproveTeammateAccessRequestCommandValidator(context);
-                        return validator.ValidateAsync(Id);
-                    }*/);
+                    context => context.ApproveTeammateAccessRequestById(Id));
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new ApproveTeammateAccessRequestCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

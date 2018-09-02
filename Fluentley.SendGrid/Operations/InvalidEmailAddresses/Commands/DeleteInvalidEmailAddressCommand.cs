@@ -8,6 +8,8 @@ using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.InvalidEmailAddresses.Core;
+using Fluentley.SendGrid.Operations.InvalidEmailAddresses.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.InvalidEmailAddresses.Commands
@@ -29,22 +31,14 @@ namespace Fluentley.SendGrid.Operations.InvalidEmailAddresses.Commands
         public Task<IResult<string>> Execute()
         {
             return Processor.Process<string, IDeleteInvalidEmailAddressCommand, DeleteInvalidEmailAddressCommand>(this,
-                context => context.DeleteInvalidEmailAddress(this) /*, context =>
-                {
-                    var validator = new DeleteInvalidEmailAddressCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.DeleteInvalidEmailAddress(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator
                 .Process<string, IDeleteInvalidEmailAddressCommand, DeleteInvalidEmailAddressCommand>(this,
-                    context => context.DeleteInvalidEmailAddress(this) /*, context =>
-                    {
-                        var validator = new DeleteInvalidEmailAddressCommandValidator(context);
-                        return validator.ValidateAsync(this);
-                    }*/);
+                    context => context.DeleteInvalidEmailAddress(this));
         }
 
         public IDeleteInvalidEmailAddressCommand DeleteAll(bool value)
@@ -65,9 +59,14 @@ namespace Fluentley.SendGrid.Operations.InvalidEmailAddresses.Commands
 
         public IDeleteInvalidEmailAddressCommand UseContextOption(Action<IContextOption> option)
         {
-            ContextOptionAction = option;
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new DeleteInvalidEmailAddressCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

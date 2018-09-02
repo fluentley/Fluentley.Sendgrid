@@ -1,15 +1,11 @@
 ﻿using Fluentley.SendGrid.Contexts;
+using Fluentley.SendGrid.Operations.Teammates.Commands;
 using FluentValidation;
 
 namespace Fluentley.SendGrid.Operations.Teammates.Validators
 {
-    internal class ResendTeammateInviteCommandValidator : AbstractValidator<string>
+    internal class ResendTeammateInviteCommandValidator : AbstractValidator<ResendTeammateInviteCommand>
     {
-        private readonly Context _context;
-
-        public ResendTeammateInviteCommandValidator(Context context)
-        {
-            _context = context;
-        }
+       
     }
 }

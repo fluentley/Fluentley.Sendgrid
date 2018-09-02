@@ -6,6 +6,8 @@ using Fluentley.SendGrid.Common.Options.ContextOptions;
 using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.IpPools.Core;
+using Fluentley.SendGrid.Operations.IpPools.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.IpPools.Commands
@@ -26,22 +28,14 @@ namespace Fluentley.SendGrid.Operations.IpPools.Commands
         public Task<IResult<string>> Execute()
         {
             return Processor.Process<string, IRemoveIpAddressFromPoolCommand, RemoveIpAddressFromPoolCommand>(this,
-                context => context.RemoveIpAddressFromPool(this) /*, context =>
-                {
-                    var validator = new RemoveIpAddressToPoolCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.RemoveIpAddressFromPool(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<string, IRemoveIpAddressFromPoolCommand, RemoveIpAddressFromPoolCommand>(
                 this,
-                context => context.RemoveIpAddressFromPool(this) /*, context =>
-                {
-                    var validator = new RemoveIpAddressToPoolCommandValidator(context);
-                    return validator.ValidateAsync(this);
-                }*/);
+                context => context.RemoveIpAddressFromPool(this));
         }
 
         public IRemoveIpAddressFromPoolCommand UseContextOption(Action<IContextOption> option)
@@ -60,6 +54,12 @@ namespace Fluentley.SendGrid.Operations.IpPools.Commands
         {
             IpPoolName = poolName;
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new RemoveIpAddressFromPoolCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

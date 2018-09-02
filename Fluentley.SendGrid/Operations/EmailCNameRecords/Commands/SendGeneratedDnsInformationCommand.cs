@@ -7,6 +7,8 @@ using Fluentley.SendGrid.Common.Queries;
 using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.EmailCNameRecords.Core;
 using Fluentley.SendGrid.Operations.EmailCNameRecords.Models;
+using Fluentley.SendGrid.Operations.EmailCNameRecords.Validators;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.EmailCNameRecords.Commands
@@ -37,11 +39,7 @@ namespace Fluentley.SendGrid.Operations.EmailCNameRecords.Commands
             return Processor
                 .Process<SendDnsInformationResult, ISendGeneratedDnsInformationCommand,
                     SendGeneratedDnsInformationCommand>(this,
-                    context => context.SendGeneratedDnsInformation(this) /*, context =>
-                    {
-                        var validator = new SendGeneratedDnsInformationCommandValidator(context);
-                        return validator.ValidateAsync(this);
-                    }*/);
+                    context => context.SendGeneratedDnsInformation(this));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
@@ -49,11 +47,7 @@ namespace Fluentley.SendGrid.Operations.EmailCNameRecords.Commands
             return RequestGenerator
                 .Process<SendDnsInformationResult, ISendGeneratedDnsInformationCommand,
                     SendGeneratedDnsInformationCommand>(this,
-                    context => context.SendGeneratedDnsInformation(this) /*, context =>
-                    {
-                        var validator = new SendGeneratedDnsInformationCommandValidator(context);
-                        return validator.ValidateAsync(this);
-                    }*/);
+                    context => context.SendGeneratedDnsInformation(this));
         }
 
         public ISendGeneratedDnsInformationCommand UseContextOption(Action<IContextOption> option)
@@ -84,6 +78,12 @@ namespace Fluentley.SendGrid.Operations.EmailCNameRecords.Commands
         {
             MessageForSend = message;
             return this;
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new SendGeneratedDnsInformationCommandValidator();
+            return validator.ValidateAsync(this);
         }
     }
 }

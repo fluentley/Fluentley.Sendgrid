@@ -7,7 +7,7 @@ namespace Fluentley.SendGrid.Operations.ApiKeys.Validators
     {
         public CreateApiKeyCommandValidator()
         {
-            RuleFor(x => x.Name).NotNull().NotEmpty();
+            RuleFor(x => x.NameOfApiKey).NotNull().NotEmpty();
         }
     }
 }
