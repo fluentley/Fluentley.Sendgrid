@@ -132,14 +132,13 @@ var filePath = @"{SomePath}";
                     .AddSubstitution("{{Salutation}}", "Mrs.")
                     .AddSubstitution("{{CommunicationReason}}", "{{GoodNewsCommunication}}"))
                 .AddContent(contentOption => contentOption
-                    .Value("{{Salutation}} {{LastName}}, <br> {{CommunicationReason}}")
+                    .Value("{{Salutation}} {{FirstName}} {{LastName}}, <br> {{CommunicationReason}}")
                     .Type("text/html"))
                 .AddAttachments(option => option
                     .FileName("Test File.txt")
                     .Content(Convert.ToBase64String(File.ReadAllBytes(filePath))))
-                .AddSection("{{GoodNewsCommunication}}",
-                    "{{FirstName}}, We contact you in order to give you a great news")
-                .AddSection("{{BadNewsCommunication}}", "{{FirstName}}, Unfortunately, we have a bad news for you")
+                .AddSection("{{GoodNewsCommunication}}", "We contact you in order to give you a great news")
+                .AddSection("{{BadNewsCommunication}}", "Unfortunately, we have a bad news for you")
                 .TrackingSettings(option => option
                     .ClickTracking(clickTrackingOption => clickTrackingOption
                         .Enable(true))
@@ -152,6 +151,11 @@ var filePath = @"{SomePath}";
 ```
 
 You can create a more comprehensive email construction, we give support its full functionality. Please make sure to check sendgrid email sending documentation.
+
+So email contents of the execution above will look like
+
+> Mr. Alex Hunter, Unfortunately, we have a bad news for you  
+> Mrs. Cara Lightfoot, We contact you in order to give you a great news  
 
 ### Generate Request
 There are three different command executions `Execute()`, `ExecuteCommand()`, `GenerateRequest()` I have already used two of them with the samples above, the last one is generate request command. You are going to see excessive use of this particular in the integration tests. It is used for generating a request without executing it and it is going to return a `IResult<HttpRequestMessage>` result.
