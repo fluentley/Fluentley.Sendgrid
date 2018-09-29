@@ -163,7 +163,7 @@ You can use the returned httprequest and pass it to any HttpClient and execute i
 
 ### Api Functionalities
 
-I will talk about a few functions due, to sendgrid documentation has it already in details, you will find the respected calls based on the documentation.
+I will talk about a few functions due to sendgrid documentation has it already in details, you will find the respected calls based on the documentation.
 
 #### Create Alert
 ```cs
