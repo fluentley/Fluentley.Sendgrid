@@ -7,8 +7,10 @@
 
 Allows you to write code that is humanly readable.
 
-Fluentley.Sendgird Fluently approach on Sendgrid Api
-Sendgrid has a feature rich api and it may get pretty complicated while utilizing it. 
+Fluentley.Sendgird Fluently approach on Sendgrid Api.
+
+Sendgrid has a feature rich api and it may get pretty complicated while utilizing it. The purpose is to ease the utilization and increase productivity.
+
 ## Installation 
 [Fluentley.SendGrid is avaliable on NuGet.](https://www.nuget.org/packages/Fluentley.SendGrid/)
 
