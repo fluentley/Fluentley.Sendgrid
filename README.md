@@ -178,7 +178,7 @@ I will talk about a few functions due, to sendgrid documentation has it already 
 
            await command.Execute();
 ```
-Or you can use it as follows, both of commands are equvant to each other.
+Or you can use it as follows, both of the commands are equivalent to each other.
 ```cs
             var command = Service.CreateAlert(option => option
                             .AlertFrequency(Frequency.Daily)
