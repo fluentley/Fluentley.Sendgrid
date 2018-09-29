@@ -163,7 +163,7 @@ You can use the returned httprequest and pass it to any HttpClient and execute i
 
 ### Api Functionalities
 
-I will talk about a few functions due to sendgrid documentation has it already in details, you will find the respected calls based on the documentation.
+I will talk about a few functions due, to sendgrid documentation has it already in details, you will find the respected calls based on the documentation.
 
 #### Create Alert
 ```cs
@@ -178,7 +178,7 @@ I will talk about a few functions due to sendgrid documentation has it already i
 
            await command.Execute();
 ```
-Or you can use it as follows, both of the commands are equivalent to each other.
+Or you can use it as follows, both of commands are equvant to each other.
 ```cs
             var command = Service.CreateAlert(option => option
                             .AlertFrequency(Frequency.Daily)
@@ -187,4 +187,54 @@ Or you can use it as follows, both of the commands are equivalent to each other.
                         );
 
            await command.Execute();
+```
+#### List Alert
+
+Basic query for returning all Alerts 
+```cs
+
+ var alerts = await Service.Alerts().Execute();
+
+```
+This particular method encapsulates [Fluentley.QueryBuilder](https://github.com/fluentley/Fluentley.QueryBuilder) package.
+
+
+Also, you can use `UseInMemoryQuery()` which has bunch of query options for you, here are the ones that are supported.
+- QueryBy
+- Paging
+- DynamicContains
+- DynamicSort
+
+Or you can have a paged version of your call as well as filtering done for you.
+```cs
+var alerts = await Service.Alerts(options=> options.
+                UseInMemoryQuery(queryOption=> queryOption
+                    .QueryBy(query=> query
+                        .Where(x=> x.EmailTo == "emre@fluentley.com"))
+                    .Paging(0, 5)
+                )
+            ).Execute();
+```
+
+#### Find Alert
+```cs
+ var result =  await Service.Alert(option => option
+                    .ById("1")
+                ).Execute();
+```
+
+Each different Api will have differnt options on the list or on the find level. But the ones I talked about are the common accross all.
+
+Also, one thing I haven't really talked about which is very important is the `UseContextOption()` again it is common across all of the calls.
+
+#### Context Option
+You can execute any of the methods, using different ApiKey or operations can be done on behalf of a sub user.
+```cs
+ var result = await Service.Alert(option => option
+                .UseContextOption(contextOption => contextOption
+                    .UseApiKey("{Sub User Api Key - or any apiKey}")
+                    .OnBehalfOfSubUser("{Behalf Of SubUser Name}")
+                )
+                .ById("1")
+            ).Execute();
 ```
