@@ -9,6 +9,7 @@ using Fluentley.SendGrid.Operations.IpPools.Core;
 using Fluentley.SendGrid.Operations.IpPools.Models;
 using Fluentley.SendGrid.Operations.IpPools.Validators;
 using FluentValidation.Results;
+using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.IpPools.Commands
 {
@@ -25,6 +26,14 @@ namespace Fluentley.SendGrid.Operations.IpPools.Commands
         {
             return Processor.Process<string, IDeleteIpPoolCommand, DeleteIpPoolCommand>(this,
                 context => context.DeleteIpPoolByName(Name));
+        }
+
+        public Task<IResult<string>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<DeleteIpPoolCommand>(commandJson);
+
+            return Processor.Process<string, IDeleteIpPoolCommand, DeleteIpPoolCommand>(this,
+                context => context.DeleteIpPoolByName(command.Name));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()

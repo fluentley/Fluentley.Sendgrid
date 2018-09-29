@@ -38,6 +38,14 @@ namespace Fluentley.SendGrid.Operations.SettingInboundParse.Commands
                 context => context.CreateParseSetting(this));
         }
 
+        public Task<IResult<ParseSetting>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<CreateParseSettingCommand>(commandJson);
+
+            return Processor.Process<ParseSetting, ICreateParseSettingCommand, CreateParseSettingCommand>(this,
+                context => context.CreateParseSetting(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<ParseSetting, ICreateParseSettingCommand, CreateParseSettingCommand>(this,

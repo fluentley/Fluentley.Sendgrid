@@ -40,6 +40,18 @@ namespace Fluentley.SendGrid.Operations.BouncedEmailAddresses.Commands
                 }*/);
         }
 
+        public Task<IResult<string>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<DeleteBouncedEmailAddressCommand>(commandJson);
+
+            return Processor.Process<string, IDeleteBouncedEmailAddressCommand, DeleteBouncedEmailAddressCommand>(this,
+                context => context.DeleteBouncedEmailAddress(command) /*, context =>
+                {
+                    var validator = new DeleteBouncedEmailAddressCommandValidator(context);
+                    return validator.ValidateAsync(this);
+                }*/);
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator

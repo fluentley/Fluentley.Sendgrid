@@ -29,6 +29,14 @@ namespace Fluentley.SendGrid.Operations.Users.Commands
                 context => context.UpdateUserName(this));
         }
 
+        public Task<IResult<User>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<UpdateUserNameCommand>(commandJson);
+
+            return Processor.Process<User, IUpdateUserNameCommand, UpdateUserNameCommand>(this,
+                context => context.UpdateUserName(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<User, IUpdateUserNameCommand, UpdateUserNameCommand>(this,

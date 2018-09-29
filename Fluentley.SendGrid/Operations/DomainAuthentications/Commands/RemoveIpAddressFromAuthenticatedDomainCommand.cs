@@ -35,6 +35,17 @@ namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
                     context => context.RemoveIpAddressFromAuthenticatedDomain(this));
         }
 
+        public Task<IResult<AuthenticatedDomain>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<RemoveIpAddressFromAuthenticatedDomainCommand>(commandJson);
+
+
+            return Processor
+                .Process<AuthenticatedDomain, IRemoveIpAddressFromAuthenticatedDomainCommand,
+                    RemoveIpAddressFromAuthenticatedDomainCommand>(this,
+                    context => context.RemoveIpAddressFromAuthenticatedDomain(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator

@@ -51,6 +51,15 @@ namespace Fluentley.SendGrid.Operations.LinkBrandings.Commands
                 context => context.AssociateBrandedForSubUser(this));
         }
 
+        public Task<IResult<string>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<AssociateBrandedForSubUserCommand>(commandJson);
+
+            return Processor.Process<string, IAssociateBrandedForSubUserCommand, AssociateBrandedForSubUserCommand>(
+                this,
+                context => context.AssociateBrandedForSubUser(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator

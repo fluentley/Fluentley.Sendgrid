@@ -31,6 +31,15 @@ namespace Fluentley.SendGrid.Operations.SettingMail.Commands
                     context => context.UpdatePlainContentSetting(this));
         }
 
+        public Task<IResult<PlainContentSetting>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<UpdatePlainContentSettingCommand>(commandJson);
+
+            return Processor
+                .Process<PlainContentSetting, IUpdatePlainContentSettingCommand, UpdatePlainContentSettingCommand>(this,
+                    context => context.UpdatePlainContentSetting(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator

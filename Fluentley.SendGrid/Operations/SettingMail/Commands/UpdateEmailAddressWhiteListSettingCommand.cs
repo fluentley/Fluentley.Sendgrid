@@ -36,6 +36,16 @@ namespace Fluentley.SendGrid.Operations.SettingMail.Commands
                     context => context.UpdateEmailAddressWhiteListSetting(this));
         }
 
+        public Task<IResult<EmailAddressWhiteListSetting>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<UpdateEmailAddressWhiteListSettingCommand>(commandJson);
+
+            return Processor
+                .Process<EmailAddressWhiteListSetting, IUpdateEmailAddressWhiteListSettingCommand,
+                    UpdateEmailAddressWhiteListSettingCommand>(this,
+                    context => context.UpdateEmailAddressWhiteListSetting(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator

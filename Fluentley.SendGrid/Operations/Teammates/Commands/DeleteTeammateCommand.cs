@@ -9,6 +9,7 @@ using Fluentley.SendGrid.Operations.Teammates.Core;
 using Fluentley.SendGrid.Operations.Teammates.Models;
 using Fluentley.SendGrid.Operations.Teammates.Validators;
 using FluentValidation.Results;
+using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.Teammates.Commands
 {
@@ -25,6 +26,14 @@ namespace Fluentley.SendGrid.Operations.Teammates.Commands
         {
             return Processor.Process<string, IDeleteTeammateCommand, DeleteTeammateCommand>(this,
                 context => context.DeleteTeammateByUserName(UserName));
+        }
+
+        public Task<IResult<string>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<DeleteTeammateCommand>(commandJson);
+
+            return Processor.Process<string, IDeleteTeammateCommand, DeleteTeammateCommand>(this,
+                context => context.DeleteTeammateByUserName(command.UserName));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()

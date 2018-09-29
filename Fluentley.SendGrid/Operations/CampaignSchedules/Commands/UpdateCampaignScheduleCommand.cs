@@ -32,16 +32,26 @@ namespace Fluentley.SendGrid.Operations.CampaignSchedules.Commands
         public Task<IResult<CampaignSchedule>> Execute()
         {
             return Processor.Process<CampaignSchedule, IUpdateCampaignScheduleCommand, UpdateCampaignScheduleCommand>(
-                this,
-                context => context.UpdateScheduleCampaignById(this));
+                this, context => context.UpdateScheduleCampaignById(this));
+        }
+
+        public Task<IResult<CampaignSchedule>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<UpdateCampaignScheduleCommand>(commandJson);
+
+            return Processor.Process<CampaignSchedule, IUpdateCampaignScheduleCommand, UpdateCampaignScheduleCommand>(
+                this, context => context.UpdateScheduleCampaignById(command));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
-            return RequestGenerator
-                .Process<CampaignSchedule, IUpdateCampaignScheduleCommand, UpdateCampaignScheduleCommand>(
-                    this,
-                    context => context.UpdateScheduleCampaignById(this));
+            return RequestGenerator.Process<CampaignSchedule, IUpdateCampaignScheduleCommand, UpdateCampaignScheduleCommand>(this, context => context.UpdateScheduleCampaignById(this));
+        }
+
+        public Task<ValidationResult> Validate()
+        {
+            var validator = new UpdateCampaignScheduleCommandValidator();
+            return validator.ValidateAsync(this);
         }
 
         public IUpdateCampaignScheduleCommand CampaignId(string id)
@@ -60,12 +70,6 @@ namespace Fluentley.SendGrid.Operations.CampaignSchedules.Commands
         {
             ContextOption = OptionProcessor.Process<IContextOption, ContextOption>(option);
             return this;
-        }
-
-        public Task<ValidationResult> Validate()
-        {
-          var validator = new UpdateCampaignScheduleCommandValidator();
-            return validator.ValidateAsync(this);
         }
     }
 }

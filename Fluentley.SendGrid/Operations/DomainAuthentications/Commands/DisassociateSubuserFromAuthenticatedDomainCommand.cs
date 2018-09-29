@@ -8,6 +8,7 @@ using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.DomainAuthentications.Core;
 using Fluentley.SendGrid.Operations.DomainAuthentications.Validators;
 using FluentValidation.Results;
+using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
 {
@@ -20,6 +21,14 @@ namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
         }
 
         public Task<IResult<string>> Execute()
+        {
+            return Processor
+                .Process<string, IDisassociateSubUserFromAuthenticatedDomainCommand,
+                    DisassociateSubUserFromAuthenticatedDomainCommand>(this,
+                    context => context.DisassociateSubuserFromAuthenticatedDomain());
+        }
+
+        public Task<IResult<string>> ExecuteCommand(string commandJson)
         {
             return Processor
                 .Process<string, IDisassociateSubUserFromAuthenticatedDomainCommand,

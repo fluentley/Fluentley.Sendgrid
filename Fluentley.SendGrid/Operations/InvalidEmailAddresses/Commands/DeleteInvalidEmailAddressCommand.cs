@@ -34,6 +34,14 @@ namespace Fluentley.SendGrid.Operations.InvalidEmailAddresses.Commands
                 context => context.DeleteInvalidEmailAddress(this));
         }
 
+        public Task<IResult<string>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<DeleteInvalidEmailAddressCommand>(commandJson);
+
+            return Processor.Process<string, IDeleteInvalidEmailAddressCommand, DeleteInvalidEmailAddressCommand>(this,
+                context => context.DeleteInvalidEmailAddress(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator

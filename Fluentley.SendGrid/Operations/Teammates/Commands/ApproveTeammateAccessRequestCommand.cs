@@ -9,6 +9,7 @@ using Fluentley.SendGrid.Operations.Teammates.Core;
 using Fluentley.SendGrid.Operations.Teammates.Models;
 using Fluentley.SendGrid.Operations.Teammates.Validators;
 using FluentValidation.Results;
+using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.Teammates.Commands
 {
@@ -41,6 +42,18 @@ namespace Fluentley.SendGrid.Operations.Teammates.Commands
                 .Process<ApproveTeammateRequestResult, IApproveTeammateAccessRequestCommand,
                     ApproveTeammateAccessRequestCommand>(this,
                     context => context.ApproveTeammateAccessRequestById(Id));
+        }
+
+        public Task<IResult<ApproveTeammateRequestResult>> ExecuteCommand(string commandJson)
+        {
+
+            var command = JsonConvert.DeserializeObject<ApproveTeammateAccessRequestCommand>(commandJson);
+
+
+            return Processor
+                .Process<ApproveTeammateRequestResult, IApproveTeammateAccessRequestCommand,
+                    ApproveTeammateAccessRequestCommand>(this,
+                    context => context.ApproveTeammateAccessRequestById(command.Id));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()

@@ -32,6 +32,14 @@ namespace Fluentley.SendGrid.Operations.SettingEnforcedTls.Commands
                 context => context.UpdateEnforcedTls(this));
         }
 
+        public Task<IResult<EnforcedTls>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<UpdateEnforcedTlsCommand>(commandJson);
+
+            return Processor.Process<EnforcedTls, IUpdateEnforcedTlsCommand, UpdateEnforcedTlsCommand>(this,
+                context => context.UpdateEnforcedTls(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<EnforcedTls, IUpdateEnforcedTlsCommand, UpdateEnforcedTlsCommand>(this,

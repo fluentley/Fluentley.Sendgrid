@@ -8,6 +8,7 @@ using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.LinkBrandings.Core;
 using Fluentley.SendGrid.Operations.LinkBrandings.Validators;
 using FluentValidation.Results;
+using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.LinkBrandings.Commands
 {
@@ -26,6 +27,15 @@ namespace Fluentley.SendGrid.Operations.LinkBrandings.Commands
             return Processor
                 .Process<string, IDisassociateBrandedForSubUserCommand, DisassociateBrandedForSubUserCommand>(this,
                     context => context.DisassociateBrandedForSubUser(UserName));
+        }
+
+        public Task<IResult<string>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<DisassociateBrandedForSubUserCommand>(commandJson);
+
+            return Processor
+                .Process<string, IDisassociateBrandedForSubUserCommand, DisassociateBrandedForSubUserCommand>(this,
+                    context => context.DisassociateBrandedForSubUser(command.UserName));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()

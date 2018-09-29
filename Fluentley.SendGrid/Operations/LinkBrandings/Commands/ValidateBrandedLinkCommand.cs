@@ -9,6 +9,7 @@ using Fluentley.SendGrid.Operations.LinkBrandings.Core;
 using Fluentley.SendGrid.Operations.LinkBrandings.Models;
 using Fluentley.SendGrid.Operations.LinkBrandings.Validators;
 using FluentValidation.Results;
+using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.LinkBrandings.Commands
 {
@@ -28,6 +29,19 @@ namespace Fluentley.SendGrid.Operations.LinkBrandings.Commands
             return Processor
                 .Process<BrandedLinkValidationResult, IValidateBrandedLinkCommand, ValidateBrandedLinkCommand>(this,
                     context => context.ValidateBrandedLinkById(Id) /*, context =>
+                    {
+                        var validator = new ValidateBrandedLinkCommandValidator(context);
+                        return validator.ValidateAsync(Id);
+                    }*/);
+        }
+
+        public Task<IResult<BrandedLinkValidationResult>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<ValidateBrandedLinkCommand>(commandJson);
+
+            return Processor
+                .Process<BrandedLinkValidationResult, IValidateBrandedLinkCommand, ValidateBrandedLinkCommand>(this,
+                    context => context.ValidateBrandedLinkById(command.Id) /*, context =>
                     {
                         var validator = new ValidateBrandedLinkCommandValidator(context);
                         return validator.ValidateAsync(Id);

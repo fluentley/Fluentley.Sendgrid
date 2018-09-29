@@ -32,6 +32,15 @@ namespace Fluentley.SendGrid.Operations.IpAccessManagements.Commands
                 context => context.RemoveWhiteListedIpAddress(this));
         }
 
+        public Task<IResult<string>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<RemoveWhiteListedIpAddressCommand>(commandJson);
+
+            return Processor.Process<string, IRemoveWhiteListedIpAddressCommand, RemoveWhiteListedIpAddressCommand>(
+                this,
+                context => context.RemoveWhiteListedIpAddress(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator

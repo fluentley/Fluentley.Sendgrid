@@ -31,6 +31,16 @@ namespace Fluentley.SendGrid.Operations.Users.Commands
                 context => context.UpdateUserEmailAddress(this));
         }
 
+        public Task<IResult<UserEmailAddress>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<UpdateUserEmailAddressCommand>(commandJson);
+
+
+            return Processor.Process<UserEmailAddress, IUpdateUserEmailAddressCommand, UpdateUserEmailAddressCommand>(
+                this,
+                context => context.UpdateUserEmailAddress(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator

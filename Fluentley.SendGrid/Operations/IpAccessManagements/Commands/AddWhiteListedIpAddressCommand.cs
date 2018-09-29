@@ -56,6 +56,16 @@ namespace Fluentley.SendGrid.Operations.IpAccessManagements.Commands
                     context => context.AddWhiteListedIpAddress(this));
         }
 
+        public Task<IResult<List<WhiteListedIpAddress>>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<AddWhiteListedIpAddressCommand>(commandJson);
+
+            return Processor
+                .Process<List<WhiteListedIpAddress>, IAddWhiteListedIpAddressCommand, AddWhiteListedIpAddressCommand>(
+                    this,
+                    context => context.AddWhiteListedIpAddress(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator

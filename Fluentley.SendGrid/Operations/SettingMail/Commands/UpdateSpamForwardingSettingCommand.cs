@@ -35,6 +35,16 @@ namespace Fluentley.SendGrid.Operations.SettingMail.Commands
                     context => context.UpdateSpamForwardingSetting(this));
         }
 
+        public Task<IResult<SpamForwardingSetting>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<UpdateSpamForwardingSettingCommand>(commandJson);
+
+            return Processor
+                .Process<SpamForwardingSetting, IUpdateSpamForwardingSettingCommand, UpdateSpamForwardingSettingCommand
+                >(this,
+                    context => context.UpdateSpamForwardingSetting(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator

@@ -8,6 +8,7 @@ using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.CampaignSchedules.Core;
 using Fluentley.SendGrid.Operations.CampaignSchedules.Validators;
 using FluentValidation.Results;
+using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.CampaignSchedules.Commands
 {
@@ -25,6 +26,14 @@ namespace Fluentley.SendGrid.Operations.CampaignSchedules.Commands
         {
             return Processor.Process<string, IDeleteCampaignScheduleCommand, DeleteCampaignScheduleCommand>(this,
                 context => context.DeleteScheduleCampaignById(Id));
+        }
+
+        public Task<IResult<string>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<DeleteCampaignScheduleCommand>(commandJson);
+
+            return Processor.Process<string, IDeleteCampaignScheduleCommand, DeleteCampaignScheduleCommand>(this,
+                context => context.DeleteScheduleCampaignById(command.Id));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()

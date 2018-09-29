@@ -20,11 +20,5 @@ namespace Fluentley.SendGrid.Common.Queries
             OptionProcessor = new OptionProcessor();
             RequestGenerator = new CommandRequestGenerator(defaultApiKey);
         }
-
-        public Task<IResult<T>> ExecuteCommand(string commandJson)
-        {
-            var command = JsonConvert.DeserializeObject<TCommand>(commandJson);
-            return command.Execute();
-        }
     }
 }

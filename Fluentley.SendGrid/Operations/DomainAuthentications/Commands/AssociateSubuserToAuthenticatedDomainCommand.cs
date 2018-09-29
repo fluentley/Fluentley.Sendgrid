@@ -48,10 +48,18 @@ namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
 
         public Task<IResult<AuthenticatedDomain>> Execute()
         {
-            return Processor
-                .Process<AuthenticatedDomain, IAssociateSubuserToAuthenticatedDomainCommand,
+            return Processor.Process<AuthenticatedDomain, IAssociateSubuserToAuthenticatedDomainCommand,
                     AssociateSubuserToAuthenticatedDomainCommand>(this,
                     context => context.AssociateSubuserToAuthenticatedDomain(this));
+        }
+
+        public Task<IResult<AuthenticatedDomain>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<AssociateSubuserToAuthenticatedDomainCommand>(commandJson);
+
+            return Processor.Process<AuthenticatedDomain, IAssociateSubuserToAuthenticatedDomainCommand,
+                AssociateSubuserToAuthenticatedDomainCommand>(this,
+                context => context.AssociateSubuserToAuthenticatedDomain(command));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()

@@ -8,6 +8,7 @@ using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.ReverseDnses.Core;
 using Fluentley.SendGrid.Operations.ReverseDnses.Validators;
 using FluentValidation.Results;
+using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.ReverseDnses.Commands
 {
@@ -24,6 +25,14 @@ namespace Fluentley.SendGrid.Operations.ReverseDnses.Commands
         {
             return Processor.Process<string, IDeleteReverseDnsCommand, DeleteReverseDnsCommand>(this,
                 context => context.DeleteReverseDns(Id));
+        }
+
+        public Task<IResult<string>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<DeleteReverseDnsCommand>(commandJson);
+
+            return Processor.Process<string, IDeleteReverseDnsCommand, DeleteReverseDnsCommand>(this,
+                context => context.DeleteReverseDns(command.Id));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()

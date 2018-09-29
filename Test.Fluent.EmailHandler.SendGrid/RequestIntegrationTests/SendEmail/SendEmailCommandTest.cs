@@ -30,7 +30,7 @@ namespace Test.Fluentley.SendGrid.RequestIntegrationTests.SendEmail
                     .AddSubstitution("{{LastName}}", "Wife")
                     .AddSubstitution("{{Salutation}}", "Mrs.")
                     .AddSubstitution("{{CommunicationReason}}", "{{GoodNewsCommunication}}"))
-                .AddContentOption(contentOption => contentOption
+                .AddContent(contentOption => contentOption
                     .Value("{{Salutation}} {{LastName}}, <br> {{CommunicationReason}}")
                     .Type("text/html"))
                 .AddAttachments(option => option
@@ -57,7 +57,55 @@ namespace Test.Fluentley.SendGrid.RequestIntegrationTests.SendEmail
         [TestMethod]
         public async Task SendEmailBasicTest()
         {
-            var result = await Service.SendEmail(sendEmailOption => sendEmailOption
+            var result = await Service.SendEmail().ExecuteCommand(@"{
+  'categories': null,
+  'from': {
+    'email': 'johnDoe@email.com',
+    'name': null
+  },
+  'reply_to': null,
+  'personalizations': [
+    {
+      'to': [
+        {
+          'email': 'emre@fluentley.com',
+          'name': null
+        }
+      ],
+      'cc': null,
+      'bcc': null,
+      'subject': null,
+      'substitutions': null,
+      'custom_args': null,
+      'headers': null,
+      'send_at': null
+    }
+  ],
+  'content': [
+    {
+      'value': 'Hello World',
+      'type': 'text/plain'
+    }
+  ],
+  'attachments': null,
+  'sections': null,
+  'custom_args': null,
+  'subject': 'Test Email 3 From Fluentley.SendGrid',
+  'send_at': null,
+  'mail_settings': null,
+  'tracking_settings': null,
+  'asm': null,
+  'sandbox_mode': null,
+  'headers': null,
+  'template_id': null,
+  'ip_pool_name': null
+}");
+
+           // var tt = await result.Execute();
+
+
+            //var result = await Service.
+            /*var result = await Service.SendEmail(sendEmailOption => sendEmailOption
                 .From("sam.smith@example.com", "Sam Smith")
                 .ReplyTo("sam.smith@example.com", "Sam Smith")
                 .AddRecipient(recipientOption => recipientOption
@@ -70,7 +118,7 @@ namespace Test.Fluentley.SendGrid.RequestIntegrationTests.SendEmail
             Assert.AreEqual("POST", result.Data.Method.Method);
             Assert.AreEqual("https://api.sendgrid.com/v3/mail/send", result.Data.RequestUri.AbsoluteUri);
 
-            Assert.AreEqual(true, CompareJsons("RequestIntegrationTests.SendEmail.Results.SendEmailBasic", result.Data));
+            Assert.AreEqual(true, CompareJsons("RequestIntegrationTests.SendEmail.Results.SendEmailBasic", result.Data));*/
         }
     }
 }

@@ -8,6 +8,7 @@ using Fluentley.SendGrid.Common.ResultArguments;
 using Fluentley.SendGrid.Operations.MonitorSettings.Core;
 using Fluentley.SendGrid.Operations.MonitorSettings.Validators;
 using FluentValidation.Results;
+using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.MonitorSettings.Commands
 {
@@ -27,6 +28,14 @@ namespace Fluentley.SendGrid.Operations.MonitorSettings.Commands
         {
             return Processor.Process<string, IDeleteMonitorSettingCommand, DeleteMonitorSettingCommand>(this,
                 context => context.DeleteMonitorSettingByUserName(SubUserName));
+        }
+
+        public Task<IResult<string>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<DeleteMonitorSettingCommand>(commandJson);
+
+            return Processor.Process<string, IDeleteMonitorSettingCommand, DeleteMonitorSettingCommand>(this,
+                context => context.DeleteMonitorSettingByUserName(command.SubUserName));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()

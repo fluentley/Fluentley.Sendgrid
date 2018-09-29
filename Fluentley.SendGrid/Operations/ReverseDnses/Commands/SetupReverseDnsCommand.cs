@@ -36,6 +36,14 @@ namespace Fluentley.SendGrid.Operations.ReverseDnses.Commands
                 context => context.SetupReverseDns(this));
         }
 
+        public Task<IResult<ReverseDns>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<SetupReverseDnsCommand>(commandJson);
+
+            return Processor.Process<ReverseDns, ISetupReverseDnsCommand, SetupReverseDnsCommand>(this,
+                context => context.SetupReverseDns(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<ReverseDns, ISetupReverseDnsCommand, SetupReverseDnsCommand>(this,

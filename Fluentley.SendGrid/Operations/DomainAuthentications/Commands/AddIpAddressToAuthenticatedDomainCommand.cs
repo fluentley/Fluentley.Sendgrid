@@ -48,10 +48,18 @@ namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
 
         public Task<IResult<AuthenticatedDomain>> Execute()
         {
-            return Processor
-                .Process<AuthenticatedDomain, IAddIpAddressToAuthenticatedDomainCommand,
+            return Processor.Process<AuthenticatedDomain, IAddIpAddressToAuthenticatedDomainCommand,
                     AddIpAddressToAuthenticatedDomainCommand>(this,
                     context => context.AddIpAddressToAuthenticatedDomain(this));
+        }
+
+        public Task<IResult<AuthenticatedDomain>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<AddIpAddressToAuthenticatedDomainCommand>(commandJson);
+
+            return Processor.Process<AuthenticatedDomain, IAddIpAddressToAuthenticatedDomainCommand,
+                AddIpAddressToAuthenticatedDomainCommand>(this,
+                context => context.AddIpAddressToAuthenticatedDomain(command));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()

@@ -32,16 +32,22 @@ namespace Fluentley.SendGrid.Operations.CampaignSchedules.Commands
         public Task<IResult<CampaignSchedule>> Execute()
         {
             return Processor.Process<CampaignSchedule, ICreateCampaignScheduleCommand, CreateCampaignScheduleCommand>(
-                this,
-                context => context.CreateCampaignSchedule(this));
+                this, context => context.CreateCampaignSchedule(this));
+        }
+
+        public Task<IResult<CampaignSchedule>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<CreateCampaignScheduleCommand>(commandJson);
+
+            return Processor.Process<CampaignSchedule, ICreateCampaignScheduleCommand, CreateCampaignScheduleCommand>(
+                this, context => context.CreateCampaignSchedule(command));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator
                 .Process<CampaignSchedule, ICreateCampaignScheduleCommand, CreateCampaignScheduleCommand>(
-                    this,
-                    context => context.CreateCampaignSchedule(this));
+                    this, context => context.CreateCampaignSchedule(this));
         }
 
         public ICreateCampaignScheduleCommand CampaignId(string id)

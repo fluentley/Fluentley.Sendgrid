@@ -37,6 +37,14 @@ namespace Fluentley.SendGrid.Operations.Teammates.Commands
                 context => context.UpdateTeammateByUserName(this));
         }
 
+        public Task<IResult<TeammateWithScope>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<UpdateTeammateCommand>(commandJson);
+
+            return Processor.Process<TeammateWithScope, IUpdateTeammateCommand, UpdateTeammateCommand>(this,
+                context => context.UpdateTeammateByUserName(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<TeammateWithScope, IUpdateTeammateCommand, UpdateTeammateCommand>(this,

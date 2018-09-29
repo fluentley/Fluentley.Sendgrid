@@ -37,6 +37,14 @@ namespace Fluentley.SendGrid.Operations.Teammates.Core
                 context => context.InviteTeammate(this));
         }
 
+        public Task<IResult<TeammateInviteResult>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<InviteTeammateCommand>(commandJson);
+
+            return Processor.Process<TeammateInviteResult, IInviteTeammateCommand, InviteTeammateCommand>(this,
+                context => context.InviteTeammate(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<TeammateInviteResult, IInviteTeammateCommand, InviteTeammateCommand>(this,

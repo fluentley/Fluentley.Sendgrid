@@ -9,6 +9,7 @@ using Fluentley.SendGrid.Operations.ApiKeys.Core.Queires;
 using Fluentley.SendGrid.Operations.ApiKeys.Models;
 using Fluentley.SendGrid.Operations.ApiKeys.Validators;
 using FluentValidation.Results;
+using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.ApiKeys.Commands
 {
@@ -25,6 +26,14 @@ namespace Fluentley.SendGrid.Operations.ApiKeys.Commands
         {
             return Processor.Process<string, IDeleteApiKeyCommand, DeleteApiKeyCommand>(this,
                 context => context.DeleteApiKeyById(Id));
+        }
+
+        public Task<IResult<string>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<DeleteApiKeyCommand>(commandJson);
+
+            return Processor.Process<string, IDeleteApiKeyCommand, DeleteApiKeyCommand>(this,
+                context => context.DeleteApiKeyById(command.Id));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()

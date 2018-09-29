@@ -59,6 +59,14 @@ namespace Fluentley.SendGrid.Operations.Alerts.Commands
                 context => context.UpdateAlert(this));
         }
 
+        public Task<IResult<Alert>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<UpdateAlertCommand>(commandJson);
+
+            return Processor.Process<Alert, IUpdateAlertCommand, UpdateAlertCommand>(this,
+                context => context.UpdateAlert(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<Alert, IUpdateAlertCommand, UpdateAlertCommand>(this,

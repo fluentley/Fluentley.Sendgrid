@@ -64,6 +64,14 @@ namespace Fluentley.SendGrid.Operations.SenderIdentities.Commands
                 context => context.UpdateSenderIdentity(this));
         }
 
+        public Task<IResult<SenderIdentity>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<UpdateSenderIdentityCommand>(commandJson);
+
+            return Processor.Process<SenderIdentity, IUpdateSenderIdentityCommand, UpdateSenderIdentityCommand>(this,
+                context => context.UpdateSenderIdentity(this));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<SenderIdentity, IUpdateSenderIdentityCommand, UpdateSenderIdentityCommand>(

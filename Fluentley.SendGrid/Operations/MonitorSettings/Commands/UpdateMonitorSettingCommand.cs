@@ -40,6 +40,14 @@ namespace Fluentley.SendGrid.Operations.MonitorSettings.Commands
                 context => context.UpdateMonitorSettingByUserName(UserName, this));
         }
 
+        public Task<IResult<MonitorSetting>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<UpdateMonitorSettingCommand>(commandJson);
+
+            return Processor.Process<MonitorSetting, IUpdateMonitorSettingCommand, UpdateMonitorSettingCommand>(this,
+                context => context.UpdateMonitorSettingByUserName(command.UserName, this));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<MonitorSetting, IUpdateMonitorSettingCommand, UpdateMonitorSettingCommand>(

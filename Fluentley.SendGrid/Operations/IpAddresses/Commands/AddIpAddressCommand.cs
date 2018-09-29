@@ -75,6 +75,14 @@ namespace Fluentley.SendGrid.Operations.IpAddresses.Commands
                 context => context.AddIpAddress(this) );
         }
 
+        public Task<IResult<AddIpResult>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<AddIpAddressCommand>(commandJson);
+
+            return Processor.Process<AddIpResult, IAddIpAddressCommand, AddIpAddressCommand>(this,
+                context => context.AddIpAddress(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<AddIpResult, IAddIpAddressCommand, AddIpAddressCommand>(this,

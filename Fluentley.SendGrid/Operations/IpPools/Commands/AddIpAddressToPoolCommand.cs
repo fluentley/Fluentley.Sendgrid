@@ -51,6 +51,15 @@ namespace Fluentley.SendGrid.Operations.IpPools.Commands
                 context => context.AddIpAddressToPool(this));
         }
 
+        public Task<IResult<IpAddress>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<AddIpAddressToPoolCommand>(commandJson);
+
+            return Processor.Process<IpAddress, IAddIpAddressToPoolCommand, AddIpAddressToPoolCommand>(this,
+                context => context.AddIpAddressToPool(command));
+        
+    }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<IpAddress, IAddIpAddressToPoolCommand, AddIpAddressToPoolCommand>(this,

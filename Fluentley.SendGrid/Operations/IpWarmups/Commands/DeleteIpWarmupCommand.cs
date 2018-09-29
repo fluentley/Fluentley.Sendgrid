@@ -9,6 +9,7 @@ using Fluentley.SendGrid.Operations.IpWarmups.Core;
 using Fluentley.SendGrid.Operations.IpWarmups.Models;
 using Fluentley.SendGrid.Operations.IpWarmups.Validators;
 using FluentValidation.Results;
+using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.IpWarmups.Commands
 {
@@ -25,6 +26,14 @@ namespace Fluentley.SendGrid.Operations.IpWarmups.Commands
         {
             return Processor.Process<string, IDeleteIpWarmupCommand, DeleteIpWarmupCommand>(this,
                 context => context.DeleteIpWarmupById(IpAddress));
+        }
+
+        public Task<IResult<string>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<DeleteIpWarmupCommand>(commandJson);
+
+            return Processor.Process<string, IDeleteIpWarmupCommand, DeleteIpWarmupCommand>(this,
+                context => context.DeleteIpWarmupById(command.IpAddress));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()

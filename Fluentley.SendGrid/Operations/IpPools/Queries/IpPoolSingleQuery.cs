@@ -39,7 +39,6 @@ namespace Fluentley.SendGrid.Operations.IpPools.Queries
         {
             return RequestGenerator.Process<IpPool, IIpPoolSingleQuery, IpPoolSingleQuery>(this,
                 context => context.IpPoolByName(Name));
-            throw new NotImplementedException();
         }
     }
 }

@@ -36,6 +36,15 @@ namespace Fluentley.SendGrid.Operations.SpamReportedEmailAddresses.Commands
                     context => context.DeleteSpamReportedEmailAddress(this));
         }
 
+        public Task<IResult<string>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<DeleteSpamReportedEmailAddressCommand>(commandJson);
+
+            return Processor
+                .Process<string, IDeleteSpamReportedEmailAddressCommand, DeleteSpamReportedEmailAddressCommand>(this,
+                    context => context.DeleteSpamReportedEmailAddress(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator

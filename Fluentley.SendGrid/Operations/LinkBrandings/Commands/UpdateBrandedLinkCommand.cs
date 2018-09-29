@@ -33,6 +33,14 @@ namespace Fluentley.SendGrid.Operations.LinkBrandings.Commands
                 context => context.UpdateBrandedLink(this));
         }
 
+        public Task<IResult<BrandedLink>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<UpdateBrandedLinkCommand>(commandJson);
+
+            return Processor.Process<BrandedLink, IUpdateBrandedLinkCommand, UpdateBrandedLinkCommand>(this,
+                context => context.UpdateBrandedLink(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<BrandedLink, IUpdateBrandedLinkCommand, UpdateBrandedLinkCommand>(this,

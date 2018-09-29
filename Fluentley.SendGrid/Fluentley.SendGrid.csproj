@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net46;netcoreapp2.0;netcoreapp2.1</TargetFrameworks>
-    <Version>1.0.0-Alpha1.3</Version>
+    <Version>1.0.0-Alpha1.4</Version>
     <Authors>Emre@Fluentley</Authors>
     <Company>Fluentley</Company>
     <Description>Fluently approach on sendgrid api.</Description>

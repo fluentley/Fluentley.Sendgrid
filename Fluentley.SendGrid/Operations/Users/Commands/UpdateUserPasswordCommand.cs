@@ -31,6 +31,14 @@ namespace Fluentley.SendGrid.Operations.Users.Commands
                 context => context.UpdateUserPassword(this));
         }
 
+        public Task<IResult<string>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<UpdateUserPasswordCommand>(commandJson);
+
+            return Processor.Process<string, IUpdateUserPasswordCommand, UpdateUserPasswordCommand>(this,
+                context => context.UpdateUserPassword(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<string, IUpdateUserPasswordCommand, UpdateUserPasswordCommand>(this,

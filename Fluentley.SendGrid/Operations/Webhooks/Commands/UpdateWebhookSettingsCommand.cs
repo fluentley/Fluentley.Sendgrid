@@ -66,6 +66,14 @@ namespace Fluentley.SendGrid.Operations.Webhooks.Commands
                 this, context => context.UpdateWebhookSettings(this));
         }
 
+        public Task<IResult<WebhookSettings>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<UpdateWebHookSettingsCommand>(commandJson);
+
+            return Processor.Process<WebhookSettings, IUpdateWebHookSettingsCommand, UpdateWebHookSettingsCommand>(
+                this, context => context.UpdateWebhookSettings(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator

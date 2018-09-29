@@ -28,6 +28,15 @@ namespace Fluentley.SendGrid.Operations.Webhooks.Commands
                 context => context.SendTestWebhookEvent(this));
         }
 
+        public Task<IResult<string>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<SendTestWebhookEventCommand>(commandJson);
+
+
+            return Processor.Process<string, ISendTestWebhookEventCommand, SendTestWebhookEventCommand>(this,
+                context => context.SendTestWebhookEvent(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<string, ISendTestWebhookEventCommand, SendTestWebhookEventCommand>(this,

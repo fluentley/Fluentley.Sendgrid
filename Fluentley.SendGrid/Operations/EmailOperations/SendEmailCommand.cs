@@ -83,6 +83,13 @@ namespace Fluentley.SendGrid.Operations.EmailOperations
                 context => context.SendEmail(this));
         }
 
+        public Task<IResult<string>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<SendEmailCommand>(commandJson);
+            return Processor.Process<string, ISendEmailCommand, SendEmailCommand>(this,
+                context => context.SendEmail(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<string, ISendEmailCommand, SendEmailCommand>(this,

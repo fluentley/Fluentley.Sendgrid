@@ -9,6 +9,7 @@ using Fluentley.SendGrid.Operations.SenderIdentities.Core;
 using Fluentley.SendGrid.Operations.SenderIdentities.Models;
 using Fluentley.SendGrid.Operations.SenderIdentities.Validators;
 using FluentValidation.Results;
+using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.SenderIdentities.Commands
 {
@@ -25,6 +26,14 @@ namespace Fluentley.SendGrid.Operations.SenderIdentities.Commands
         {
             return Processor.Process<string, IDeleteSenderIdentityCommand, DeleteSenderIdentityCommand>(this,
                 context => context.DeleteSenderIdentityById(Id));
+        }
+
+        public Task<IResult<string>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<DeleteSenderIdentityCommand>(commandJson);
+
+            return Processor.Process<string, IDeleteSenderIdentityCommand, DeleteSenderIdentityCommand>(this,
+                context => context.DeleteSenderIdentityById(command.Id));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()

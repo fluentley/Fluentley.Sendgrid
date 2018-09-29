@@ -9,6 +9,7 @@ using Fluentley.SendGrid.Operations.Alerts.Core.Commands;
 using Fluentley.SendGrid.Operations.Alerts.Models;
 using Fluentley.SendGrid.Operations.Alerts.Validators;
 using FluentValidation.Results;
+using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.Alerts.Commands
 {
@@ -25,6 +26,14 @@ namespace Fluentley.SendGrid.Operations.Alerts.Commands
         {
             return Processor.Process<string, IDeleteAlertCommand, DeleteAlertCommand>(this,
                 context => context.DeleteAlertById(IdForAlert));
+        }
+
+        public Task<IResult<string>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<DeleteAlertCommand>(commandJson);
+            return Processor.Process<string, IDeleteAlertCommand, DeleteAlertCommand>(this,
+                context => context.DeleteAlertById(command.IdForAlert));
+
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()

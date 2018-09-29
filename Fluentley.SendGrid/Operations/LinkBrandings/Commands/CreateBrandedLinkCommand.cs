@@ -36,6 +36,14 @@ namespace Fluentley.SendGrid.Operations.LinkBrandings.Commands
                 context => context.CreateBrandedLink(this));
         }
 
+        public Task<IResult<BrandedLink>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<CreateBrandedLinkCommand>(commandJson);
+
+            return Processor.Process<BrandedLink, ICreateBrandedLinkCommand, CreateBrandedLinkCommand>(this,
+                context => context.CreateBrandedLink(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<BrandedLink, ICreateBrandedLinkCommand, CreateBrandedLinkCommand>(this,

@@ -9,6 +9,7 @@ using Fluentley.SendGrid.Operations.LinkBrandings.Core;
 using Fluentley.SendGrid.Operations.LinkBrandings.Models;
 using Fluentley.SendGrid.Operations.LinkBrandings.Validators;
 using FluentValidation.Results;
+using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.LinkBrandings.Commands
 {
@@ -25,6 +26,14 @@ namespace Fluentley.SendGrid.Operations.LinkBrandings.Commands
         {
             return Processor.Process<string, IDeleteBrandedLinkCommand, DeleteBrandedLinkCommand>(this,
                 context => context.DeleteBrandedLinkById(Id));
+        }
+
+        public Task<IResult<string>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<DeleteBrandedLinkCommand>(commandJson);
+
+            return Processor.Process<string, IDeleteBrandedLinkCommand, DeleteBrandedLinkCommand>(this,
+                context => context.DeleteBrandedLinkById(command.Id));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()

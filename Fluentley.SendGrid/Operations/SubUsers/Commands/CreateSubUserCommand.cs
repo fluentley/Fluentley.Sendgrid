@@ -40,6 +40,14 @@ namespace Fluentley.SendGrid.Operations.SubUsers.Commands
                 context => context.CreateSubUser(this));
         }
 
+        public Task<IResult<SubUser>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<CreateSubUserCommand>(commandJson);
+
+            return Processor.Process<SubUser, ICreateSubUserCommand, CreateSubUserCommand>(this,
+                context => context.CreateSubUser(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<SubUser, ICreateSubUserCommand, CreateSubUserCommand>(this,

@@ -31,6 +31,14 @@ namespace Fluentley.SendGrid.Operations.IpPools.Commands
                 context => context.RemoveIpAddressFromPool(this));
         }
 
+        public Task<IResult<string>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<RemoveIpAddressFromPoolCommand>(commandJson);
+
+            return Processor.Process<string, IRemoveIpAddressFromPoolCommand, RemoveIpAddressFromPoolCommand>(this,
+                context => context.RemoveIpAddressFromPool(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<string, IRemoveIpAddressFromPoolCommand, RemoveIpAddressFromPoolCommand>(

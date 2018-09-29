@@ -29,6 +29,15 @@ namespace Fluentley.SendGrid.Operations.IpWarmups.Commands
                 context => context.CreateIpWarmup(this));
         }
 
+        public Task<IResult<IpWarmup>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<CreateIpWarmupCommand>(commandJson);
+
+            return Processor.Process<IpWarmup, ICreateIpWarmupCommand, CreateIpWarmupCommand>(this,
+                context => context.CreateIpWarmup(command));
+
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<IpWarmup, ICreateIpWarmupCommand, CreateIpWarmupCommand>(this,

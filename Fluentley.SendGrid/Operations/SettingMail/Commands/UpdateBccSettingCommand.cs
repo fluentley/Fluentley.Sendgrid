@@ -32,6 +32,14 @@ namespace Fluentley.SendGrid.Operations.SettingMail.Commands
                 context => context.UpdateBccSetting(this));
         }
 
+        public Task<IResult<BccSetting>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<UpdateBccSettingCommand>(commandJson);
+
+            return Processor.Process<BccSetting, IUpdateBccSettingCommand, UpdateBccSettingCommand>(this,
+                context => context.UpdateBccSetting(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<BccSetting, IUpdateBccSettingCommand, UpdateBccSettingCommand>(this,

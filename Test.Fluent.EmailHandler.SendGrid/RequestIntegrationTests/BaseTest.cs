@@ -9,7 +9,7 @@ namespace Test.Fluentley.SendGrid.RequestIntegrationTests
     public abstract class BaseTest
     {
         protected const string EndPoint = "https://api.sendgrid.com/v3";
-        protected const string SendGridApiKey = "SendGridApiKey";
+        protected const string SendGridApiKey = "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";
         protected readonly SendGridService Service;
 
         public BaseTest()

@@ -42,6 +42,16 @@ namespace Fluentley.SendGrid.Operations.EmailCNameRecords.Commands
                     context => context.SendGeneratedDnsInformation(this));
         }
 
+        public Task<IResult<SendDnsInformationResult>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<SendGeneratedDnsInformationCommand>(commandJson);
+
+            return Processor
+                .Process<SendDnsInformationResult, ISendGeneratedDnsInformationCommand,
+                    SendGeneratedDnsInformationCommand>(this,
+                    context => context.SendGeneratedDnsInformation(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator

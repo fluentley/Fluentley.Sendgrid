@@ -29,6 +29,14 @@ namespace Fluentley.SendGrid.Operations.IpPools.Commands
                 context => context.CreateIpPool(this));
         }
 
+        public Task<IResult<IpPool>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<CreateIpPoolCommand>(commandJson);
+
+            return Processor.Process<IpPool, ICreateIpPoolCommand, CreateIpPoolCommand>(this,
+                context => context.CreateIpPool(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<IpPool, ICreateIpPoolCommand, CreateIpPoolCommand>(this,

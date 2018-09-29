@@ -39,6 +39,16 @@ namespace Fluentley.SendGrid.Operations.DomainAuthentications.Commands
                     context => context.UpdateAuthenticatedDomainSetting(this));
         }
 
+        public Task<IResult<AuthenticatedDomainSetting>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<UpdateAuthenticatedDomainSettingCommand>(commandJson);
+
+            return Processor
+                .Process<AuthenticatedDomainSetting, IUpdateAuthenticatedDomainSettingCommand,
+                    UpdateAuthenticatedDomainSettingCommand>(this,
+                    context => context.UpdateAuthenticatedDomainSetting(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator

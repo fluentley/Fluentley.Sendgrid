@@ -9,6 +9,7 @@ using Fluentley.SendGrid.Operations.SubUsers.Core;
 using Fluentley.SendGrid.Operations.SubUsers.Models;
 using Fluentley.SendGrid.Operations.SubUsers.Validators;
 using FluentValidation.Results;
+using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.SubUsers.Commands
 {
@@ -28,6 +29,15 @@ namespace Fluentley.SendGrid.Operations.SubUsers.Commands
         {
             return Processor.Process<SubUser, IUpdateSubUserCommand, UpdateSubUserCommand>(this,
                 context => context.UpdateSubUser(Model));
+        }
+
+        public Task<IResult<SubUser>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<UpdateSubUserCommand>(commandJson);
+
+
+            return Processor.Process<SubUser, IUpdateSubUserCommand, UpdateSubUserCommand>(this,
+                context => context.UpdateSubUser(command.Model));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()

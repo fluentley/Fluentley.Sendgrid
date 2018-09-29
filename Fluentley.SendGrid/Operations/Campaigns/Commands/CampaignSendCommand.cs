@@ -57,6 +57,14 @@ namespace Fluentley.SendGrid.Operations.Campaigns.Commands
                 context => context.SendCampaignById(this));
         }
 
+        public Task<IResult<CampaignSchedule>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<CampaignSendCommand>(commandJson);
+
+            return Processor.Process<CampaignSchedule, ICampaignSendCommand, CampaignSendCommand>(this,
+                context => context.SendCampaignById(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<CampaignSchedule, ICampaignSendCommand, CampaignSendCommand>(this,

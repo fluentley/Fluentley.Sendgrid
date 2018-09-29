@@ -36,6 +36,15 @@ namespace Fluentley.SendGrid.Operations.SettingMail.Commands
                 context => context.UpdateSpamCheckSetting(this));
         }
 
+        public Task<IResult<SpamCheckSetting>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<UpdateSpamCheckSettingCommand>(commandJson);
+
+            return Processor.Process<SpamCheckSetting, IUpdateSpamCheckSettingCommand, UpdateSpamCheckSettingCommand>(
+                this,
+                context => context.UpdateSpamCheckSetting(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator

@@ -9,6 +9,7 @@ using Fluentley.SendGrid.Operations.SettingInboundParse.Core;
 using Fluentley.SendGrid.Operations.SettingInboundParse.Models;
 using Fluentley.SendGrid.Operations.SettingInboundParse.Validators;
 using FluentValidation.Results;
+using Newtonsoft.Json;
 
 namespace Fluentley.SendGrid.Operations.SettingInboundParse.Commands
 {
@@ -25,6 +26,14 @@ namespace Fluentley.SendGrid.Operations.SettingInboundParse.Commands
         {
             return Processor.Process<string, IDeleteParseSettingCommand, DeleteParseSettingCommand>(this,
                 context => context.DeleteParseSetting(this));
+        }
+
+        public Task<IResult<string>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<DeleteParseSettingCommand>(commandJson);
+
+            return Processor.Process<string, IDeleteParseSettingCommand, DeleteParseSettingCommand>(this,
+                context => context.DeleteParseSetting(command));
         }
 
         public Task<IResult<HttpRequestMessage>> GenerateRequest()

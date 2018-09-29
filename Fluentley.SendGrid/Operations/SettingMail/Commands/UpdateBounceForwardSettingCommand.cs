@@ -35,6 +35,16 @@ namespace Fluentley.SendGrid.Operations.SettingMail.Commands
                     context => context.UpdateBounceForwardSetting(this));
         }
 
+        public Task<IResult<BounceForwardSetting>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<UpdateBounceForwardSettingCommand>(commandJson);
+
+            return Processor
+                .Process<BounceForwardSetting, IUpdateBounceForwardSettingCommand, UpdateBounceForwardSettingCommand>(
+                    this,
+                    context => context.UpdateBounceForwardSetting(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator

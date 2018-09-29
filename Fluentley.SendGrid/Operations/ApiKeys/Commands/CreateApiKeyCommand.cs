@@ -41,6 +41,14 @@ namespace Fluentley.SendGrid.Operations.ApiKeys.Commands
                 context => context.CreateApiKey(this));
         }
 
+        public Task<IResult<ApiKey>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<CreateApiKeyCommand>(commandJson);
+
+            return Processor.Process<ApiKey, ICreateApiKeyCommand, CreateApiKeyCommand>(this,
+                context => context.CreateApiKey(this));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator.Process<ApiKey, ICreateApiKeyCommand, CreateApiKeyCommand>(this,

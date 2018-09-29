@@ -48,16 +48,24 @@ namespace Fluentley.SendGrid.Operations.Campaigns.Commands
         [JsonProperty("send_at")]
         internal long? SendAt => ScheduledTime?.ToUnixTime();
 
-        public async Task<IResult<Campaign>> Execute()
+        public Task<IResult<Campaign>> Execute()
         {
-            return await Processor.Process<Campaign, IUpdateCampaignCommand, UpdateCampaignCommand>(this,
-                async context => await context.UpdateCampaign(this));
+            return Processor.Process<Campaign, IUpdateCampaignCommand, UpdateCampaignCommand>(this,
+                 context => context.UpdateCampaign(this));
         }
 
-        public async Task<IResult<HttpRequestMessage>> GenerateRequest()
+        public Task<IResult<Campaign>> ExecuteCommand(string commandJson)
         {
-            return await RequestGenerator.Process<Campaign, IUpdateCampaignCommand, UpdateCampaignCommand>(this,
-                async context => await context.UpdateCampaign(this));
+            var command = JsonConvert.DeserializeObject<UpdateCampaignCommand>(commandJson);
+
+            return Processor.Process<Campaign, IUpdateCampaignCommand, UpdateCampaignCommand>(this,
+                context => context.UpdateCampaign(command));
+        }
+
+        public Task<IResult<HttpRequestMessage>> GenerateRequest()
+        {
+            return RequestGenerator.Process<Campaign, IUpdateCampaignCommand, UpdateCampaignCommand>(this,
+                 context => context.UpdateCampaign(this));
         }
 
         public Task<ValidationResult> Validate()

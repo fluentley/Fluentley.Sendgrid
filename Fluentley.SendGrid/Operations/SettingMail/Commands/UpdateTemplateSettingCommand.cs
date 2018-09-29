@@ -33,6 +33,15 @@ namespace Fluentley.SendGrid.Operations.SettingMail.Commands
                 context => context.UpdateTemplateSetting(this));
         }
 
+        public Task<IResult<TemplateSetting>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<UpdateTemplateSettingCommand>(commandJson);
+
+            return Processor.Process<TemplateSetting, IUpdateTemplateSettingCommand, UpdateTemplateSettingCommand>(
+                this,
+                context => context.UpdateTemplateSetting(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator

@@ -35,6 +35,14 @@ namespace Fluentley.SendGrid.Operations.BlockedEmailAddresses.Commands
                 context => context.DeleteBlockedEmailAddress(this));
         }
 
+        public Task<IResult<string>> ExecuteCommand(string commandJson)
+        {
+            var command = JsonConvert.DeserializeObject<DeleteBlockedEmailAddressCommand>(commandJson);
+
+            return Processor.Process<string, IDeleteBlockedEmailAddressCommand, DeleteBlockedEmailAddressCommand>(this,
+                context => context.DeleteBlockedEmailAddress(command));
+        }
+
         public Task<IResult<HttpRequestMessage>> GenerateRequest()
         {
             return RequestGenerator
