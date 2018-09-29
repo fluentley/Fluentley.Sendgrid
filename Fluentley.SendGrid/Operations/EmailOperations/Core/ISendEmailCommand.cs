@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Fluentley.SendGrid.Common.Queries;
+using Fluentley.SendGrid.Common.ResultArguments;
 
 namespace Fluentley.SendGrid.Operations.EmailOperations.Core
 {
@@ -17,12 +19,13 @@ namespace Fluentley.SendGrid.Operations.EmailOperations.Core
         ISendEmailCommand TrackingSettings(Action<ITrackingSettingOption> option);
         ISendEmailCommand TemplateId(string value);
         ISendEmailCommand AddHeader(string key, string value);
-        ISendEmailCommand AddContentOption(Action<IContentOption> option);
+        ISendEmailCommand AddContent(Action<IContentOption> option);
         ISendEmailCommand AddAttachments(Action<IAttachmentOption> option);
 
         ISendEmailCommand FromIpPoolName(string name);
         ISendEmailCommand Sandbox(Action<ISandboxOption> option);
         ISendEmailCommand UnsubscribeManagement(Action<IUnsubscribeManagementOption> option);
         ISendEmailCommand SendAtUtc(DateTime sendAtDateTime);
+       // Task<IResult<string>> ExecuteCommand(string commandJson);
     }
 }

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net46;netcoreapp2.0;netcoreapp2.1</TargetFrameworks>
-    <Version>1.0.0-Alpha1.2</Version>
+    <Version>1.0.0-Alpha1.3</Version>
     <Authors>Emre@Fluentley</Authors>
     <Company>Fluentley</Company>
     <Description>Fluently approach on sendgrid api.</Description>
@@ -25,9 +25,9 @@
 
   <ItemGroup>
     <PackageReference Include="Fluentley.QueryBuilder" Version="1.0.0-alpha.1.8" />
-    <PackageReference Include="FluentValidation" Version="8.0.0" />
+    <PackageReference Include="FluentValidation" Version="8.0.100" />
     <PackageReference Include="RestEase" Version="1.4.7" />
-    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.8.17" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.8.18" />
   </ItemGroup>
 
 </Project>

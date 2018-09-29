@@ -190,7 +190,7 @@ namespace Fluentley.SendGrid.Operations.EmailOperations
             return this;
         }
 
-        public ISendEmailCommand AddContentOption(Action<IContentOption> option)
+        public ISendEmailCommand AddContent(Action<IContentOption> option)
         {
             if (ContentOptions == null)
                 ContentOptions = new List<ContentOption>();
